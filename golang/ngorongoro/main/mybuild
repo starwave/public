@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# for the first time to open firewall
+# sudo ufw allow 8080
+
+##########################################################
+# initialize os variables
+##########################################################
+# msys : Windows MinGW
+# cygwin : Windows Cygwin
+# darwin10.0 : Mac OS X (Snow leopard)
+# darwin14 : Mac OS X (Yosemite)
+# darwin15 : Mac OS X (El capitan)
+# darwin16 : Mac OS X (Sierra)
+# darwin17 : Mac OS X (High Sierra)
+# darwin18 : Mac OS X (Mojave)
+# darwin19 : Mac OS X (Catalina)
+# darwin20 : Mac OS X (Big Sur)
+# linux-gnu : Ubuntu
+function init_os() {
+    os="${OSTYPE}"
+    os_linefeed=$'\n'
+    if [ "${os}" = "linux-gnu" ]; then
+        os="linux"
+    elif [ "${os/[1|2]*/}" = "darwin" ]; then
+        os="osx"
+    elif [[ "${os}" = "msys" || "${os}" = "cygwin" ]]; then
+        os="windows"
+        os_linefeed=$'\r\n'
+    fi
+}
+init_os
+
+# dev directory creation
+if [[ os != "linux" && ! -d ~/Downloads/Media/CloudStation/ ]]; then
+    echo -e "mkdir -p ~/Downloads/Media/CloudStation/"
+    mkdir -p ~/Downloads/Media/CloudStation/
+    echo -e "rsync -av -f \"+ */\" -f \"- *\" ~/CloudStation/ ~/Downloads/Media/CloudStation/"
+    rsync -av -f "+ */" -f "- *" ~/CloudStation/ ~/Downloads/Media/CloudStation/
+fi
+
+if [ ! -f ~/logs/ngorongoro.log ]; then
+    mkdir -p ~/logs
+    touch ~/logs/ngorongoro.log
+fi
+
+# for one time import
+# for fsnotify use
+echo "# in case original fsnotify is needed"
+echo "$ go get github.com/fsnotify/fsnotify"
+# go get github.com/fsnotify/fsnotify
+
+if [ ! -d ~/go/pkg/mod/github.com/syndtr ]; then
+    echo "$ go get github.com/syndtr/goleveldb/leveldb"
+    go get github.com/syndtr/goleveldb/leveldb
+fi
+
+echo "[1] killing ngorongoro process, if any"
+output=$(ps -ef | grep ngorongoro | grep -v grep )
+if [ "${output}" != "" ]; then
+    echo -e "${output}\n$ killall ngorongoro"
+    killall ngorongoro
+fi
+echo "[2] build and install ngorongoro ..."
+echo -e "$ go build -o ~/bin/ngorongoro"
+output=$(go build -o ~/bin/ngorongoro 2>&1 )
+if [[ "${output}" != "" ]]; then
+    echo -e "###############\n$ Error in build\n${output}\n###############"
+    exit 1
+fi
+
+echo "[3] copy ngorongoro scripts..."
+cp tromso.png ~/bin/.tromso.png
+if [[ $# -eq 1 && $1 == "-f" ]]; then
+    my_deploy -f
+else
+    my_deploy
+fi
+
+echo "[4] execute ngorongoro ..."
+~/bin/ngorongoro.sh

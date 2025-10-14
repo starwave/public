@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="notification_id">13</integer>
+    <integer name="default_interval">15</integer>
+    <integer name="min_interval">5</integer>
+    <integer name="max_interval">30</integer>
+</resources>

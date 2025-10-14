@@ -1,0 +1,377 @@
+#!/bin/bash
+
+##########################################################
+# set path environment variable
+##########################################################
+source_root_path=~/CloudStation
+service_cache_path=~/Documents/CloudStation/BPCache
+service_best_path=~/Documents/CloudStation/Best
+service_coden_path=~/Documents/Coden
+if [ -d "${BPWALLPAPERROOT}" ]; then
+    source_root_path="${BPWALLPAPERROOT}"
+fi
+if [ -d "${BPWALLPAPERCACHE}" ]; then
+    service_cache_path="${BPWALLPAPERCACHE}"
+fi
+if [ -d "${BPPHOTOBEST}" ]; then
+    service_best_path="${BPPHOTOBEST}"
+fi
+if [ -d "${BPWALLPAPERCODEN}" ]; then
+    service_coden_path="${BPWALLPAPERCODEN}"
+fi
+# default service root (can be updated by cache path)
+service_root_path="${source_root_path}"
+
+##########################################################
+# set global variable
+##########################################################
+o_dimensions=( "photo" )
+o_mode="diff" # full, exif, create
+all_dimensions=( "photo" "1920x1080" )
+
+##########################################################
+# return media modified time
+##########################################################
+function get_modified_time() {
+    if [[ "${os}" = "linux" || "${os}" = "windows" ]]; then
+        modified_time=$(stat -c "%Y" "${1}")
+    elif [ "${os}" = "osx" ]; then
+        modified_time=$(stat -f "%m" "${1}")
+    else
+        modified_time=$(stat -c "%Y" "${1}")
+    fi
+    echo "${modified_time}"
+}
+
+##########################################################
+# function to show count
+##########################################################
+function show_count() {
+    let index++
+    if [ $(( $index % 100 )) = 1 ]; then
+        echo -e ">>>>>>>>> Dimension ${o_dimension}: ${index} of ${total} <<<<<<<<<"
+    fi
+}
+
+##########################################################
+# function to check whether it's updated
+##########################################################
+needs_updated=false
+function check_file() {
+    f_source="${1}"
+    # take best file for the source of cache
+    if [[ "${f_source}" =~ "/BP Photo/" ]]; then
+        bestfile="${f_source/${path_src}\/BP Photo/${service_best_path}}"
+    else
+        bestfile="${f_source}"
+    fi
+    if [ $o_mode = "create" ]; then
+        needs_updated=true
+        return
+    fi
+    needs_updated=false
+    if [ "${o_mode}" = "diff" ]; then
+        f_source="${f_source/Only in /}"
+        file="${f_source/: //}"
+        filename="${file##*/}"
+  		base="${filename%.[^.]*}"
+		file_extension="${filename:${#base} + 1}"
+        if [[ ( "$file_extension" = "jpg" || "$file_extension" = "JPG" ) && "${filename:0:1}" != "." ]]; then
+            needs_updated=true
+            if [[ "${file}" =~ "/BP Photo/" ]]; then
+                bestfile="${file/${path_src}\/BP Photo/${service_best_path}}"
+            else
+                bestfile="${file}"
+            fi
+        else
+            echo "File '${file}' is skipped."
+        fi
+    else
+        f_target="${f_source/${path_src}/${path_dest}}"
+        if [ ! -f "${f_target}" ]; then
+            needs_updated=true
+        else
+            f_source_date=$(get_modified_time "${f_source}" )
+            f_target_date=$(get_modified_time "${f_target}" )
+            if [ $f_source_date != $f_target_date ]; then
+                needs_updated=true
+            elif [[ "${o_mode}" == "exif" ]]; then
+                raw_source_info=$(exiftool -f -s -S -originalfilename -imagedescription  "${f_source}")
+                raw_target_info=$(exiftool -f -s -S -originalfilename -imagedescription  "${f_target}")
+                if [ "$raw_source_info" != "$raw_target_info" ]; then
+                    needs_updated=true
+                fi
+            elif [[ "${file}" =~ "/BP Photo/" || "${file}" =~ "/Best/" ]]; then
+                f_source_desc=$(exiftool -q -imagedescription "${f_source}" 2>/dev/null )
+                f_target_desc=$(exiftool -q -imagedescription "${f_target}" 2>/dev/null )
+                if [ "$f_source_desc" != "$f_target_desc" ]; then
+                    needs_updated=true
+                fi
+            fi
+        fi
+    fi
+}
+
+##########################################################
+# safe removal of files
+##########################################################
+function safe_remove() {
+    f_target="${1}"
+    f_target="${f_target/Only in /}"
+    file="${f_target/: //}"
+    if [ -d "${file}" ]; then
+        filename="${file##*/}"
+        if [ "${filename}" != ".SynologyWorkingDirectory" ]; then
+            rm -Rf "${file}"
+            echo "Directory '${file}' is deleted."
+        else
+            echo "Directory '${file}' is preserved."
+        fi
+    else
+        # delete coden cache before original source file (resized) is deleted
+        if [ "$o_dimension" = "photo" ]; then
+            f_symlink="${file/${path_dest}/${service_coden_path}/BP Photo}"
+            raw_candidates=$(find -L "$(dirname "${f_symlink}")" -samefile "${file}" 2> /dev/null)
+            SAVEIFS=$IFS   					# Save current IFS
+            IFS=$'\n'						# Change IFS to new line
+            f_candidates=($raw_candidates) 	# split to array $names
+            IFS=$SAVEIFS   					# Restore IFS
+            for f_candidate in "${f_candidates[@]}";
+            do
+                echo -e "Remove coden symlink: ${f_candidate}"
+                rm -f "${f_candidate}"
+            done
+        # delete non-photo coden cache (wallpapers) before original source file is deleted
+        elif [[ "$o_dimension" = "1920x1080" && ! "${file}" =~ "/BP Photo/" ]]; then
+            f_symlink="${file/${path_dest}/${service_coden_path}}"
+            echo -e "Remove coden symlink: ${f_symlink}"
+            rm -f "${f_symlink}"
+        fi
+        rm -f "${file}"
+        echo "File '${file}' is deleted.";
+    fi
+}
+
+##########################################################
+# process pics with the current dimension
+##########################################################
+user_home=~
+function process_file() {
+    f_source="${1}"
+    if [ ! -f "$f_source" ]; then
+        echo "file ${f_source} doesn't exist"
+        exit
+    fi
+    if [ "$o_dimension" = "photo" ]; then
+        f_target="${f_source/${path_src}/${path_dest}}"
+        magick "${f_source}" -quality 70 -auto-orient -resize '8000x2280>' "${f_target}" ;
+        touch -r "${f_source}" "${f_target}"
+        echo -e "Resize: ${f_target/${user_home}/} from ${f_source/${user_home}/}"
+    else
+        echo -e "Cache: \c"
+        # must include -n not to use cache
+        bpwallpaper -n -f "" -D "${o_dimension}" -U "${f_source/${path_src}/${path_dest}}" "${bestfile}"
+        # create Coden symlink
+        if [ "$o_dimension" = "1920x1080" ]; then
+            f_target="${f_source/${path_src}/${service_coden_path}}"
+            if [[ "${f_source}" =~ "/BP Photo/" ]]; then
+                description=$(exiftool -f -s -S -imagedescription "$f_source")
+                if [[ "${description}" != "-" && "${description}" != "" ]]; then
+                    # escape description for file name
+                    description=$(echo "${description}" | sed -E "s/[\\\/:*?\"<>|]/ /g")
+                    filename="${f_source##*/}"
+                    f_base="${filename%.[^.]*}"
+                    # must include . in matching pattern to ensure it's changing file name
+                    f_target="${f_target/${f_base}\./${f_base}%${description}\.}"
+                    # delete symlinks that point to same f_source, if any
+                    raw_candidates=$(find -L "$(dirname "${f_target}")" -samefile "${f_source}" 2> /dev/null)
+                    SAVEIFS=$IFS   					# Save current IFS
+                    IFS=$'\n'						# Change IFS to new line
+                    f_candidates=($raw_candidates) 	# split to array $names
+                    IFS=$SAVEIFS   					# Restore IFS
+                    for f_candidate in "${f_candidates[@]}";
+                    do
+                        echo -e "Remove existing coden symlnk before adding, if any: ${f_candidate}"
+                        rm -f "${f_candidate}"
+                    done
+                fi
+            fi
+            ln -s -f "${f_source}" "${f_target}"
+            touch -r "${f_source}" "${f_target}"
+            echo -e "Coden: ${f_target/${user_home}/} from ${f_source/${user_home}/}"
+        fi
+    fi
+}
+
+##########################################################
+# initialize os variables
+##########################################################
+os=$(bp_os)
+os_linefeed=$'\n' && [[ "${os}" == "windows" ]]  && os_linefeed=$'\r\n'
+
+##########################################################
+# read command parameters
+##########################################################
+# iphonex : 2436x1125 - share with iPhone Xs Max (2.165)
+# galaxy s9, s10 : 1080x2280 - Portrait (0.474)
+# galaxy note 9 : 2960x1440 - share with galaxys
+# itouch : 1136x640 - share with hd (1.775)
+# zanzibar : 1360x768 - share with hd (1.770)
+# ipad : 2048x1536 - share with ipadpro (1.333)
+# galaxy tab s3 : 2048x1536 - share with iPad Pro (1.333)
+while getopts "d:f:t:m:h" option
+do
+	case "${option}"
+	in
+        d) dimension="${OPTARG}"
+            case "${dimension}"
+            in
+               hd|itouch|zanzibar)
+                   o_dimensions+=( "1920x1080" );; # 1.778
+               uhd)
+                   o_dimensions+=( "3840x2160" );; # 1.778
+               ipadpro|ipad|galaxytab)
+                   o_dimensions+=( "2732x2048" );; # 1.334
+               iphonemax|iphonex)
+                   o_dimensions+=( "2688x1242" );; # 2.164
+               galaxys|galaxynote)
+                   o_dimensions+=( "1080x2280" );; # 0.474
+               ipadpro2)
+                   o_dimensions+=( "2048x2732" );; # 0.749
+               all)
+                   o_dimensions=( "${all_dimensions[@]}" );;
+               *)
+                   o_dimensions+=( "${dimension}" );;
+           esac;;
+        b) service_best_path="${OPTARG}";;
+        f) source_root_path="${OPTARG}";;
+		t) service_cache_path="${OPTARG}";;
+		m) o_mode="${OPTARG}";;
+        h|?) echo -e "usage: bpcache [-d dimension] [-b best_photo_folder] [-f source_folder] [-t dest_folder] [-m mode] [args]"
+             echo -e "-d dimension : cache dimension. all or (hd,default:1920x1080, uhd:3840x2160, ipadpro:2732x2048, iphonemax:2688x1242, ipadpro2:2048x2732, galaxys:1080x2280)";
+             echo -e "-b best_photo_folder : best photo path.";
+             echo -e "-f source_folder : image source path.";
+             echo -e "-t dest_folder : cache destination path not including dimension information";
+             echo -e "-m mode : diff , full, exif, create";
+             echo -e "        : diff -> add/delete {default}";
+             echo -e "        : full -> add/delete, update with date & photo description";
+             echo -e "        : exif -> add/delete, update with date, description and original file name";
+             echo -e "        : create -> regenerate cache without diff";
+             echo -e "        : delete -> delete only with args";
+             echo -e "args : cache file paths to delete before cache creation";
+             echo -e "-h : this page";
+             exit;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+
+# delete the caches with given input files in args for all dimensions
+if [ $# -gt 0 ]; then
+	all_input_files=( "$@" )
+    for input_file in "${all_input_files[@]}"; do
+        if [[ "$input_file" =~ "${service_best_path}" ]]; then
+            best_photo=true
+        else
+            best_photo=false
+        fi
+        echo -e "Cache Remove for ${input_file/${user_home}/}"
+        for o_dimension in "${all_dimensions[@]}"; do
+            if $best_photo; then
+                if [ "$o_dimension" = "photo" ]; then
+                    path_dest="${source_root_path}/BP Photo"
+                    file="${input_file/${service_best_path}/${path_dest}}"
+                else
+                    path_dest="${service_cache_path}/${o_dimension}/BP Photo"
+                    file="${input_file/${service_best_path}/${path_dest}}"
+                fi
+            else
+                path_dest="${service_cache_path}/${o_dimension}"
+                file="${input_file/${source_root_path}/${path_dest}}"
+            fi
+            # wallpaper & photo dimension will be ignored by file exists checking
+            if [ -f "${file}" ]; then
+                safe_remove "${file}"
+            fi
+        done
+    done
+fi
+
+# each mode one time initialization
+case "$o_mode" in
+    # create mode is done all in here
+    create|full|exif)
+        raw_all_pics=$(find "${source_root_path}" -ipath '*.jpg' -type f -not -path '*/.*' )
+        raw_all_best=$(find "${service_best_path}" -ipath '*.jpg' -type f -not -path '*/.*' )
+        ;;
+    # default diff mode
+    diff)
+        ;;
+    # delete mode will exit silently after deletion
+    delete)
+        exit 0
+        ;;
+    # invalid mode
+    *)
+        echo "Unsupported Mode = '${o_mode}'"
+        exit 1
+        ;;
+esac
+
+# if no dimension is assigned
+if [ ! ${#o_dimensions[@]} -gt 0 ]; then
+    echo "Given no dimension as the parameter, only photo resize will be processed."
+fi
+
+##########################################################
+# main loop for all dimensions
+##########################################################
+for o_dimension in "${o_dimensions[@]}";
+do
+    echo -e "######### $o_dimension #########"
+    if [ "$o_dimension" = "photo" ]; then
+        path_src="${service_best_path}"
+        path_dest="${source_root_path}/BP Photo"
+        raw_all_files="${raw_all_best}"
+    else
+        path_src="${source_root_path}"
+        # if service_cache_path include dimension in it, it means partial update so no attaching dimension to the path
+        if [[ "${service_cache_path}" =~ "${o_dimension}" ]]; then
+            path_dest="${service_cache_path}"
+        else
+            path_dest="${service_cache_path}/${o_dimension}"
+        fi
+        raw_all_files="${raw_all_pics}"
+        # create all Coden folders
+        if [ "$o_dimension" = "1920x1080" ]; then
+            raw_all_src_folders=$(find "${source_root_path}" -type d -not -path '*/.*' )
+            raw_all_dest_folders="${raw_all_src_folders//${source_root_path}/${service_coden_path}}"
+            echo -e "${raw_all_dest_folders}" | while IFS= read -r folder ; do mkdir -p "${folder}" ; done
+        fi
+    fi
+
+    # create all dest folders the first
+    raw_all_src_folders=$(find "${path_src}" -type d -not -path '*/.*' )
+    raw_all_dest_folders="${raw_all_src_folders//${path_src}/${path_dest}}"
+    echo -e "${raw_all_dest_folders}" | while IFS= read -r folder ; do mkdir -p "${folder}" ; done
+
+    if [ $o_mode != "create" ]; then
+        # remove files only in dest
+        raw_diff=$(diff -x '.*' -qr "${path_src}" "${path_dest}" )
+        raw_only_in_dest=$(echo -e "${raw_diff}" | grep "Only in ${path_dest}" )
+        if [ "${raw_only_in_dest}" != "" ]; then
+            echo -e "${raw_only_in_dest}" | while IFS= read -r file ; do safe_remove "${file}"; done
+        fi
+
+        # collect files for diff mode
+        if [ "$o_mode" = "diff" ]; then
+            raw_all_files=$(echo -e "${raw_diff}" | grep "Only in ${path_src}" )
+        fi
+    fi
+
+    # update wallpaer per each mode
+    index=0
+    total=$(wc -l <<< "$raw_all_files" )
+    if [ "${raw_all_files}" != "" ]; then
+        echo -e "${raw_all_files}" | while IFS= read -r file ; do show_count; check_file "${file}"; if $needs_updated ; then process_file "${file}" ; fi ; done
+    fi
+done

@@ -1,0 +1,214 @@
+[
+	{
+		"Word": "#nd#",
+		"WordPath": ""
+	},
+	{
+		"Word": "#sn#",
+		"WordPath": ""
+	},
+	{
+		"Word": "/",
+		"WordPath": "/"
+	},
+	{
+		"Word": "/#nd#/",
+		"WordPath": "/BP Wallpaper/#nd#"
+	},
+	{
+		"Word": "/#sn#/",
+		"WordPath": "/BP Wallpaper/#sn#"
+	},
+	{
+		"Word": "/0000 #sn#/",
+		"WordPath": "/BP Photo/0000 #sn#"
+	},
+	{
+		"Word": "/1990/",
+		"WordPath": "/BP Photo/1990"
+	},
+	{
+		"Word": "/1991/",
+		"WordPath": "/BP Photo/1991"
+	},
+	{
+		"Word": "/1992/",
+		"WordPath": "/BP Photo/1992"
+	},
+	{
+		"Word": "/1994/",
+		"WordPath": "/BP Photo/1994"
+	},
+	{
+		"Word": "/1998/",
+		"WordPath": "/BP Photo/1998"
+	},
+	{
+		"Word": "/1999/",
+		"WordPath": "/BP Photo/1999"
+	},
+	{
+		"Word": "/2000/",
+		"WordPath": "/BP Photo/2000"
+	},
+	{
+		"Word": "/2001/",
+		"WordPath": "/BP Photo/2001"
+	},
+	{
+		"Word": "/2002/",
+		"WordPath": "/BP Photo/2002"
+	},
+	{
+		"Word": "/2003/",
+		"WordPath": "/BP Photo/2003"
+	},
+	{
+		"Word": "/2004/",
+		"WordPath": "/BP Photo/2004"
+	},
+	{
+		"Word": "/2005/",
+		"WordPath": "/BP Photo/2005"
+	},
+	{
+		"Word": "/2006/",
+		"WordPath": "/BP Photo/2006"
+	},
+	{
+		"Word": "/2007/",
+		"WordPath": "/BP Photo/2007"
+	},
+	{
+		"Word": "/2008/",
+		"WordPath": "/BP Photo/2008"
+	},
+	{
+		"Word": "/2009/",
+		"WordPath": "/BP Photo/2009"
+	},
+	{
+		"Word": "/2010/",
+		"WordPath": "/BP Photo/2010"
+	},
+	{
+		"Word": "/2011/",
+		"WordPath": "/BP Photo/2011"
+	},
+	{
+		"Word": "/2012/",
+		"WordPath": "/BP Photo/2012"
+	},
+	{
+		"Word": "/2013/",
+		"WordPath": "/BP Photo/2013"
+	},
+	{
+		"Word": "/2014/",
+		"WordPath": "/BP Photo/2014"
+	},
+	{
+		"Word": "/2015/",
+		"WordPath": "/BP Photo/2015"
+	},
+	{
+		"Word": "/2016/",
+		"WordPath": "/BP Photo/2016"
+	},
+	{
+		"Word": "/2017/",
+		"WordPath": "/BP Photo/2017"
+	},
+	{
+		"Word": "/2018/",
+		"WordPath": "/BP Photo/2018"
+	},
+	{
+		"Word": "/2019/",
+		"WordPath": "/BP Photo/2019"
+	},
+	{
+		"Word": "/2020/",
+		"WordPath": "/BP Photo/2020"
+	},
+	{
+		"Word": "/Animations/",
+		"WordPath": "/BP Wallpaper/Animations"
+	},
+	{
+		"Word": "/Anime/",
+		"WordPath": "/BP Wallpaper/Anime"
+	},
+	{
+		"Word": "/Architecture/",
+		"WordPath": "/BP Wallpaper/Architecture"
+	},
+	{
+		"Word": "/Arts/",
+		"WordPath": "/BP Wallpaper/Arts"
+	},
+	{
+		"Word": "/BP Photo/",
+		"WordPath": "/BP Photo"
+	},
+	{
+		"Word": "/BP Wallpaper/",
+		"WordPath": "/BP Wallpaper"
+	},
+	{
+		"Word": "/Cars/",
+		"WordPath": "/BP Wallpaper/Cars"
+	},
+	{
+		"Word": "/ETC/",
+		"WordPath": "/BP Wallpaper/ETC"
+	},
+	{
+		"Word": "/Games/",
+		"WordPath": "/BP Wallpaper/Games"
+	},
+	{
+		"Word": "/Korea/",
+		"WordPath": "/BP Wallpaper/Korea"
+	},
+	{
+		"Word": "/Landscapes/",
+		"WordPath": "/BP Wallpaper/Landscapes"
+	},
+	{
+		"Word": "/Life/",
+		"WordPath": "/BP Wallpaper/Life"
+	},
+	{
+		"Word": "/Movies/",
+		"WordPath": "/BP Wallpaper/Movies"
+	},
+	{
+		"Word": "/Nature/",
+		"WordPath": "/BP Wallpaper/Nature"
+	},
+	{
+		"Word": "/People/",
+		"WordPath": "/BP Wallpaper/People"
+	},
+	{
+		"Word": "/Performance/",
+		"WordPath": "/BP Wallpaper/Performance"
+	},
+	{
+		"Word": "/Space/",
+		"WordPath": "/BP Wallpaper/Space"
+	},
+	{
+		"Word": "/TVShow/",
+		"WordPath": "/BP Wallpaper/TVShow"
+	},
+	{
+		"Word": "/USA/",
+		"WordPath": "/BP Wallpaper/USA"
+	},
+	{
+		"Word": "/Windows/",
+		"WordPath": "/BP Wallpaper/Windows"
+	}
+]

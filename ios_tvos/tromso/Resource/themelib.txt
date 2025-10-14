@@ -1,0 +1,70 @@
+[
+	{
+		"Label": "* Animation *",
+		"Config": "/BP Wallpaper/Animations|/BP Wallpaper/Anime;#nd#|#sn#;"
+	},
+	{
+		"Label": "* Fashion *",
+		"Config": "/BP Wallpaper/#nd#|/BP Wallpaper/#sn#|/BP Wallpaper/People;Candice Swanepoel|Hannah Ferguson|Irina Shayk|Jessica Gomes|Miranda Kerr|Ratajkowski;"
+	},
+	{
+		"Label": "* Hollywood *",
+		"Config": "/BP Wallpaper/#sn#|/BP Wallpaper/Movies|/BP Wallpaper/People;Armas|Emma Stone|Gadot|Johansson|Margot|Olsen|Seyfried|Sophie Turner;#nd#"
+	},
+	{
+		"Label": "* Movies + *",
+		"Config": "/BP Wallpaper/Animations|/BP Wallpaper/Movies|/BP Wallpaper/TVShow;#nd#|#sn#;"
+	},
+	{
+		"Label": "* People *",
+		"Config": "/BP Wallpaper/#sn#|/BP Wallpaper/Games|/BP Wallpaper/Movies|/BP Wallpaper/People|/BP Wallpaper/Performance;#sn#|/People/|강민경|경리|낸시|미주|설현|손나은|수지|슬기|아이린|아이유|유라|윤아|재경|전소미|전효성|제니|쯔위|크리스탈|태연|현아;#nd#|나인뮤지스, 현아|신수지"
+	},
+	{
+		"Label": "Album Art",
+		"Config": "/BP Wallpaper/Performance;Album@;#nd#|#sn#"
+	},
+	{
+		"Label": "DCEU",
+		"Config": "/BP Wallpaper/Movies|/BP Wallpaper/TVShow;Aquaman|Arrow S|Arrowverse|Batman V|Flash S|Harley Quinn|Justice League|Legends of Tomorrow|Man of Steel|Shazam|Suicide Squad|Supergirl S|Wonder Woman 2017;#nd#|#sn#"
+	},
+	{
+		"Label": "Ghibli",
+		"Config": "/BP Wallpaper/Animations;Arrietty|Earthsea|Ghibli|Howl|Kaguya|Kiki|Laputa|Marnie|Mononoke|Nausicaa|Only Yesterday|Ponyo|Poppy Hill|Porco|Spirited|Totoro|Whisper of|Wind Rises;#nd#|#sn#"
+	},
+	{
+		"Label": "K-Pop",
+		"Config": "/BP Wallpaper/Games|/BP Wallpaper/People|/BP Wallpaper/Performance;강민경|경리|낸시|미주|설현|손나은|수지|슬기|아이린|아이유|유라|윤아|재경|전소미|전효성|제니|쯔위|크리스탈|태연|현아;#nd#|#sn#|나인뮤지스, 현아|신수지"
+	},
+	{
+		"Label": "MCU",
+		"Config": "/BP Wallpaper/Movies|/BP Wallpaper/TVShow;Avengers|Iron Man|Black Panther|Thor|Captain America|Guardians of|Marvel|Jessica Jones|Doctor Strange|Homecoming|Far from Home|Incredible Hulk|Ant-Man|Iron Fist|DareDevil S|Punisher S|Luke Cage;#sn#|#nd#"
+	},
+	{
+		"Label": "Museum",
+		"Config": "/BP Photo/|/BP Wallpaper/Architecture|/BP Wallpaper/Arts;Louvre|Museo|Museum|Musée|Orsay|Pompidou|Prado|갤러리|미술관|박물관;#nd#|#sn#"
+	},
+	{
+		"Label": "National Park",
+		"Config": "/BP Photo|/BP Wallpaper/Korea|/BP Wallpaper/Landscapes|/BP Wallpaper/Nature|/BP Wallpaper/USA; NP | SP |National Park|Preserve|State Park|forest|국립공원;#nd#|#sn#"
+	},
+	{
+		"Label": "Pixar",
+		"Config": "/BP Wallpaper/Animations;Brave|Bug|Cars|Coco|Finding |Good Dino|Incredibles|Inside Out|Monsters|Ratatouille|Toy Story|Up Pixar|Wall-E;#nd#|#sn#"
+	},
+	{
+		"Label": "Recent TV",
+		"Config": "/BP Wallpaper/TVShow;Community|Daredevil S3|Good Omens|Iron Fist S2|Jessica Jones S3|Luke Cage S2|Punisher S2|Stranger Things|The Boys|Umbrella Academy|Warrior Nun;#nd#|#sn#"
+	},
+	{
+		"Label": "Religious",
+		"Config": "/;Cathedral|Church|Mosque|Sistine|Temple|낙산사|화엄사;#nd#|#sn#"
+	},
+	{
+		"Label": "Star Wars",
+		"Config": "/BP Wallpaper/Animations|/BP Wallpaper/Movies;Clone Wars|Star Wars;#nd#|#sn#"
+	},
+	{
+		"Label": "World Wonder",
+		"Config": "/BP Photo|/BP Wallpaper/Architecture|/BP Wallpaper/USA;Acropolis|Alhambra|Angkor Wat|Borobudur|Chichen Itza|Christ The Redeemer|Colosseo, Rome|Eiffel Tower|Giza|Great Wall|Hagia Sophia|Kiyomizu|Machu|Moai|Neuschwanstein|Petra|Red Square|Sistine|Statue of Liberty, New|Stonehenge|Sydney Opera|Taj Mahal|Teotihuacan|Timbuktu;#nd#|#sn#"
+	}
+]

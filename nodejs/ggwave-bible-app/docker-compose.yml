@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  ggwave-bible-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ggwave-bible-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

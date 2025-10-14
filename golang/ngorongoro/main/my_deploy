@@ -1,0 +1,51 @@
+#!/bin/bash
+
+##########################################################
+# initialize os variables
+##########################################################
+# msys : Windows MinGW
+# cygwin : Windows Cygwin
+# darwin10.0 : Mac OS X (Snow leopard)
+# darwin14 : Mac OS X (Yosemite)
+# darwin15 : Mac OS X (El capitan)
+# darwin16 : Mac OS X (Sierra)
+# darwin17 : Mac OS X (High Sierra)
+# darwin18 : Mac OS X (Mojave)
+# darwin19 : Mac OS X (Catalina)
+# darwin20 : Mac OS X (Big Sur)
+# linux-gnu : Ubuntu
+function init_os() {
+    os="${OSTYPE}"
+    os_linefeed=$'\n'
+    if [ "${os}" = "linux-gnu" ]; then
+        os="linux"
+    elif [ "${os/[1|2]*/}" = "darwin" ]; then
+        os="osx"
+    elif [[ "${os}" = "msys" || "${os}" = "cygwin" ]]; then
+        os="windows"
+        os_linefeed=$'\r\n'
+    fi
+}
+init_os
+
+source1="bpwallpaper bpcache check_coden_cache check_image_description ngorongoro.sh"
+source2="rsync_androids rsync_highlands"
+if [[ "${os}" == "linux" ]]; then
+    cp $source1 $source2 ~/bin
+else
+    cp bpwallpaper ~/bin
+fi
+
+if [[ $# -eq 1 && $1 == "-f" ]]; then
+    echo -e "Deploy for all platforms"
+    if [ -d ~/Documents/CloudStation/Install/Mac\ OS\ X/bin ]; then
+        cp $source1 ~/Documents/CloudStation/Install/Mac\ OS\ X/bin
+    fi
+    if [ -d ~/Documents/CloudStation/Install/MS\ Windows/bin ]; then
+        cp $source1 ~/Documents/CloudStation/Install/MS\ Windows/bin
+    fi
+    if [ -d ~/Documents/CloudStation/Install/Linux/bin ]; then
+        cp $source1 ~/Documents/CloudStation/Install/Linux/bin
+        cp $source2 ~/Documents/CloudStation/Install/Linux
+    fi
+fi

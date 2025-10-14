@@ -1,0 +1,153 @@
+#!/bin/bash
+
+o_path_src=~/CloudStation
+o_path_coden=~/Documents/Coden
+if [ -d "${BPWALLPAPERROOT}" ]; then
+    o_path_src="${BPWALLPAPERROOT}"
+fi
+if [ -d "${BPWALLPAPERCODEN}" ]; then
+    o_path_coden="${BPWALLPAPERCODEN}"
+fi
+o_mode=normal
+
+##########################################################
+# initialize os variables
+##########################################################
+# msys : Windows MinGW
+# cygwin : Windows Cygwin
+# darwin10.0 : Mac OS X (Snow leopard)
+# darwin14 : Mac OS X (Yosemite)
+# darwin15 : Mac OS X (El capitan)
+# darwin16 : Mac OS X (Sierra)
+# darwin17 : Mac OS X (High Sierra)
+# darwin18 : Mac OS X (Mojave)
+# darwin19 : Mac OS X (Catalina)
+# darwin20 : Mac OS X (Big Sur)
+# linux-gnu : Ubuntu
+function init_os() {
+    os="${OSTYPE}"
+    os_linefeed=$'\n'	
+    if [ "${os}" = "linux-gnu" ]; then
+        os="linux"
+    elif [ "${os/[1|2]*/}" = "darwin" ]; then
+        os="osx"
+    elif [[ "${os}" = "msys" || "${os}" = "cygwin" ]]; then
+        os="windows"
+        os_linefeed=$'\r\n'	
+    fi
+}
+init_os
+
+##########################################################
+# function to show count
+##########################################################
+function show_count() {
+    let index++
+    if [ $(( $index % 100 )) = 1 ]; then
+        echo -e ">>>>> check coden symlink for ${action_label}: ${index} of ${total} <<<<<<<<<"
+    fi
+}
+
+##########################################################
+# process file for add
+##########################################################
+user_home=~
+function process_file_add() {
+    f_source="${1}"
+    f_target="${f_source/${o_path_src}/${o_path_coden}}"
+    if [[ "${f_source}" =~ "/BP Photo/" ]]; then
+        f_target=$(find -L "$(dirname "${f_target}")" -samefile "${f_source}" )
+    fi
+    if [ ! -L "${f_target}" ]; then
+        if [[ "${f_source}" =~ "/BP Photo/" ]]; then
+            description=$(exiftool -f -s -S -imagedescription "$f_source")
+            if [[ "${description}" != "-" ]]; then
+                # escape description for file name
+                description=$(echo "${description}" | sed -E "s/[\\\/:*?\"<>|]/ /g")
+                filename="${f_source##*/}"
+                f_base="${filename%.[^.]*}"
+                # reassign f_target due to find -L failure
+                f_target="${f_source/${o_path_src}/${o_path_coden}}"
+                # must include . in matching pattern to ensure it's changing file name
+                f_target="${f_target/${f_base}\./${f_base}%${description}\.}"
+            fi
+        fi
+        ln -s -f "${f_source}" "${f_target}"
+        touch -r "${f_source}" "${f_target}"
+        echo -e "Tromso: ${f_target/${user_home}/} from ${f_source/${user_home}/}"        
+    fi
+}
+
+##########################################################
+# process file for delete
+##########################################################
+function process_file_delete() {
+    f_source="${1}"
+    tromso_original_path=$(realpath "${f_source}")
+    if [ ! -f "${tromso_original_path}" ]; then
+        echo "Symlink '${f_source}' is deleted because its original file doesn't exist."
+        rm -f "${f_source}"
+    elif [[ $o_mode=="full" && "${f_source}" =~ "/BP Photo/" ]]; then
+        # it will delete the coden cache that holds previous description caused by recent description update
+        description=%$(exiftool -f -s -S -imagedescription "${tromso_original_path}").
+        # escape description for file name to compare with file name's substring
+        description=$(echo "${description}" | sed -E "s/[\\\/:*?\"<>|]/ /g"
+        if [ "${description}" = "%-." ]; then
+            if [[ "${f_source##*/}" != "${tromso_original_path##*/}" ]]; then
+                echo "Symlink '${f_source}' is deleted because it has old description as coden. (${description})"
+                rm -f "${f_source}"
+            fi
+        elif [[ ! "${f_source}" =~ "${description}" ]]; then
+            echo "Symlink '${f_source}' is deleted because it has old description as coden. (${description})"
+            rm -f "${f_source}"
+        fi
+    fi
+}
+
+##########################################################
+# read command parameters
+##########################################################
+while getopts "fh" option
+do
+	case "${option}"
+	in
+        f) o_mode=full;;
+        h|?) echo -e "usage: check_coden_cache [-f]"
+        	 echo -e "-f : full mode to check exif";
+             echo -e "-h : this page";
+             exit;;
+    esac
+done
+
+##########################################################
+# main
+##########################################################
+raw_all_src_folders=$(find "${o_path_src}" -type d -not -path '*/.*' )
+raw_all_dest_folders="${raw_all_src_folders//${o_path_src}/${o_path_coden}}"
+echo -e "${raw_all_dest_folders}" | while IFS= read -r folder ; do mkdir -p "${folder}" ; done
+
+# delete tromso cache if needed
+action_label="delete"
+raw_all_files=$(find "${o_path_coden}" -ipath '*.jpg' -type l -not -path '*/.*' )
+# update wallpaer per each mode
+index=0
+total=$(wc -l <<< "$raw_all_files" )
+if [ "${raw_all_files}" != "" ]; then
+    echo -e "${raw_all_files}" | while IFS= read -r file ; do show_count; process_file_delete "${file}" ; done
+else
+    echo -e "Error: There is no Coden cache."
+fi
+
+# add tromso cache if needed
+raw_all_files=$(find "${o_path_src}" -ipath '*.jpg' -type f -not -path '*/.*' )
+# update wallpaer per each mode
+action_label="add"
+index=0
+total=$(wc -l <<< "$raw_all_files" )
+if [ "${raw_all_files}" != "" ]; then
+    echo -e "${raw_all_files}" | while IFS= read -r file ; do show_count; process_file_add "${file}" ; done
+else
+    echo -e "Error: There is no source."
+    exit 1
+fi
+

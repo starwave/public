@@ -1,0 +1,4 @@
+Type=Application
+Exec=/home/starwave/bin/WallpaperInfoApp.sh
+Name=WallpaperInfoApp
+Icon=/home/starwave/bin/.thirdwave.png

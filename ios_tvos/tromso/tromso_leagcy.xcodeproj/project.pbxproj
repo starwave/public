@@ -1,0 +1,1154 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC278FD8247A4A9600FF5348 /* PlatformHotKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC278FD7247A4A9600FF5348 /* PlatformHotKeyViewController.swift */; };
+		FC278FD9247A4AC300FF5348 /* PlatformHotKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC278FD7247A4A9600FF5348 /* PlatformHotKeyViewController.swift */; };
+		FC278FDB247A4B4300FF5348 /* PlatformHotKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC278FD7247A4A9600FF5348 /* PlatformHotKeyViewController.swift */; };
+		FC288DEB24EFBF6B00A227A9 /* PlatformWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC288DEA24EFBF6B00A227A9 /* PlatformWallpaper.swift */; };
+		FC288DEC24EFBF6B00A227A9 /* PlatformWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC288DEA24EFBF6B00A227A9 /* PlatformWallpaper.swift */; };
+		FC288DED24EFBF6B00A227A9 /* PlatformWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC288DEA24EFBF6B00A227A9 /* PlatformWallpaper.swift */; };
+		FC2E40632463460D005510F3 /* TromsoTVAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2E40622463460D005510F3 /* TromsoTVAppDelegate.swift */; };
+		FC2E40652463460D005510F3 /* TromsoTVContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2E40642463460D005510F3 /* TromsoTVContentView.swift */; };
+		FC2E40672463460F005510F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2E40662463460F005510F3 /* Assets.xcassets */; };
+		FC2E406A2463460F005510F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2E40692463460F005510F3 /* Preview Assets.xcassets */; };
+		FC2E406D2463460F005510F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2E406B2463460F005510F3 /* LaunchScreen.storyboard */; };
+		FC2F03622511E914001A4D21 /* TromsoTVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2F03612511E914001A4D21 /* TromsoTVExtension.swift */; };
+		FC3807A4251050FB00F55EE8 /* reservedword.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC3807A3251050FB00F55EE8 /* reservedword.txt */; };
+		FC3807A5251050FB00F55EE8 /* reservedword.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC3807A3251050FB00F55EE8 /* reservedword.txt */; };
+		FC3807A6251050FB00F55EE8 /* reservedword.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC3807A3251050FB00F55EE8 /* reservedword.txt */; };
+		FC5925302473980B009ECB34 /* PlatformHotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59252F2473980B009ECB34 /* PlatformHotKey.swift */; };
+		FC5925322473B868009ECB34 /* BPUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925312473B868009ECB34 /* BPUtil.swift */; };
+		FC5925342473B93A009ECB34 /* WallpaperServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925332473B93A009ECB34 /* WallpaperServiceInfo.swift */; };
+		FC5925362473BA08009ECB34 /* PlatformPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925352473BA08009ECB34 /* PlatformPreference.swift */; };
+		FC5925382473BB2D009ECB34 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925372473BB2D009ECB34 /* ImageFileManager.swift */; };
+		FC59253B2473BBC7009ECB34 /* LinkedHashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253A2473BBC7009ECB34 /* LinkedHashMap.swift */; };
+		FC59253D2473BCA6009ECB34 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253C2473BCA5009ECB34 /* AppUtil.swift */; };
+		FC59253F2473BCB9009ECB34 /* ExifInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253E2473BCB9009ECB34 /* ExifInterface.swift */; };
+		FC5925432473BECD009ECB34 /* WallpaperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925422473BECD009ECB34 /* WallpaperService.swift */; };
+		FC592547247485B7009ECB34 /* PlatformTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC592546247485B6009ECB34 /* PlatformTimer.swift */; };
+		FC592549247485EA009ECB34 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC592548247485EA009ECB34 /* RepeatingTimer.swift */; };
+		FC66789A247722D300704176 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253C2473BCA5009ECB34 /* AppUtil.swift */; };
+		FC66789B247722D600704176 /* BPUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925312473B868009ECB34 /* BPUtil.swift */; };
+		FC66789C247722D900704176 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925372473BB2D009ECB34 /* ImageFileManager.swift */; };
+		FC66789D247722DD00704176 /* PlatformFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF451E2474CEB900BEA604 /* PlatformFileManager.swift */; };
+		FC66789F247722E200704176 /* PlatformInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45972475ACF000BEA604 /* PlatformInfo.swift */; };
+		FC6678A0247722E500704176 /* PlatformPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925352473BA08009ECB34 /* PlatformPreference.swift */; };
+		FC6678A1247722E800704176 /* PlatformTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC592546247485B6009ECB34 /* PlatformTimer.swift */; };
+		FC6678A2247722EB00704176 /* ThemeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45992475BE3A00BEA604 /* ThemeInfo.swift */; };
+		FC6678A3247722EE00704176 /* WallpaperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925422473BECD009ECB34 /* WallpaperService.swift */; };
+		FC6678A4247722F100704176 /* WallpaperServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF451A2474A8B700BEA604 /* WallpaperServiceHandler.swift */; };
+		FC6678A5247722F400704176 /* WallpaperServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925332473B93A009ECB34 /* WallpaperServiceInfo.swift */; };
+		FC6678A62477230500704176 /* ExifInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253E2473BCB9009ECB34 /* ExifInterface.swift */; };
+		FC6678A72477230800704176 /* LinkedHashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253A2473BBC7009ECB34 /* LinkedHashMap.swift */; };
+		FC6678A82477230A00704176 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC592548247485EA009ECB34 /* RepeatingTimer.swift */; };
+		FC6678AB24772A4A00704176 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45932475A88B00BEA604 /* config.plist */; };
+		FC6678AC2477311A00704176 /* tromso.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5FF6C247716E800F9EED3 /* tromso.png */; };
+		FC6678AD247731FB00704176 /* media_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454E2474F72600BEA604 /* media_pause.png */; };
+		FC6678AE247731FE00704176 /* media_play_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45512474F72600BEA604 /* media_play_pause.png */; };
+		FC6678AF2477320100704176 /* media_play.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454D2474F72600BEA604 /* media_play.png */; };
+		FC7A93E02476684600D12729 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253C2473BCA5009ECB34 /* AppUtil.swift */; };
+		FC7A93E12476684900D12729 /* BPUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925312473B868009ECB34 /* BPUtil.swift */; };
+		FC7A93E22476684C00D12729 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925372473BB2D009ECB34 /* ImageFileManager.swift */; };
+		FC7A93E32476684F00D12729 /* PlatformFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF451E2474CEB900BEA604 /* PlatformFileManager.swift */; };
+		FC7A93E42476685300D12729 /* PlatformHotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59252F2473980B009ECB34 /* PlatformHotKey.swift */; };
+		FC7A93E52476685500D12729 /* PlatformInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45972475ACF000BEA604 /* PlatformInfo.swift */; };
+		FC7A93E62476685800D12729 /* PlatformPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925352473BA08009ECB34 /* PlatformPreference.swift */; };
+		FC7A93E72476685A00D12729 /* PlatformTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC592546247485B6009ECB34 /* PlatformTimer.swift */; };
+		FC7A93EA2476686C00D12729 /* ThemeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45992475BE3A00BEA604 /* ThemeInfo.swift */; };
+		FC7A93EB2476687000D12729 /* WallpaperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925422473BECD009ECB34 /* WallpaperService.swift */; };
+		FC7A93EC2476687300D12729 /* WallpaperServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF451A2474A8B700BEA604 /* WallpaperServiceHandler.swift */; };
+		FC7A93ED2476687700D12729 /* WallpaperServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5925332473B93A009ECB34 /* WallpaperServiceInfo.swift */; };
+		FC7A93EF247668C500D12729 /* ExifInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253E2473BCB9009ECB34 /* ExifInterface.swift */; };
+		FC7A93F0247668C700D12729 /* LinkedHashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC59253A2473BBC7009ECB34 /* LinkedHashMap.swift */; };
+		FC7A93F1247668CA00D12729 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC592548247485EA009ECB34 /* RepeatingTimer.swift */; };
+		FC7A93F22476693700D12729 /* folder_mac.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45502474F72600BEA604 /* folder_mac.png */; };
+		FC7A93F32476693A00D12729 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454C2474F72600BEA604 /* gear.png */; };
+		FC7A93F42476693D00D12729 /* media_next.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454F2474F72600BEA604 /* media_next.png */; };
+		FC7A93F52476694000D12729 /* media_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454E2474F72600BEA604 /* media_pause.png */; };
+		FC7A93F62476694300D12729 /* media_play_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45512474F72600BEA604 /* media_play_pause.png */; };
+		FC7A93F72476694500D12729 /* media_play.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454D2474F72600BEA604 /* media_play.png */; };
+		FC7A93F82476694900D12729 /* media_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454B2474F72600BEA604 /* media_previous.png */; };
+		FC7A93F92476694B00D12729 /* media_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45492474F72600BEA604 /* media_stop.png */; };
+		FC7A93FA2476694F00D12729 /* power_on.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454A2474F72600BEA604 /* power_on.png */; };
+		FC7A93FB2476695200D12729 /* power_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45522474F72600BEA604 /* power_stop.png */; };
+		FC7A93FF24766A2F00D12729 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45932475A88B00BEA604 /* config.plist */; };
+		FC80BECE25149DB1002B84EA /* CustomConfigDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80BECD25149DB1002B84EA /* CustomConfigDialog.swift */; };
+		FC80BED025156731002B84EA /* CustomConfigDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC80BECF25156731002B84EA /* CustomConfigDialog.xib */; };
+		FC80BED12516E4D9002B84EA /* folder_mac.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45502474F72600BEA604 /* folder_mac.png */; };
+		FCAB9566250C2E9C007E4A79 /* TromsoIOSOptionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9565250C2E9C007E4A79 /* TromsoIOSOptionUI.swift */; };
+		FCAB956A250C7AF7007E4A79 /* ThemeLibraryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9569250C7AF7007E4A79 /* ThemeLibraryInterface.swift */; };
+		FCAB956B250C7AF7007E4A79 /* ThemeLibraryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9569250C7AF7007E4A79 /* ThemeLibraryInterface.swift */; };
+		FCAB956C250C7AF7007E4A79 /* ThemeLibraryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9569250C7AF7007E4A79 /* ThemeLibraryInterface.swift */; };
+		FCAB9573250C9538007E4A79 /* red_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956D250C9537007E4A79 /* red_light.png */; };
+		FCAB9574250C9538007E4A79 /* red_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956D250C9537007E4A79 /* red_light.png */; };
+		FCAB9575250C9538007E4A79 /* red_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956D250C9537007E4A79 /* red_light.png */; };
+		FCAB9576250C9538007E4A79 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956E250C9537007E4A79 /* folder.png */; };
+		FCAB9577250C9538007E4A79 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956E250C9537007E4A79 /* folder.png */; };
+		FCAB9578250C9538007E4A79 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956E250C9537007E4A79 /* folder.png */; };
+		FCAB9579250C9538007E4A79 /* green_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956F250C9538007E4A79 /* green_light.png */; };
+		FCAB957A250C9538007E4A79 /* green_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956F250C9538007E4A79 /* green_light.png */; };
+		FCAB957B250C9538007E4A79 /* green_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB956F250C9538007E4A79 /* green_light.png */; };
+		FCAB957C250C9538007E4A79 /* gray_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9570250C9538007E4A79 /* gray_light.png */; };
+		FCAB957D250C9538007E4A79 /* gray_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9570250C9538007E4A79 /* gray_light.png */; };
+		FCAB957E250C9538007E4A79 /* gray_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9570250C9538007E4A79 /* gray_light.png */; };
+		FCAB957F250C9538007E4A79 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9571250C9538007E4A79 /* trash.png */; };
+		FCAB9580250C9538007E4A79 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9571250C9538007E4A79 /* trash.png */; };
+		FCAB9581250C9538007E4A79 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9571250C9538007E4A79 /* trash.png */; };
+		FCAB9586250C9566007E4A79 /* themelib.txt in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9585250C9566007E4A79 /* themelib.txt */; };
+		FCAB9587250C9566007E4A79 /* themelib.txt in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9585250C9566007E4A79 /* themelib.txt */; };
+		FCAB9588250C9566007E4A79 /* themelib.txt in Resources */ = {isa = PBXBuildFile; fileRef = FCAB9585250C9566007E4A79 /* themelib.txt */; };
+		FCAB958A250D4DCF007E4A79 /* WallpaperServiceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9589250D4DCF007E4A79 /* WallpaperServiceConnection.swift */; };
+		FCAB958B250D4DCF007E4A79 /* WallpaperServiceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9589250D4DCF007E4A79 /* WallpaperServiceConnection.swift */; };
+		FCAB958C250D4DCF007E4A79 /* WallpaperServiceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9589250D4DCF007E4A79 /* WallpaperServiceConnection.swift */; };
+		FCBD97902CDF8EF100F2AE8D /* FileSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD978F2CDF8EF100F2AE8D /* FileSyncManager.swift */; };
+		FCBD97912CDF8EF100F2AE8D /* FileSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD978F2CDF8EF100F2AE8D /* FileSyncManager.swift */; };
+		FCBD97922CDF8EF100F2AE8D /* FileSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD978F2CDF8EF100F2AE8D /* FileSyncManager.swift */; };
+		FCCF451B2474A8B700BEA604 /* WallpaperServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF451A2474A8B700BEA604 /* WallpaperServiceHandler.swift */; };
+		FCCF451F2474CEB900BEA604 /* PlatformFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF451E2474CEB900BEA604 /* PlatformFileManager.swift */; };
+		FCCF45212474D0B000BEA604 /* TromsoTVOptionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45202474D0B000BEA604 /* TromsoTVOptionUI.swift */; };
+		FCCF45252474D11F00BEA604 /* TromsoWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45242474D11F00BEA604 /* TromsoWidgetProvider.swift */; };
+		FCCF453E2474D30500BEA604 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCF452C2474D26D00BEA604 /* TVServices.framework */; };
+		FCCF45412474D30500BEA604 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45402474D30500BEA604 /* ContentProvider.swift */; };
+		FCCF45532474F72600BEA604 /* media_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45492474F72600BEA604 /* media_stop.png */; };
+		FCCF45542474F72600BEA604 /* power_on.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454A2474F72600BEA604 /* power_on.png */; };
+		FCCF45552474F72600BEA604 /* media_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454B2474F72600BEA604 /* media_previous.png */; };
+		FCCF45562474F72600BEA604 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454C2474F72600BEA604 /* gear.png */; };
+		FCCF45572474F72700BEA604 /* media_play.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454D2474F72600BEA604 /* media_play.png */; };
+		FCCF45582474F72700BEA604 /* media_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454E2474F72600BEA604 /* media_pause.png */; };
+		FCCF45592474F72700BEA604 /* media_next.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF454F2474F72600BEA604 /* media_next.png */; };
+		FCCF455A2474F72700BEA604 /* folder_mac.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45502474F72600BEA604 /* folder_mac.png */; };
+		FCCF455B2474F72700BEA604 /* media_play_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45512474F72600BEA604 /* media_play_pause.png */; };
+		FCCF455C2474F72700BEA604 /* power_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45522474F72600BEA604 /* power_stop.png */; };
+		FCCF4564247590A700BEA604 /* TromsoIOSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF4563247590A700BEA604 /* TromsoIOSAppDelegate.swift */; };
+		FCCF4566247590A700BEA604 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF4565247590A700BEA604 /* SceneDelegate.swift */; };
+		FCCF4568247590A700BEA604 /* TromsoIOSContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF4567247590A700BEA604 /* TromsoIOSContentView.swift */; };
+		FCCF456A247590A900BEA604 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCCF4569247590A900BEA604 /* Assets.xcassets */; };
+		FCCF456D247590A900BEA604 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCCF456C247590A900BEA604 /* Preview Assets.xcassets */; };
+		FCCF4570247590A900BEA604 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCF456E247590A900BEA604 /* LaunchScreen.storyboard */; };
+		FCCF45942475A88B00BEA604 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCF45932475A88B00BEA604 /* config.plist */; };
+		FCCF45982475ACF000BEA604 /* PlatformInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45972475ACF000BEA604 /* PlatformInfo.swift */; };
+		FCCF459A2475BE3A00BEA604 /* ThemeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCF45992475BE3A00BEA604 /* ThemeInfo.swift */; };
+		FCEEB39D24E3D95400918B8C /* NgorongoroInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEEB39C24E3D95400918B8C /* NgorongoroInterface.swift */; };
+		FCEEB39E24E3D95700918B8C /* NgorongoroInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEEB39C24E3D95400918B8C /* NgorongoroInterface.swift */; };
+		FCEEB39F24E3D95800918B8C /* NgorongoroInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEEB39C24E3D95400918B8C /* NgorongoroInterface.swift */; };
+		FCF5FF622476F76600F9EED3 /* PreferenceUIHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5FF612476F76600F9EED3 /* PreferenceUIHostingController.swift */; };
+		FCF5FF6D247718CB00F9EED3 /* tromso.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5FF6C247716E800F9EED3 /* tromso.png */; };
+		FCF5FF6E247718CD00F9EED3 /* tromso.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5FF6C247716E800F9EED3 /* tromso.png */; };
+		FCF5FF7D2477214700F9EED3 /* TromsoIOS9AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5FF7C2477214700F9EED3 /* TromsoIOS9AppDelegate.swift */; };
+		FCF5FF7F2477214700F9EED3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5FF7E2477214700F9EED3 /* SceneDelegate.swift */; };
+		FCF5FF812477214700F9EED3 /* TromsoIOS9ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF5FF802477214700F9EED3 /* TromsoIOS9ViewController.swift */; };
+		FCF5FF862477214900F9EED3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCF5FF852477214900F9EED3 /* Assets.xcassets */; };
+		FCFB3EC92523D60300E2ABAB /* WPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3EC82523D60300E2ABAB /* WPath.swift */; };
+		FCFB3ECA2523D60300E2ABAB /* WPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3EC82523D60300E2ABAB /* WPath.swift */; };
+		FCFB3ECB2523D60300E2ABAB /* WPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3EC82523D60300E2ABAB /* WPath.swift */; };
+		FCFB3ECD2523D63D00E2ABAB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3ECC2523D63D00E2ABAB /* StringExtension.swift */; };
+		FCFB3ECE2523D63D00E2ABAB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3ECC2523D63D00E2ABAB /* StringExtension.swift */; };
+		FCFB3ECF2523D63D00E2ABAB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3ECC2523D63D00E2ABAB /* StringExtension.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC278FD7247A4A9600FF5348 /* PlatformHotKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformHotKeyViewController.swift; sourceTree = "<group>"; };
+		FC288DEA24EFBF6B00A227A9 /* PlatformWallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformWallpaper.swift; sourceTree = "<group>"; };
+		FC2E405F2463460D005510F3 /* tromso_leagcy_tv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tromso_leagcy_tv.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2E40622463460D005510F3 /* TromsoTVAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoTVAppDelegate.swift; sourceTree = "<group>"; };
+		FC2E40642463460D005510F3 /* TromsoTVContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoTVContentView.swift; sourceTree = "<group>"; };
+		FC2E40662463460F005510F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC2E40692463460F005510F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FC2E406C2463460F005510F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC2E406E2463460F005510F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC2F03612511E914001A4D21 /* TromsoTVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoTVExtension.swift; sourceTree = "<group>"; };
+		FC3503B9252D1FF30048F074 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		FC3807A3251050FB00F55EE8 /* reservedword.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reservedword.txt; sourceTree = "<group>"; };
+		FC59252F2473980B009ECB34 /* PlatformHotKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformHotKey.swift; sourceTree = "<group>"; };
+		FC5925312473B868009ECB34 /* BPUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPUtil.swift; sourceTree = "<group>"; };
+		FC5925332473B93A009ECB34 /* WallpaperServiceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperServiceInfo.swift; sourceTree = "<group>"; };
+		FC5925352473BA08009ECB34 /* PlatformPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformPreference.swift; sourceTree = "<group>"; };
+		FC5925372473BB2D009ECB34 /* ImageFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
+		FC59253A2473BBC7009ECB34 /* LinkedHashMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedHashMap.swift; sourceTree = "<group>"; };
+		FC59253C2473BCA5009ECB34 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
+		FC59253E2473BCB9009ECB34 /* ExifInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExifInterface.swift; sourceTree = "<group>"; };
+		FC5925422473BECD009ECB34 /* WallpaperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperService.swift; sourceTree = "<group>"; };
+		FC592546247485B6009ECB34 /* PlatformTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformTimer.swift; sourceTree = "<group>"; };
+		FC592548247485EA009ECB34 /* RepeatingTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
+		FC80BECD25149DB1002B84EA /* CustomConfigDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomConfigDialog.swift; sourceTree = "<group>"; };
+		FC80BECF25156731002B84EA /* CustomConfigDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomConfigDialog.xib; sourceTree = "<group>"; };
+		FCAB9565250C2E9C007E4A79 /* TromsoIOSOptionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoIOSOptionUI.swift; sourceTree = "<group>"; };
+		FCAB9569250C7AF7007E4A79 /* ThemeLibraryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLibraryInterface.swift; sourceTree = "<group>"; };
+		FCAB956D250C9537007E4A79 /* red_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_light.png; sourceTree = "<group>"; };
+		FCAB956E250C9537007E4A79 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		FCAB956F250C9538007E4A79 /* green_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_light.png; sourceTree = "<group>"; };
+		FCAB9570250C9538007E4A79 /* gray_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_light.png; sourceTree = "<group>"; };
+		FCAB9571250C9538007E4A79 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		FCAB9585250C9566007E4A79 /* themelib.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = themelib.txt; sourceTree = "<group>"; };
+		FCAB9589250D4DCF007E4A79 /* WallpaperServiceConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperServiceConnection.swift; sourceTree = "<group>"; };
+		FCBD978F2CDF8EF100F2AE8D /* FileSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSyncManager.swift; sourceTree = "<group>"; };
+		FCCF451A2474A8B700BEA604 /* WallpaperServiceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperServiceHandler.swift; sourceTree = "<group>"; };
+		FCCF451E2474CEB900BEA604 /* PlatformFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFileManager.swift; sourceTree = "<group>"; };
+		FCCF45202474D0B000BEA604 /* TromsoTVOptionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoTVOptionUI.swift; sourceTree = "<group>"; };
+		FCCF45242474D11F00BEA604 /* TromsoWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoWidgetProvider.swift; sourceTree = "<group>"; };
+		FCCF452C2474D26D00BEA604 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
+		FCCF453D2474D30500BEA604 /* tromso_leagcyTopshelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = tromso_leagcyTopshelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCCF45402474D30500BEA604 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
+		FCCF45422474D30500BEA604 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCCF45492474F72600BEA604 /* media_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_stop.png; sourceTree = "<group>"; };
+		FCCF454A2474F72600BEA604 /* power_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power_on.png; sourceTree = "<group>"; };
+		FCCF454B2474F72600BEA604 /* media_previous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_previous.png; sourceTree = "<group>"; };
+		FCCF454C2474F72600BEA604 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		FCCF454D2474F72600BEA604 /* media_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_play.png; sourceTree = "<group>"; };
+		FCCF454E2474F72600BEA604 /* media_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_pause.png; sourceTree = "<group>"; };
+		FCCF454F2474F72600BEA604 /* media_next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_next.png; sourceTree = "<group>"; };
+		FCCF45502474F72600BEA604 /* folder_mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder_mac.png; sourceTree = "<group>"; };
+		FCCF45512474F72600BEA604 /* media_play_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_play_pause.png; sourceTree = "<group>"; };
+		FCCF45522474F72600BEA604 /* power_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power_stop.png; sourceTree = "<group>"; };
+		FCCF4561247590A700BEA604 /* Tromso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tromso.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCCF4563247590A700BEA604 /* TromsoIOSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoIOSAppDelegate.swift; sourceTree = "<group>"; };
+		FCCF4565247590A700BEA604 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FCCF4567247590A700BEA604 /* TromsoIOSContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoIOSContentView.swift; sourceTree = "<group>"; };
+		FCCF4569247590A900BEA604 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCCF456C247590A900BEA604 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FCCF456F247590A900BEA604 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCCF4571247590A900BEA604 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCCF45932475A88B00BEA604 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		FCCF45952475AB2A00BEA604 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		FCCF45962475AB3D00BEA604 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		FCCF45972475ACF000BEA604 /* PlatformInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInfo.swift; sourceTree = "<group>"; };
+		FCCF45992475BE3A00BEA604 /* ThemeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeInfo.swift; sourceTree = "<group>"; };
+		FCEEB39C24E3D95400918B8C /* NgorongoroInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NgorongoroInterface.swift; sourceTree = "<group>"; };
+		FCF5FF612476F76600F9EED3 /* PreferenceUIHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceUIHostingController.swift; sourceTree = "<group>"; };
+		FCF5FF6524770FA300F9EED3 /* tromso_topshelf4640.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tromso_topshelf4640.jpg; sourceTree = "<group>"; };
+		FCF5FF6624770FA400F9EED3 /* tromso_topshelf2320.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tromso_topshelf2320.jpg; sourceTree = "<group>"; };
+		FCF5FF672477104200F9EED3 /* tromso_topshelf1920.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tromso_topshelf1920.jpg; sourceTree = "<group>"; };
+		FCF5FF682477109900F9EED3 /* tromso_topshelf3840.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tromso_topshelf3840.jpg; sourceTree = "<group>"; };
+		FCF5FF69247716E800F9EED3 /* tromso_tv1280.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_tv1280.png; sourceTree = "<group>"; };
+		FCF5FF6A247716E800F9EED3 /* tromso_tv1920.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_tv1920.png; sourceTree = "<group>"; };
+		FCF5FF6B247716E800F9EED3 /* tromso_tv400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_tv400.png; sourceTree = "<group>"; };
+		FCF5FF6C247716E800F9EED3 /* tromso.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso.png; sourceTree = "<group>"; };
+		FCF5FF6F24771A5100F9EED3 /* tromso_ios120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios120.png; sourceTree = "<group>"; };
+		FCF5FF7024771A5100F9EED3 /* tromso_ios450.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios450.png; sourceTree = "<group>"; };
+		FCF5FF7124771A5100F9EED3 /* tromso_ios152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios152.png; sourceTree = "<group>"; };
+		FCF5FF7224771A5100F9EED3 /* tromso_ios180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios180.png; sourceTree = "<group>"; };
+		FCF5FF7324771A5100F9EED3 /* tromso_ios1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios1024.png; sourceTree = "<group>"; };
+		FCF5FF7424771A5100F9EED3 /* tromso_ios167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios167.png; sourceTree = "<group>"; };
+		FCF5FF7524771A5100F9EED3 /* tromso_ios76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tromso_ios76.png; sourceTree = "<group>"; };
+		FCF5FF7A2477214700F9EED3 /* Tromso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tromso.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCF5FF7C2477214700F9EED3 /* TromsoIOS9AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoIOS9AppDelegate.swift; sourceTree = "<group>"; };
+		FCF5FF7E2477214700F9EED3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FCF5FF802477214700F9EED3 /* TromsoIOS9ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TromsoIOS9ViewController.swift; sourceTree = "<group>"; };
+		FCF5FF852477214900F9EED3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCF5FF8A2477214900F9EED3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCFB3EC82523D60300E2ABAB /* WPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WPath.swift; sourceTree = "<group>"; };
+		FCFB3ECC2523D63D00E2ABAB /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC2E405C2463460D005510F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCF453A2474D30500BEA604 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCCF453E2474D30500BEA604 /* TVServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCF455E247590A700BEA604 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCF5FF772477214700F9EED3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC23365F2476D2B600096AB6 /* tromso_tv */ = {
+			isa = PBXGroup;
+			children = (
+				FC2E40622463460D005510F3 /* TromsoTVAppDelegate.swift */,
+				FC2E40642463460D005510F3 /* TromsoTVContentView.swift */,
+				FCCF45202474D0B000BEA604 /* TromsoTVOptionUI.swift */,
+				FC2F03612511E914001A4D21 /* TromsoTVExtension.swift */,
+				FCCF45242474D11F00BEA604 /* TromsoWidgetProvider.swift */,
+				FC2E406E2463460F005510F3 /* Info.plist */,
+				FC2E406B2463460F005510F3 /* LaunchScreen.storyboard */,
+				FC2E40682463460F005510F3 /* Preview Content */,
+			);
+			path = tromso_tv;
+			sourceTree = "<group>";
+		};
+		FC2E40562463460D005510F3 = {
+			isa = PBXGroup;
+			children = (
+				FC2E40612463460D005510F3 /* tromso */,
+				FC23365F2476D2B600096AB6 /* tromso_tv */,
+				FCCF4562247590A700BEA604 /* tromso_ios */,
+				FCF5FF7B2477214700F9EED3 /* tromso_ios9 */,
+				FCCF45922475A83A00BEA604 /* Configuration */,
+				FCCF451C2474CDAF00BEA604 /* Resource */,
+				FCCF453F2474D30500BEA604 /* tromsoTopshelf */,
+				FCCF452B2474D26D00BEA604 /* Frameworks */,
+				FC2E40602463460D005510F3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC2E40602463460D005510F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC2E405F2463460D005510F3 /* tromso_leagcy_tv.app */,
+				FCCF453D2474D30500BEA604 /* tromso_leagcyTopshelf.appex */,
+				FCCF4561247590A700BEA604 /* Tromso.app */,
+				FCF5FF7A2477214700F9EED3 /* Tromso.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC2E40612463460D005510F3 /* tromso */ = {
+			isa = PBXGroup;
+			children = (
+				FC59253C2473BCA5009ECB34 /* AppUtil.swift */,
+				FC5925312473B868009ECB34 /* BPUtil.swift */,
+				FCBD978F2CDF8EF100F2AE8D /* FileSyncManager.swift */,
+				FC5925372473BB2D009ECB34 /* ImageFileManager.swift */,
+				FCEEB39C24E3D95400918B8C /* NgorongoroInterface.swift */,
+				FCCF451E2474CEB900BEA604 /* PlatformFileManager.swift */,
+				FC59252F2473980B009ECB34 /* PlatformHotKey.swift */,
+				FC278FD7247A4A9600FF5348 /* PlatformHotKeyViewController.swift */,
+				FCCF45972475ACF000BEA604 /* PlatformInfo.swift */,
+				FC5925352473BA08009ECB34 /* PlatformPreference.swift */,
+				FC592546247485B6009ECB34 /* PlatformTimer.swift */,
+				FC288DEA24EFBF6B00A227A9 /* PlatformWallpaper.swift */,
+				FCCF45992475BE3A00BEA604 /* ThemeInfo.swift */,
+				FCAB9569250C7AF7007E4A79 /* ThemeLibraryInterface.swift */,
+				FC5925422473BECD009ECB34 /* WallpaperService.swift */,
+				FCAB9589250D4DCF007E4A79 /* WallpaperServiceConnection.swift */,
+				FCCF451A2474A8B700BEA604 /* WallpaperServiceHandler.swift */,
+				FC5925332473B93A009ECB34 /* WallpaperServiceInfo.swift */,
+				FCFB3EC82523D60300E2ABAB /* WPath.swift */,
+				FCCF451D2474CDC100BEA604 /* ExternSrc */,
+			);
+			path = tromso;
+			sourceTree = "<group>";
+		};
+		FC2E40682463460F005510F3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FC2E40692463460F005510F3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FCCF451C2474CDAF00BEA604 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FCAB956E250C9537007E4A79 /* folder.png */,
+				FCAB9570250C9538007E4A79 /* gray_light.png */,
+				FCAB956F250C9538007E4A79 /* green_light.png */,
+				FCAB956D250C9537007E4A79 /* red_light.png */,
+				FCAB9571250C9538007E4A79 /* trash.png */,
+				FCCF45502474F72600BEA604 /* folder_mac.png */,
+				FCCF454C2474F72600BEA604 /* gear.png */,
+				FCCF454F2474F72600BEA604 /* media_next.png */,
+				FCCF454E2474F72600BEA604 /* media_pause.png */,
+				FCCF45512474F72600BEA604 /* media_play_pause.png */,
+				FCCF454D2474F72600BEA604 /* media_play.png */,
+				FCCF454B2474F72600BEA604 /* media_previous.png */,
+				FCCF45492474F72600BEA604 /* media_stop.png */,
+				FCCF454A2474F72600BEA604 /* power_on.png */,
+				FCCF45522474F72600BEA604 /* power_stop.png */,
+				FC2E40662463460F005510F3 /* Assets.xcassets */,
+				FC3807A3251050FB00F55EE8 /* reservedword.txt */,
+				FCAB9585250C9566007E4A79 /* themelib.txt */,
+				FCF5FF7524771A5100F9EED3 /* tromso_ios76.png */,
+				FCF5FF6F24771A5100F9EED3 /* tromso_ios120.png */,
+				FCF5FF7124771A5100F9EED3 /* tromso_ios152.png */,
+				FCF5FF7424771A5100F9EED3 /* tromso_ios167.png */,
+				FCF5FF7224771A5100F9EED3 /* tromso_ios180.png */,
+				FCF5FF7024771A5100F9EED3 /* tromso_ios450.png */,
+				FCF5FF7324771A5100F9EED3 /* tromso_ios1024.png */,
+				FCF5FF6B247716E800F9EED3 /* tromso_tv400.png */,
+				FCF5FF69247716E800F9EED3 /* tromso_tv1280.png */,
+				FCF5FF6A247716E800F9EED3 /* tromso_tv1920.png */,
+				FCF5FF6C247716E800F9EED3 /* tromso.png */,
+				FCF5FF672477104200F9EED3 /* tromso_topshelf1920.jpg */,
+				FCF5FF6624770FA400F9EED3 /* tromso_topshelf2320.jpg */,
+				FCF5FF682477109900F9EED3 /* tromso_topshelf3840.jpg */,
+				FCF5FF6524770FA300F9EED3 /* tromso_topshelf4640.jpg */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		FCCF451D2474CDC100BEA604 /* ExternSrc */ = {
+			isa = PBXGroup;
+			children = (
+				FC59253E2473BCB9009ECB34 /* ExifInterface.swift */,
+				FC59253A2473BBC7009ECB34 /* LinkedHashMap.swift */,
+				FCFB3ECC2523D63D00E2ABAB /* StringExtension.swift */,
+				FC592548247485EA009ECB34 /* RepeatingTimer.swift */,
+				FCF5FF612476F76600F9EED3 /* PreferenceUIHostingController.swift */,
+				FC3503B9252D1FF30048F074 /* CheckBoxView.swift */,
+			);
+			path = ExternSrc;
+			sourceTree = "<group>";
+		};
+		FCCF452B2474D26D00BEA604 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCCF452C2474D26D00BEA604 /* TVServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCCF453F2474D30500BEA604 /* tromsoTopshelf */ = {
+			isa = PBXGroup;
+			children = (
+				FCCF45402474D30500BEA604 /* ContentProvider.swift */,
+				FCCF45422474D30500BEA604 /* Info.plist */,
+			);
+			path = tromsoTopshelf;
+			sourceTree = "<group>";
+		};
+		FCCF4562247590A700BEA604 /* tromso_ios */ = {
+			isa = PBXGroup;
+			children = (
+				FCCF4563247590A700BEA604 /* TromsoIOSAppDelegate.swift */,
+				FCCF4567247590A700BEA604 /* TromsoIOSContentView.swift */,
+				FCAB9565250C2E9C007E4A79 /* TromsoIOSOptionUI.swift */,
+				FCCF4565247590A700BEA604 /* SceneDelegate.swift */,
+				FCCF4571247590A900BEA604 /* Info.plist */,
+				FCCF4569247590A900BEA604 /* Assets.xcassets */,
+				FCCF456E247590A900BEA604 /* LaunchScreen.storyboard */,
+				FCCF456B247590A900BEA604 /* Preview Content */,
+			);
+			path = tromso_ios;
+			sourceTree = "<group>";
+		};
+		FCCF456B247590A900BEA604 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FCCF456C247590A900BEA604 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FCCF45922475A83A00BEA604 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				FCCF45932475A88B00BEA604 /* config.plist */,
+				FCCF45952475AB2A00BEA604 /* release.xcconfig */,
+				FCCF45962475AB3D00BEA604 /* debug.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		FCF5FF7B2477214700F9EED3 /* tromso_ios9 */ = {
+			isa = PBXGroup;
+			children = (
+				FCF5FF7C2477214700F9EED3 /* TromsoIOS9AppDelegate.swift */,
+				FCF5FF802477214700F9EED3 /* TromsoIOS9ViewController.swift */,
+				FC80BECD25149DB1002B84EA /* CustomConfigDialog.swift */,
+				FCF5FF7E2477214700F9EED3 /* SceneDelegate.swift */,
+				FCF5FF852477214900F9EED3 /* Assets.xcassets */,
+				FCF5FF8A2477214900F9EED3 /* Info.plist */,
+				FC80BECF25156731002B84EA /* CustomConfigDialog.xib */,
+			);
+			path = tromso_ios9;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC2E405E2463460D005510F3 /* tromso_leagcy_tv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC2E40872463460F005510F3 /* Build configuration list for PBXNativeTarget "tromso_leagcy_tv" */;
+			buildPhases = (
+				FC2E405B2463460D005510F3 /* Sources */,
+				FC2E405C2463460D005510F3 /* Frameworks */,
+				FC2E405D2463460D005510F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tromso_leagcy_tv;
+			productName = tromso;
+			productReference = FC2E405F2463460D005510F3 /* tromso_leagcy_tv.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FCCF453C2474D30500BEA604 /* tromso_leagcyTopshelf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCCF45462474D30500BEA604 /* Build configuration list for PBXNativeTarget "tromso_leagcyTopshelf" */;
+			buildPhases = (
+				FCCF45392474D30500BEA604 /* Sources */,
+				FCCF453A2474D30500BEA604 /* Frameworks */,
+				FCCF453B2474D30500BEA604 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tromso_leagcyTopshelf;
+			productName = tromsoTopshelf;
+			productReference = FCCF453D2474D30500BEA604 /* tromso_leagcyTopshelf.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		FCCF4560247590A700BEA604 /* tromso_leagcy_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCCF4588247590A900BEA604 /* Build configuration list for PBXNativeTarget "tromso_leagcy_ios" */;
+			buildPhases = (
+				FCCF455D247590A700BEA604 /* Sources */,
+				FCCF455E247590A700BEA604 /* Frameworks */,
+				FCCF455F247590A700BEA604 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tromso_leagcy_ios;
+			productName = tromso_ios;
+			productReference = FCCF4561247590A700BEA604 /* Tromso.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FCF5FF792477214700F9EED3 /* tromso_leagcy_ios9 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCF5FFA12477214A00F9EED3 /* Build configuration list for PBXNativeTarget "tromso_leagcy_ios9" */;
+			buildPhases = (
+				FCF5FF762477214700F9EED3 /* Sources */,
+				FCF5FF772477214700F9EED3 /* Frameworks */,
+				FCF5FF782477214700F9EED3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tromso_leagcy_ios9;
+			productName = "tromso-ios";
+			productReference = FCF5FF7A2477214700F9EED3 /* Tromso.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC2E40572463460D005510F3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1220;
+				ORGANIZATIONNAME = "Brad Park";
+				TargetAttributes = {
+					FC2E405E2463460D005510F3 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					FCCF453C2474D30500BEA604 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					FCCF4560247590A700BEA604 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					FCF5FF792477214700F9EED3 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = FC2E405A2463460D005510F3 /* Build configuration list for PBXProject "tromso_leagcy" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC2E40562463460D005510F3;
+			productRefGroup = FC2E40602463460D005510F3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC2E405E2463460D005510F3 /* tromso_leagcy_tv */,
+				FCCF453C2474D30500BEA604 /* tromso_leagcyTopshelf */,
+				FCCF4560247590A700BEA604 /* tromso_leagcy_ios */,
+				FCF5FF792477214700F9EED3 /* tromso_leagcy_ios9 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC2E405D2463460D005510F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCAB9579250C9538007E4A79 /* green_light.png in Resources */,
+				FCCF45542474F72600BEA604 /* power_on.png in Resources */,
+				FCF5FF6E247718CD00F9EED3 /* tromso.png in Resources */,
+				FCAB9573250C9538007E4A79 /* red_light.png in Resources */,
+				FCCF455A2474F72700BEA604 /* folder_mac.png in Resources */,
+				FCCF45942475A88B00BEA604 /* config.plist in Resources */,
+				FCCF45532474F72600BEA604 /* media_stop.png in Resources */,
+				FCCF455C2474F72700BEA604 /* power_stop.png in Resources */,
+				FC3807A4251050FB00F55EE8 /* reservedword.txt in Resources */,
+				FC2E406D2463460F005510F3 /* LaunchScreen.storyboard in Resources */,
+				FCCF45572474F72700BEA604 /* media_play.png in Resources */,
+				FCCF45592474F72700BEA604 /* media_next.png in Resources */,
+				FCCF45582474F72700BEA604 /* media_pause.png in Resources */,
+				FCCF45562474F72600BEA604 /* gear.png in Resources */,
+				FCCF455B2474F72700BEA604 /* media_play_pause.png in Resources */,
+				FC2E406A2463460F005510F3 /* Preview Assets.xcassets in Resources */,
+				FC2E40672463460F005510F3 /* Assets.xcassets in Resources */,
+				FCCF45552474F72600BEA604 /* media_previous.png in Resources */,
+				FCAB9576250C9538007E4A79 /* folder.png in Resources */,
+				FCAB957F250C9538007E4A79 /* trash.png in Resources */,
+				FCAB9586250C9566007E4A79 /* themelib.txt in Resources */,
+				FCAB957C250C9538007E4A79 /* gray_light.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCF453B2474D30500BEA604 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCF455F247590A700BEA604 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCAB957A250C9538007E4A79 /* green_light.png in Resources */,
+				FCCF4570247590A900BEA604 /* LaunchScreen.storyboard in Resources */,
+				FCF5FF6D247718CB00F9EED3 /* tromso.png in Resources */,
+				FCAB9574250C9538007E4A79 /* red_light.png in Resources */,
+				FC7A93FF24766A2F00D12729 /* config.plist in Resources */,
+				FC7A93F62476694300D12729 /* media_play_pause.png in Resources */,
+				FC7A93F72476694500D12729 /* media_play.png in Resources */,
+				FC7A93FB2476695200D12729 /* power_stop.png in Resources */,
+				FC3807A5251050FB00F55EE8 /* reservedword.txt in Resources */,
+				FC7A93F82476694900D12729 /* media_previous.png in Resources */,
+				FC7A93F92476694B00D12729 /* media_stop.png in Resources */,
+				FC7A93F32476693A00D12729 /* gear.png in Resources */,
+				FC7A93F22476693700D12729 /* folder_mac.png in Resources */,
+				FCCF456D247590A900BEA604 /* Preview Assets.xcassets in Resources */,
+				FC7A93FA2476694F00D12729 /* power_on.png in Resources */,
+				FC7A93F52476694000D12729 /* media_pause.png in Resources */,
+				FCCF456A247590A900BEA604 /* Assets.xcassets in Resources */,
+				FC7A93F42476693D00D12729 /* media_next.png in Resources */,
+				FCAB9577250C9538007E4A79 /* folder.png in Resources */,
+				FCAB9580250C9538007E4A79 /* trash.png in Resources */,
+				FCAB9587250C9566007E4A79 /* themelib.txt in Resources */,
+				FCAB957D250C9538007E4A79 /* gray_light.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCF5FF782477214700F9EED3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCAB957B250C9538007E4A79 /* green_light.png in Resources */,
+				FC80BED025156731002B84EA /* CustomConfigDialog.xib in Resources */,
+				FC6678AB24772A4A00704176 /* config.plist in Resources */,
+				FC3807A6251050FB00F55EE8 /* reservedword.txt in Resources */,
+				FC6678AD247731FB00704176 /* media_pause.png in Resources */,
+				FCAB957E250C9538007E4A79 /* gray_light.png in Resources */,
+				FC6678AE247731FE00704176 /* media_play_pause.png in Resources */,
+				FCAB9575250C9538007E4A79 /* red_light.png in Resources */,
+				FC6678AC2477311A00704176 /* tromso.png in Resources */,
+				FCF5FF862477214900F9EED3 /* Assets.xcassets in Resources */,
+				FC6678AF2477320100704176 /* media_play.png in Resources */,
+				FC80BED12516E4D9002B84EA /* folder_mac.png in Resources */,
+				FCAB9588250C9566007E4A79 /* themelib.txt in Resources */,
+				FCAB9578250C9538007E4A79 /* folder.png in Resources */,
+				FCAB9581250C9538007E4A79 /* trash.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC2E405B2463460D005510F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC5925342473B93A009ECB34 /* WallpaperServiceInfo.swift in Sources */,
+				FC5925302473980B009ECB34 /* PlatformHotKey.swift in Sources */,
+				FCCF459A2475BE3A00BEA604 /* ThemeInfo.swift in Sources */,
+				FC288DEB24EFBF6B00A227A9 /* PlatformWallpaper.swift in Sources */,
+				FC2E40652463460D005510F3 /* TromsoTVContentView.swift in Sources */,
+				FC5925362473BA08009ECB34 /* PlatformPreference.swift in Sources */,
+				FC592549247485EA009ECB34 /* RepeatingTimer.swift in Sources */,
+				FC2E40632463460D005510F3 /* TromsoTVAppDelegate.swift in Sources */,
+				FCEEB39D24E3D95400918B8C /* NgorongoroInterface.swift in Sources */,
+				FCCF45252474D11F00BEA604 /* TromsoWidgetProvider.swift in Sources */,
+				FC59253F2473BCB9009ECB34 /* ExifInterface.swift in Sources */,
+				FCAB956A250C7AF7007E4A79 /* ThemeLibraryInterface.swift in Sources */,
+				FCBD97902CDF8EF100F2AE8D /* FileSyncManager.swift in Sources */,
+				FC2F03622511E914001A4D21 /* TromsoTVExtension.swift in Sources */,
+				FCFB3ECD2523D63D00E2ABAB /* StringExtension.swift in Sources */,
+				FC278FD8247A4A9600FF5348 /* PlatformHotKeyViewController.swift in Sources */,
+				FCCF451B2474A8B700BEA604 /* WallpaperServiceHandler.swift in Sources */,
+				FC5925432473BECD009ECB34 /* WallpaperService.swift in Sources */,
+				FC59253B2473BBC7009ECB34 /* LinkedHashMap.swift in Sources */,
+				FCAB958A250D4DCF007E4A79 /* WallpaperServiceConnection.swift in Sources */,
+				FCCF451F2474CEB900BEA604 /* PlatformFileManager.swift in Sources */,
+				FCCF45212474D0B000BEA604 /* TromsoTVOptionUI.swift in Sources */,
+				FCFB3EC92523D60300E2ABAB /* WPath.swift in Sources */,
+				FC592547247485B7009ECB34 /* PlatformTimer.swift in Sources */,
+				FCCF45982475ACF000BEA604 /* PlatformInfo.swift in Sources */,
+				FC59253D2473BCA6009ECB34 /* AppUtil.swift in Sources */,
+				FC5925322473B868009ECB34 /* BPUtil.swift in Sources */,
+				FC5925382473BB2D009ECB34 /* ImageFileManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCF45392474D30500BEA604 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCCF45412474D30500BEA604 /* ContentProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCF455D247590A700BEA604 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC7A93E42476685300D12729 /* PlatformHotKey.swift in Sources */,
+				FCAB9566250C2E9C007E4A79 /* TromsoIOSOptionUI.swift in Sources */,
+				FC7A93ED2476687700D12729 /* WallpaperServiceInfo.swift in Sources */,
+				FCCF4564247590A700BEA604 /* TromsoIOSAppDelegate.swift in Sources */,
+				FC288DEC24EFBF6B00A227A9 /* PlatformWallpaper.swift in Sources */,
+				FCF5FF622476F76600F9EED3 /* PreferenceUIHostingController.swift in Sources */,
+				FC7A93E22476684C00D12729 /* ImageFileManager.swift in Sources */,
+				FCAB956B250C7AF7007E4A79 /* ThemeLibraryInterface.swift in Sources */,
+				FC7A93EB2476687000D12729 /* WallpaperService.swift in Sources */,
+				FCCF4566247590A700BEA604 /* SceneDelegate.swift in Sources */,
+				FCEEB39E24E3D95700918B8C /* NgorongoroInterface.swift in Sources */,
+				FC7A93EA2476686C00D12729 /* ThemeInfo.swift in Sources */,
+				FCBD97912CDF8EF100F2AE8D /* FileSyncManager.swift in Sources */,
+				FCCF4568247590A700BEA604 /* TromsoIOSContentView.swift in Sources */,
+				FCFB3ECE2523D63D00E2ABAB /* StringExtension.swift in Sources */,
+				FC278FD9247A4AC300FF5348 /* PlatformHotKeyViewController.swift in Sources */,
+				FC7A93E62476685800D12729 /* PlatformPreference.swift in Sources */,
+				FCAB958B250D4DCF007E4A79 /* WallpaperServiceConnection.swift in Sources */,
+				FC7A93E52476685500D12729 /* PlatformInfo.swift in Sources */,
+				FC7A93E02476684600D12729 /* AppUtil.swift in Sources */,
+				FC7A93E72476685A00D12729 /* PlatformTimer.swift in Sources */,
+				FC7A93EF247668C500D12729 /* ExifInterface.swift in Sources */,
+				FCFB3ECA2523D60300E2ABAB /* WPath.swift in Sources */,
+				FC7A93E32476684F00D12729 /* PlatformFileManager.swift in Sources */,
+				FC7A93F0247668C700D12729 /* LinkedHashMap.swift in Sources */,
+				FC7A93E12476684900D12729 /* BPUtil.swift in Sources */,
+				FC7A93F1247668CA00D12729 /* RepeatingTimer.swift in Sources */,
+				FC7A93EC2476687300D12729 /* WallpaperServiceHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCF5FF762477214700F9EED3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC6678A2247722EB00704176 /* ThemeInfo.swift in Sources */,
+				FCF5FF812477214700F9EED3 /* TromsoIOS9ViewController.swift in Sources */,
+				FCBD97922CDF8EF100F2AE8D /* FileSyncManager.swift in Sources */,
+				FC6678A5247722F400704176 /* WallpaperServiceInfo.swift in Sources */,
+				FC66789C247722D900704176 /* ImageFileManager.swift in Sources */,
+				FCF5FF7D2477214700F9EED3 /* TromsoIOS9AppDelegate.swift in Sources */,
+				FC6678A4247722F100704176 /* WallpaperServiceHandler.swift in Sources */,
+				FCAB958C250D4DCF007E4A79 /* WallpaperServiceConnection.swift in Sources */,
+				FCFB3ECF2523D63D00E2ABAB /* StringExtension.swift in Sources */,
+				FCF5FF7F2477214700F9EED3 /* SceneDelegate.swift in Sources */,
+				FC278FDB247A4B4300FF5348 /* PlatformHotKeyViewController.swift in Sources */,
+				FC6678A3247722EE00704176 /* WallpaperService.swift in Sources */,
+				FCFB3ECB2523D60300E2ABAB /* WPath.swift in Sources */,
+				FC6678A0247722E500704176 /* PlatformPreference.swift in Sources */,
+				FC6678A72477230800704176 /* LinkedHashMap.swift in Sources */,
+				FC66789F247722E200704176 /* PlatformInfo.swift in Sources */,
+				FC6678A62477230500704176 /* ExifInterface.swift in Sources */,
+				FCAB956C250C7AF7007E4A79 /* ThemeLibraryInterface.swift in Sources */,
+				FC80BECE25149DB1002B84EA /* CustomConfigDialog.swift in Sources */,
+				FC6678A82477230A00704176 /* RepeatingTimer.swift in Sources */,
+				FCEEB39F24E3D95800918B8C /* NgorongoroInterface.swift in Sources */,
+				FC66789D247722DD00704176 /* PlatformFileManager.swift in Sources */,
+				FC6678A1247722E800704176 /* PlatformTimer.swift in Sources */,
+				FC66789A247722D300704176 /* AppUtil.swift in Sources */,
+				FC66789B247722D600704176 /* BPUtil.swift in Sources */,
+				FC288DED24EFBF6B00A227A9 /* PlatformWallpaper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC2E406B2463460F005510F3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC2E406C2463460F005510F3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FCCF456E247590A900BEA604 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCCF456F247590A900BEA604 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC2E40852463460F005510F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45962475AB3D00BEA604 /* debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 13.2;
+			};
+			name = Debug;
+		};
+		FC2E40862463460F005510F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45952475AB2A00BEA604 /* release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 13.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC2E40882463460F005510F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45962475AB3D00BEA604 /* debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"tromso_tv/Preview Content\"";
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = tromso_tv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thirdwavesoft.tromso-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		FC2E40892463460F005510F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45952475AB2A00BEA604 /* release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"tromso_tv/Preview Content\"";
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = tromso_tv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thirdwavesoft.tromso-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+		FCCF45472474D30500BEA604 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				INFOPLIST_FILE = tromsoTopshelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdwavesoft.tromso.tromsoTopshelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		FCCF45482474D30500BEA604 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				INFOPLIST_FILE = tromsoTopshelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdwavesoft.tromso.tromsoTopshelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+		FCCF4589247590A900BEA604 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45962475AB3D00BEA604 /* debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"tromso_ios/Preview Content\"";
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = tromso_ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thirdwavesoft.tromso-ios";
+				PRODUCT_NAME = Tromso;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCCF458A247590A900BEA604 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45952475AB2A00BEA604 /* release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"tromso_ios/Preview Content\"";
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = tromso_ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thirdwavesoft.tromso-ios";
+				PRODUCT_NAME = Tromso;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FCF5FFA22477214A00F9EED3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45962475AB3D00BEA604 /* debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				INFOPLIST_FILE = tromso_ios9/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thirdwavesoft.tromso-ios";
+				PRODUCT_NAME = Tromso;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCF5FFA32477214A00F9EED3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCCF45952475AB2A00BEA604 /* release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UYPXG8G397;
+				INFOPLIST_FILE = tromso_ios9/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thirdwavesoft.tromso-ios";
+				PRODUCT_NAME = Tromso;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC2E405A2463460D005510F3 /* Build configuration list for PBXProject "tromso_leagcy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC2E40852463460F005510F3 /* Debug */,
+				FC2E40862463460F005510F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC2E40872463460F005510F3 /* Build configuration list for PBXNativeTarget "tromso_leagcy_tv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC2E40882463460F005510F3 /* Debug */,
+				FC2E40892463460F005510F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCCF45462474D30500BEA604 /* Build configuration list for PBXNativeTarget "tromso_leagcyTopshelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCCF45472474D30500BEA604 /* Debug */,
+				FCCF45482474D30500BEA604 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCCF4588247590A900BEA604 /* Build configuration list for PBXNativeTarget "tromso_leagcy_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCCF4589247590A900BEA604 /* Debug */,
+				FCCF458A247590A900BEA604 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCF5FFA12477214A00F9EED3 /* Build configuration list for PBXNativeTarget "tromso_leagcy_ios9" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCF5FFA22477214A00F9EED3 /* Debug */,
+				FCF5FFA32477214A00F9EED3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC2E40572463460D005510F3 /* Project object */;
+}

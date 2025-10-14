@@ -1,0 +1,26 @@
+{
+  "images" : [
+    {
+      "idiom" : "tv",
+      "filename" : "tromso_topshelf2320.jpg",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "tromso_topshelf4640.jpg",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "tv-marketing",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "tv-marketing",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

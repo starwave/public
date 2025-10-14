@@ -1,0 +1,43 @@
+#!/bin/bash
+
+##########################################################
+# set path environment variable
+##########################################################
+source_root_path=~/CloudStation
+service_cache_path=~/Documents/CloudStation/BPCache
+service_coden_path=~/Documents/Coden
+if [ -d "${BPWALLPAPERROOT}" ]; then
+    source_root_path="${BPWALLPAPERROOT}"
+fi
+if [ -d "${BPWALLPAPERCACHE}" ]; then
+    service_cache_path="${BPWALLPAPERCACHE}"
+fi
+if [ -d "${BPWALLPAPERCODEN}" ]; then
+    service_coden_path="${BPWALLPAPERCODEN}"
+fi
+# default service root (can be updated by cache path)
+service_root_path="${source_root_path}"
+
+##########################################################
+# Rsync
+##########################################################
+echo -e ">> ~/Documents/CloudStation/Docs/... <<"
+rsync -aP --iconv=utf-8,utf-8-mac --delete ~/Documents/CloudStation/Install/Docs/ 'starwave@192.168.1.113:/Users/starwave/Documents/CloudStation/Install/Docs'   
+echo -e ">> ~/Documents/CloudStation/Mac OS X/... <<"
+rsync -aP --iconv=utf-8,utf-8-mac --delete ~/Documents/CloudStation/Install/Mac\ OS\ X/ 'starwave@192.168.1.113:/Users/starwave/Documents/CloudStation/Install/Mac\ OS\ X' 
+# following must be newer version of rsync (3.1.3). 
+# $ brew install rsync; # if needed. which rsync => /usr/local/bin
+echo -e ">> ~/Documents/CloudStation/BPCache/1920x1080/... <<"
+rsync -aP --iconv=utf-8,utf-8-mac --delete ${service_cache_path}/1920x1080/ 'starwave@192.168.1.113:/Users/starwave/Documents/CloudStation/BPCache/1920x1080'
+
+# initial work
+# mkdir -p ~/Documents/CloudStation/Install/Docs
+# mkdir -p ~/Documents/CloudStation/Install/Mac\ OS\ X
+# mkdir -p ~/CloudStation
+
+# optional
+# cp ~/Documents/CloudStation/Install/Mac\ OS\ X/bin/* ~/bin
+
+# original images
+# rsync -aP --iconv=utf-8,utf-8-mac --delete ~/CloudStation/ 'starwave@192.168.1.113:/Users/starwave/CloudStation'
+
