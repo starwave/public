@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   ggwave-bible-app:
+    image: ggwave-bible-app:latest
     build:
       context: .
       dockerfile: Dockerfile
