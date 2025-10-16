@@ -24,7 +24,7 @@ describe('Server API Endpoints', () => {
             expect(Array.isArray(response.body)).toBe(true);
             expect(response.body.length).toBeGreaterThan(0);
 
-            response.body.forEach((theme: any) => {
+            response.body.forEach((theme: { Label: string; Config: string }) => {
                 expect(theme).toHaveProperty('Label');
                 expect(theme).toHaveProperty('Config');
                 expect(typeof theme.Label).toBe('string');
@@ -159,12 +159,12 @@ describe('Server API Endpoints', () => {
 
     describe('Error Handling', () => {
         it('should handle 404 for unknown routes', async () => {
-            const response = await request(app)
+            await request(app)
                 .get('/unknown-endpoint')
                 .expect(200); // Returns index.html for SPA
 
             // For API routes, should return proper error
-            const apiResponse = await request(app)
+            await request(app)
                 .get('/api/unknown')
                 .expect(200);
         });

@@ -1,5 +1,5 @@
 // tests/utils/testUtils.tsx
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 
 // Custom render function with providers if needed

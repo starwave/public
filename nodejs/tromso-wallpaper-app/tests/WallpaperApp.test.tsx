@@ -1,8 +1,7 @@
 // tests/WallpaperApp.test.tsx
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from './utils/testUtils';
 import WallpaperApp from '../src/WallpaperApp';
-import { mockFetch, mockThemeLibrary, waitForMs } from './utils/helpers';
+import { mockFetch, mockThemeLibrary } from './utils/helpers';
 
 describe('WallpaperApp Component', () => {
   beforeEach(() => {

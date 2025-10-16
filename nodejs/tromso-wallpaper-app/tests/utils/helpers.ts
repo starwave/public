@@ -2,7 +2,9 @@
 export const waitForMs = (ms: number) =>
     new Promise(resolve => setTimeout(resolve, ms));
 
-export const mockFetch = (data: any, ok = true) => {
+export { mockThemeLibrary } from './mockData';
+
+export const mockFetch = (data: unknown, ok = true) => {
     global.fetch = jest.fn(() =>
         Promise.resolve({
             ok,
@@ -34,7 +36,7 @@ export const createTouchEvent = (
     touches: { clientX: number; clientY: number }[]
 ) => {
     return new TouchEvent(type, {
-        touches: touches as any,
+        touches: touches as unknown as Touch[],
         bubbles: true,
         cancelable: true,
     });
