@@ -1,0 +1,116 @@
+#!/bin/bash
+
+##########################################################
+# set path environment variable
+##########################################################
+source_root_path=~/CloudStation
+service_cache_path=~/Documents/CloudStation/BPCache
+service_coden_path=~/Documents/Coden
+if [ -d "${BPWALLPAPERROOT}" ]; then
+    source_root_path="${BPWALLPAPERROOT}"
+fi
+if [ -d "${BPWALLPAPERCACHE}" ]; then
+    service_cache_path="${BPWALLPAPERCACHE}"
+fi
+if [ -d "${BPWALLPAPERCODEN}" ]; then
+    service_coden_path="${BPWALLPAPERCODEN}"
+fi
+# default service root (can be updated by cache path)
+service_root_path="${source_root_path}"
+
+##########################################################
+# set global variable
+##########################################################
+o_home=~
+o_src_path_arr=()
+o_extern_sdcard=false
+
+default_all_addr=( "galaxys24u" "firehd10" )
+
+while getopts "f:h" option
+do
+	case "${option}"
+	in
+		f) src_path="${OPTARG/\/CloudStation\//}"
+           o_src_path_arr+=("${src_path}")
+           ;;
+		h|?) echo "rsync_androids [-f rsync_path] [-f rsync_path] ... [device_addr ...] ";
+	       echo "-f rsync_path : source path that has changed files ripped with home directory.";
+	       echo "                (ex. /Documents/CloudStation/Best/2021, /CloudStation/BP Wallpaper/Movies)";
+		   exit;;
+	esac
+done
+
+shift $(( OPTIND - 1 ))
+
+if [ ${#o_src_path_arr[@]} = 0 ]; then
+    o_src_path_arr=(".")
+fi
+
+if [ $# -gt 0 ]; then
+    all_addr=( "$@" )
+    if [[ " ${all_addr[*]} " == *" all "* ]]; then
+        all_addr=( "${default_all_addr[@]}" )
+    fi
+else
+    all_addr=( "${default_all_addr[@]}" )
+fi
+
+# move to root path to make -R (relative path) option works for rsync
+cd "${source_root_path}"
+
+for addr in "${all_addr[@]}"; do
+    case "${addr}"
+    in
+        192.168.1.104|galaxys24u)
+            echo -e "######### Sync starts with Galaxy S24 Ultra #########"
+            o_dest_path="192.168.1.104:/storage/emulated/0/CloudStation"
+            o_extern_sdcard=false
+            ;;
+        192.168.1.109|galaxys22)
+            echo -e "######### Sync starts with Galaxy S22 #########"
+            o_dest_path="192.168.1.109:/storage/emulated/0/CloudStation"
+            o_extern_sdcard=false
+            ;;
+        192.168.1.106|galaxytabs3)
+            echo -e "######### Sync starts with Galaxy Tab S3 #########"
+            o_dest_path="192.168.1.106:/storage/6139-F3A6/Android/data/org.galexander.sshd/files/Cloudstation"
+            o_extern_sdcard=true
+            ;;
+        192.168.1.114|firehd10)
+            echo -e "######### Sync starts with Fire HD 10 #########"
+            o_dest_path="192.168.1.114:/storage/emulated/0/Android/data/org.galexander.sshd/files/CloudStation"
+            o_extern_sdcard=true
+            ;;
+        192.168.1.103|galaxys9)
+            echo -e "######### Sync starts with Galaxy S9 #########"
+            o_dest_path="192.168.1.103:/storage/emulated/0/CloudStation"
+            o_extern_sdcard=false
+            ;;
+        192.168.1.107|galaxys10)
+            echo -e "######### Sync starts with Galaxy S10 #########"
+            o_dest_path="192.168.1.107:/storage/emulated/0/CloudStation"
+            o_extern_sdcard=false
+            ;;
+        192.168.1.113|highlands)
+            echo -e "######### Sync starts with highlands #########"
+            rsync_highlands
+            exit
+            ;;
+        *)
+            echo -e "Error : ${addr} is not registered device."
+            exit 1
+            ;;
+    esac
+
+    echo from "${o_src_path_arr[@]}" to "${o_dest_path}"", SD Card: "$o_extern_sdcard,
+    # --no-perms option to avoid "rsync: failed to set permissions on" error
+    if $o_extern_sdcard ; then
+        echo "rsync -aPR --no-o --no-g --no-perms --delete --modify-window=3602 --exclude=\".*\" -e 'ssh -p 2222' \"${o_src_path_arr[@]}\" \"${o_dest_path}\""
+        rsync -aPR --no-o --no-g --no-perms --delete --modify-window=3602 --exclude=".*" -e 'ssh -p 2222' "${o_src_path_arr[@]}" "${o_dest_path}"
+    else
+        echo "rsync -aPR --no-o --no-g --no-perms --delete --modify-window=3602 --exclude=\".*\" -e 'ssh -p 2222' \"${o_src_path_arr[@]}\" \"${o_dest_path}\""
+        rsync -aPR --no-o --no-g --no-perms --delete --modify-window=3602 --exclude=".*" -e 'ssh -p 2222' "${o_src_path_arr[@]}" "${o_dest_path}"
+    fi
+done
+

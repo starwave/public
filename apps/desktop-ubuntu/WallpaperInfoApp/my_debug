@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# for VS Code
+unset GTK_PATH
+export GTK_PATH=/usr/lib/x86_64-linux-gnu/gtk-3.0
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+
+python3 WallpaperInfoApp.py

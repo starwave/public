@@ -1,0 +1,20 @@
+services:
+  tromso-wallpaper-app:
+    image: tromso-wallpaper-app-ruby:latest
+    container_name: tromso-wallpaper-app-ruby
+    ports:
+      - "3001:3001"
+    environment:
+      - RACK_ENV=production
+      - PORT=3001
+    restart: unless-stopped
+    networks:
+      - tromso-network
+
+networks:
+  tromso-network:
+    driver: bridge
+
+# Production deployment configuration
+# This file uses the pre-built image transferred by deploy.sh
+# For local development/testing, use: docker-compose.dev.yml

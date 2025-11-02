@@ -1,0 +1,593 @@
+package ngorongoro
+
+import (
+	"fmt"
+	"net/http"
+	"strings"
+)
+
+func (ngs *NgrongHTTPService) handleTromso(w http.ResponseWriter, req *http.Request) {
+	var tromsohtmlfinal = strings.ReplaceAll(tromsohtml, "http://192.168.1.111:8080/", "")
+	fmt.Fprintf(w, "%s", tromsohtmlfinal)
+}
+
+func (ngs *NgrongHTTPService) faviconHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, ".tromso.png")
+}
+
+// iPhone Safari : iPhone; CPU iPhone OS 15_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Mobile/15E148 Safari/604.1
+// iPad Safari   : iPad; CPU OS 15_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Mobile/15E148 Safari/604.1
+// Desktop mode  : Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15
+// Mac Safari    : Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15
+var tromsohtml = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="height=device-height, 
+                      width=device-width, initial-scale=0.5, 
+                      minimum-scale=0.5, maximum-scale=1.0, 
+                      user-scalable=no, target-densitydpi=device-dpi">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/tromso.png" type="image/x-icon" />
+    <title>Tromso Web</title>
+    <style>
+        body {
+            margin: 0px;
+            background-color:black;
+            touch-action: none; /* disable pannig <> pan-x, pan-y in safari */
+            overscroll-behavior-y: contain; /* disable pull-down refresh in chrome */
+        }
+        .disable-doubletap-to-zoom {
+            touch-action: none; /* disable double-tap zoom */
+        }
+        .sortable-handler {
+            touch-action: none; /* disable double-tap zoom (safari) */
+        }
+        .container {
+            position: absolute;
+            background-color: rgba(158, 83, 83, 0);
+            width: 1920px;
+            height: 1080px;
+        }
+        .container img {
+            position: absolute;
+            top: 50%;
+            bottom: 50%;
+            left: 0%;
+            right: 0%;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+        }
+        .container .btnclass {
+            position: absolute;
+            left: 5%;
+            top: 7%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            background-color: #555;
+            color: white;
+            font-size: 16px;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            opacity: 0.1
+        }
+        .container .btnclass:hover {
+            background-color: black;
+            opacity: 1.0
+        }
+        .container .themeclass {
+            background-color: black;
+            opacity: 1.0
+        }
+        :-webkit-full-screen {
+            width: 1920px;
+            height: 1080px;
+        }
+        .buttonConfig {width: 150px; height:40px;}
+        .buttonTable {width: 120px; height:30px; }
+        #customconfig{ 
+            position: sticky;
+            text-align: center;
+            display: none;
+            width: 500px; margin:0 auto;
+            height: 740px;
+            border: 5px solid lightgray;
+            background-color: white;
+            z-index:1000;
+        }
+        #splash{ 
+            position: sticky;
+            display: none;
+            width: 450px;
+            height: 450px;
+            padding: 16px;
+            border: 16px solid cyan;
+            background-color: white;
+            z-index:1002;
+        }
+        table, th, td {
+            border: 1px solid black;
+            font-size: 24px
+        }
+        table tbody {
+            width:350px;
+            height:590px; 
+            overflow-y:scroll; 
+            display:block;
+        }
+    </style>
+    <script>
+        // init variable
+        window.onresize = adjustScreen;
+        const _defaultcustomconfigstring = "/;;#sn#|#nd#";
+        const _interval = 7000;
+        const _saverTime = 5000;
+        let _caches;
+        var _index;
+        var _dimension="1920x1080"
+        var _theme;
+        var _customconfigstring;
+        var _optionstring;
+        var _intervalTimerId = -1;
+        var _saverTimerId = -1;
+        var _pause = false;
+        var _saver = true;
+        resetCache();
+        restartTimer();
+
+        // set up double tap for safari
+        var ua = window.navigator.userAgent;
+        var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i) || !!ua.match(/AppleWebKit/i);;;
+        if (iOS == true) {
+            dbclick_for_safari();
+        } else {
+            window.addEventListener("dblclick", event => {
+                if (clickOnCenter(event.clientX, event.clientY)) {
+                    showCustomConfig()
+                }
+            });
+        }
+        function resetSaverTimer() {
+            if (_saverTimerId > -1) {
+                window.clearTimeout(_saverTimerId);
+            }
+            if (_saver && !_pause) {
+                _saverTimerId =  window.setTimeout( "setPause(true);", _saverTime * 60);
+            } else {
+                _saverTimerId = -1;
+            }
+        }
+        function restartTimer() {
+            if (_intervalTimerId > -1) {
+                window.clearInterval(_intervalTimerId);
+            }
+            _intervalTimerId =  window.setInterval( "switchWallpaper();", _interval);
+            // this is for initial and button navigation reset
+            resetSaverTimer(); 
+        }
+        function resetCache() {
+            _caches = [ ];
+            _index = -1;
+        }
+        function switchWallpaper() {
+            btn = document.getElementById('btnpause')
+            if (! _pause) {
+                navigateWallpaper(1)
+            }
+        }
+        function navigateWallpaper(offset) {
+            if (offset == 1) {
+                if (_index == _caches.length - 1) {
+                    var new_image = document.createElement("img");
+                    new_image.src = "http://192.168.1.111:8080/ngorongoro?a=tweb&d="+_dimension+"&t="+_theme+_optionstring+"&"+new Date().getTime();
+                    document.getElementById('imgwallpaper').src = new_image.src
+                    if (_caches.length > 20) {
+                        _caches.shift()
+                    } else {
+                        _index++
+                    }
+                    _caches.push(new_image)
+                } else {
+                    _index++
+                    document.getElementById('imgwallpaper').src = _caches[_index].src
+                }
+            } else {
+                if (_index > 0) {
+                    _index--
+                    document.getElementById('imgwallpaper').src = _caches[_index].src
+                }
+            }
+        }
+        function adjstWallpaper() {
+            screenWidth=window.innerWidth
+            screenHeight=window.innerHeight
+            ratio=screenWidth*1000/screenHeight
+            if (1150 < ratio && ratio <= 1550) {			// iPadPro (1.334)
+                _dimension = "2732x2048"
+            } else if (1550 < ratio && ratio <= 1950) {		// HD or UHD (1.778)
+            	if (screenWidth > 1920) {
+					_dimension = "3840x2160"
+				} else {
+					_dimension = "1920x1080"
+				}
+            } else if (1950 < ratio && ratio <= 2350) {		// iPhoneMax Landscape (2.164)
+                _dimension = "2688x1242"
+            } else if (600 < ratio && ratio <= 900) {		// iPad Pro Portrait (0.749)
+                _dimension = "2048x2732"
+            } else if (300 < ratio && ratio <= 700) {		// GalaxyS Portrait (0.474)
+                _dimension = "1080x2280"
+            } else {
+                _dimension = screenWidth + "x" + screenHeight
+            }
+            lengths=_dimension.split("x")
+            var ratio = Math.min(screenWidth / lengths[0], screenHeight / lengths[1]);
+            imgwidth = lengths[0] * ratio
+            imgheight = lengths[1] * ratio
+            var div = document.getElementById('divwallpaper')
+            div.style.width = screenWidth + "px"
+            div.style.height = screenHeight + "px"
+            var img = document.getElementById('imgwallpaper')
+            img.style.width = imgwidth + "px"
+            img.style.height = imgheight + "px"
+        }
+        function adjustScreen() {
+            var btn = document.getElementById('btnpause')
+            btn.style.left = "95%"
+            btn.style.top = "95%"
+            var sel = document.getElementById('seltheme')
+            sel.style.left = "93%"
+            sel.style.top = "7%"
+            var back = document.getElementById('btnback')
+            back.style.left = "3%"
+            back.style.top = "48%"
+            var forward = document.getElementById('btnforward')
+            forward.style.left = "95%"
+            forward.style.top = "48%"
+            adjstWallpaper()
+        }
+        function btnpauseClicked() {
+            setPause(!_pause);
+            resetSaverTimer();
+        }
+        function setPause(newpause) {
+            _pause = newpause;
+            var btn = document.getElementById('btnpause')
+            if (_pause) {
+                btn.textContent = '\u25b6'
+            } else {
+                btn.textContent = '\u23f8'
+            }
+        }
+        function cancelFullScreen(el) {
+            var requestMethod = el.cancelFullScreen||el.webkitCancelFullScreen||el.mozCancelFullScreen||el.exitFullscreen;
+            if (requestMethod) { // cancel full screen.
+                requestMethod.call(el);
+            } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+                var wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{F11}");
+                }
+            }
+        }
+        function requestFullScreen(el) {
+            // Supports most browsers and their versions.
+            var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+            if (requestMethod) { // Native full screen.
+                requestMethod.call(el);
+            } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+                var wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{F11}");
+                }
+            }
+            return false
+        }
+        function themeChanged() {
+            var sel = document.getElementById("seltheme");
+            _theme = sel.options[sel.selectedIndex].value;
+            updateOptionString()
+            // remove all _caches
+            if (_theme != "all") {
+                resetCache();
+            }
+            setCookie("theme", _theme, 365);
+            resetSaverTimer();
+        }
+        function updateCustomConfigString(newcustomconfigstring){
+            // remove all _caches
+            resetCache()
+            _customconfigstring = newcustomconfigstring
+            setCookie("customconfigstring", _customconfigstring, 365);
+            updateOptionString()
+        }
+        function updateOptionString() {
+            if (_theme == "custom") {
+                optiondata=" -c '" + _customconfigstring + "'"
+                _optionstring = "&o=" + encodeURIComponent(optiondata);
+            } else {
+                _optionstring = ""
+            }
+        }
+        function showCustomConfig() {
+            setPause(true);
+            $("#customconfig").show().center();
+            document.getElementById("savercheckbox").checked = _saver;
+            $("#themelibs tr").remove();
+            document.getElementById("configstring").value=_customconfigstring;
+            $.getJSON("http://192.168.1.111:8080/maramboi?a=g", 
+                function(json) {
+                    json.unshift({Label:"Default", Config:_defaultcustomconfigstring});
+                    json.unshift({Label:"Current", Config:_customconfigstring});
+                    var table = document.getElementById("themelibs");
+                    for (var key in json) {
+                        if (json.hasOwnProperty(key)) {
+                            var row = table.insertRow(table.rows.length);
+                            var cell1 = row.insertCell(0);
+                            cell1.style.width = "270px";
+                            cell1.innerHTML = json[key].Label;
+                            var cell2 = row.insertCell(1);
+                            cell2.innerHTML = "<button class=\"button buttonTable\" onclick='document.getElementById(\"configstring\").value=\"" + json[key].Config + "\"'>Set</button>";
+                        }
+                    }
+                }
+            );
+        }
+        function configOkClicked() {
+            updateCustomConfigString(document.getElementById("configstring").value);
+            configCancelClicked();
+        }
+        function configCancelClicked() {
+            $("#customconfig").hide();
+            setPause(false);
+            resetSaverTimer();
+        }
+        function btnfullClicked() {
+            var elem = document.body; // Make the body go full screen.
+            var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||  (document.mozFullScreen || document.webkitIsFullScreen);
+            var btn = document.getElementById('btnfull')
+            if (isInFullScreen) {
+                cancelFullScreen(document);
+                btn.textContent = "Full"
+            } else {
+                requestFullScreen(elem);
+                btn.textContent = "Normal"
+                setTimeout(function(){   
+                    adjustScreen();
+                }, 3000);
+            }
+            resetSaverTimer();
+            return false;
+        }
+        $.fn.center = function () {
+            this.css("position","absolute");
+            this.css("top", Math.max(0, (
+                ($(window).innerHeight() - $(this).outerHeight()) / 2) + 
+                $(window).scrollTop()) + "px"
+            );
+            this.css("left", Math.max(0, (
+                ($(window).innerWidth() - $(this).outerWidth()) / 2) + 
+                $(window).scrollLeft()) + "px"
+            );
+            return this;
+        }
+        function showSplash() {
+            $("#splash").show().center();
+            setTimeout(function(){   
+                $("#splash").animate({opacity:0.0},3000);
+            }, 1000);
+            setTimeout(function(){   
+                $("#splash").remove();
+            }, 4100);
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + encodeURIComponent(cvalue) + ";" + expires + ";path=/";
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return decodeURIComponent(c.substring(name.length, c.length));
+                }
+            }
+            return "";
+        }
+        // double tap for safari browser
+        function dbclick_for_safari() {
+            jQuery.event.special.dblclick = {
+                setup: function(data, namespaces) {
+                    var agent = navigator.userAgent.toLowerCase();
+                    if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0 || agent.indexOf('ipod') >= 0) {
+                        var elem = this,
+                            $elem = jQuery(elem);
+                        $elem.bind('touchend.dblclick', jQuery.event.special.dblclick.handler);
+                    } else {
+                        var elem = this,
+                            $elem = jQuery(elem);
+                        $elem.bind('click.dblclick', jQuery.event.special.dblclick.handler);
+                    }
+                },
+                teardown: function(namespaces) {
+                    var agent = navigator.userAgent.toLowerCase();
+                    if (agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0 || agent.indexOf('ipod') >= 0) {
+                        var elem = this,
+                            $elem = jQuery(elem);
+                        $elem.unbind('touchend.dblclick');
+                    } else {
+                        var elem = this,
+                            $elem = jQuery(elem);
+                        $elem.unbind('click.dblclick', jQuery.event.special.dblclick.handler);
+                    }
+                },
+                handler: function(event) {
+                    var elem = event.target,
+                        $elem = jQuery(elem),
+                        lastTouch = $elem.data('lastTouch') || 0,
+                        now = new Date().getTime();
+                    var delta = now - lastTouch;
+                    if (delta > 20 && delta < 500) {
+                        $elem.data('lastTouch', 0);
+                        $elem.trigger('dblclick', [ event.pageX, event.pageY ]);
+                    } else {
+                        $elem.data('lastTouch', now);
+                    }
+                }
+            };
+            $(window).on("dblclick", function(e, x, y) {
+                e.preventDefault();
+                if (clickOnCenter(x, y)) {
+                    showCustomConfig()
+                }
+            });        
+        }
+        // check mouse is in center
+        function clickOnCenter(x, y) {
+            screenWidth=window.innerWidth
+            screenHeight=window.innerHeight
+            // window.alert("x: " + x + " - y: " + y)
+            // click only center area to opeb customConfig window
+            if (x > screenWidth / 2 - 200 && x < screenWidth / 2 + 200 &&
+                y > screenHeight / 2 - 200 && y < screenHeight / 2 + 200 ) {
+                return true
+            } else {
+                return false
+            }
+        }
+        // swipe gesture
+        var xDown, xUp, yDown, yUp;
+        resetSwipePos();
+        document.addEventListener('touchstart', handleTouchStart, false);   
+        document.addEventListener('touchmove', handleTouchMove, false);     
+        document.addEventListener('touchend', handleTouchEnd, false);
+        function getTouches(evt) {
+            return evt.touches ||             // browser API
+                    evt.originalEvent.touches; // jQuery
+        }                                                     
+        function handleTouchStart(evt) {
+            const firstTouch = getTouches(evt)[0];
+            if (firstTouch.clientX > 0 && firstTouch.clientY > 0 ) {
+                xDown = firstTouch.clientX;                                      
+                yDown = firstTouch.clientY;                                      
+            }
+        };                                                
+        function handleTouchMove(evt) {
+            if ( xDown == null || yDown == null ) {
+                resetSwipePos();
+                return;
+            }
+            const moveTouch = evt.touches[0]
+            if (moveTouch.clientX > 0 && moveTouch.clientY > 0 ) {
+                xUp = moveTouch.clientX;                                    
+                yUp = moveTouch.clientY;
+            }
+        }
+        function resetSwipePos() {
+            xDown = null; yDown = null;
+            xUp = null; yUp = null;
+        }
+        function handleTouchEnd(evt) {
+            if ( xDown == null || yDown == null || xUp == null || yUp == null) {
+                resetSwipePos();
+                return;
+            }
+            var xDiff = xDown - xUp;
+            var yDiff = yDown - yUp;
+            /* reset values */
+            resetSwipePos();
+            if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+                if (Math.abs( xDiff ) < 100) {
+                    return;
+                } 
+                if ( xDiff > 0 ) {
+                    navigateWallpaper(1); /* right swipe */ 
+                } else {
+                    navigateWallpaper(-1); /* left swipe */
+                }                       
+            } else {
+                if (Math.abs( yDiff ) < 100) {
+                    return;
+                } 
+                sel = document.getElementById('seltheme')
+                index = sel.selectedIndex
+                if ( yDiff > 0 ) {
+                    sel.selectedIndex = index > 0 ? index - 1 : sel.options.length - 1; /* down swipe - previous */ 
+                    themeChanged()
+                } else {
+                    sel.selectedIndex = index < sel.options.length - 1 ? index + 1 : 0; /* up swipe - next */
+                    themeChanged()
+                }
+                sel.style.opacity = 1.0
+                sel.style.backgroundColor = "black";
+                setTimeout(function(){   
+                    sel.style.opacity = 0.1
+                    sel.style.backgroundColor = "#555";
+                }, 3000);
+            }                                          
+        };
+    </script> 
+</head>
+<body>
+    <div id="customconfig">
+        <br>
+        <button id="themeok" onclick="configOkClicked()" class="button buttonConfig">OK</button>
+        <button id="themecancel" onclick='configCancelClicked()' class="button buttonConfig">Cancel</button>
+        <br>
+        <input type="checkbox" id="savercheckbox" onclick='_saver=document.getElementById("savercheckbox").checked;'> Saver
+        <br>
+        <textarea name="text" id="configstring" rows="4" cols="42" wrap="soft"> </textarea>
+        <table style="margin: 0 auto;" id="themelibs"></table>
+    </div>
+    <div id="splash">
+        <img src="tromso.png" width=450 height=450>
+    </div>
+    <div id="divwallpaper" class="container">
+        <img id="imgwallpaper" src="" width="1920" height="1080">
+        <select id="seltheme" class="btnclass" onchange="themeChanged()">
+            <option value = "default1">Default</option>
+            <option value = "default2">Default+</option>
+            <option value = "custom" >Custom</option>
+            <option value = "photo">Photo</option>
+            <option value = "recent">Recent</option>
+            <option value = "wallpaper">Wallpaper</option>
+            <option value = "landscape">Landscape</option>
+            <option value = "movie1">Movie</option>
+            <option value = "movie2">* Movie+ *</option>
+            <option value = "special1">* Special *</option>
+            <option value = "special2">* Special+ *</option>
+            <option value = "all">* All *</option>
+        </select>
+        <button id="btnfull" class="btnclass" onclick="btnfullClicked()">Full</button>
+        <button id="btnback" class="btnclass" onclick="restartTimer();navigateWallpaper(-1)">&#x23ee;</button>
+        <button id="btnforward" class="btnclass" onclick="restartTimer();navigateWallpaper(1)">&#x23ed;</button>
+        <button id="btnpause" class="btnclass" onclick="btnpauseClicked()">&#x23f8;</button>
+    </div>
+    <script type="module">
+        adjustScreen();
+        showSplash();
+        // customstring should be updated first before _theme
+        var init_customconfigstring=getCookie("customconfigstring");
+        if (init_customconfigstring == "" || init_customconfigstring == "undefined") {
+            init_customconfigstring = _defaultcustomconfigstring;
+        }
+        updateCustomConfigString(init_customconfigstring);
+        var init_theme=getCookie("theme");
+        if (init_theme == "" || init_theme == "undefined") {
+            init_theme = "default2";
+        }
+        document.getElementById("seltheme").value = init_theme;
+        themeChanged();
+        switchWallpaper();
+    </script>
+</body>
+</html>
+`

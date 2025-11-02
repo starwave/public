@@ -1,0 +1,683 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC00199F2BF8B75200E78E3D /* QuickShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC00199E2BF8B75200E78E3D /* QuickShareManager.swift */; };
+		FC08ED432CD64D4100C3F9FD /* BPFileReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC08ED422CD64D4100C3F9FD /* BPFileReceiver.swift */; };
+		FC0B76CC244650C400A9630F /* DirectoryChooserDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B76CB244650C400A9630F /* DirectoryChooserDialog.swift */; };
+		FC0B76CF244654E700A9630F /* thirdwave.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0B76CD244654E700A9630F /* thirdwave.png */; };
+		FC0B76D0244654E700A9630F /* wallpaperinfo.icns in Resources */ = {isa = PBXBuildFile; fileRef = FC0B76CE244654E700A9630F /* wallpaperinfo.icns */; };
+		FC0D6570245BF95300CABD28 /* PlatformHotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0D656F245BF95300CABD28 /* PlatformHotKey.swift */; };
+		FC2389D524FC082F0015DCE2 /* themelib.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC2389D424FC082F0015DCE2 /* themelib.txt */; };
+		FC2389D724FC9D150015DCE2 /* CustomConfigDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2389D624FC9D150015DCE2 /* CustomConfigDialog.swift */; };
+		FC2389D924FCC5620015DCE2 /* CustomConfigDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2389D824FCC5620015DCE2 /* CustomConfigDialog.xib */; };
+		FC2B467E2447A6A6006C47C8 /* WallpaperServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B467D2447A6A6006C47C8 /* WallpaperServiceHandler.swift */; };
+		FC2B46802447BA90006C47C8 /* WallpaperServiceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B467F2447BA90006C47C8 /* WallpaperServiceConnection.swift */; };
+		FC2B46822448C224006C47C8 /* StatusBarMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2B46812448C224006C47C8 /* StatusBarMenu.xib */; };
+		FC2B46842448C758006C47C8 /* toolicon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2B46832448C758006C47C8 /* toolicon.png */; };
+		FC2B46862449FC7B006C47C8 /* PlatformPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B46852449FC7B006C47C8 /* PlatformPreference.swift */; };
+		FC2E409B24648109005510F3 /* folder_mac.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2E409A24648109005510F3 /* folder_mac.png */; };
+		FC35DD8624445F80001E734F /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC35DD8524445F80001E734F /* NSImageExtension.swift */; };
+		FC35DD8824447789001E734F /* WallpaperWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC35DD8724447789001E734F /* WallpaperWidgetProvider.swift */; };
+		FC35DD8A24449EF6001E734F /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC35DD8924449EF6001E734F /* AppUtil.swift */; };
+		FC3807A8251066E400F55EE8 /* reservedword.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC3807A7251066E400F55EE8 /* reservedword.txt */; };
+		FCAB9568250C3B29007E4A79 /* ThemeLibraryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB9567250C3B29007E4A79 /* ThemeLibraryInterface.swift */; };
+		FCB1FBE42522C9930033A4C0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1FBE32522C9930033A4C0 /* StringExtension.swift */; };
+		FCB5E619245915BE00241084 /* media_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E610245915BE00241084 /* media_stop.png */; };
+		FCB5E61A245915BE00241084 /* power_on.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E611245915BE00241084 /* power_on.png */; };
+		FCB5E61B245915BE00241084 /* media_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E612245915BE00241084 /* media_previous.png */; };
+		FCB5E61C245915BE00241084 /* power_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E613245915BE00241084 /* power_stop.png */; };
+		FCB5E61D245915BE00241084 /* media_play.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E614245915BE00241084 /* media_play.png */; };
+		FCB5E61E245915BE00241084 /* media_eject.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E615245915BE00241084 /* media_eject.png */; };
+		FCB5E61F245915BE00241084 /* media_next.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E616245915BE00241084 /* media_next.png */; };
+		FCB5E620245915BE00241084 /* media_play_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E617245915BE00241084 /* media_play_pause.png */; };
+		FCB5E621245915BE00241084 /* media_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E618245915BE00241084 /* media_pause.png */; };
+		FCB5E6242459182200241084 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E6222459182200241084 /* gear.png */; };
+		FCB5E6252459182200241084 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB5E6232459182200241084 /* folder.png */; };
+		FCBD64542CA46AF9006D6947 /* BPBonjourService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD64532CA46AED006D6947 /* BPBonjourService.swift */; };
+		FCBD64562CA46BEA006D6947 /* BPHTTPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD64552CA46BE4006D6947 /* BPHTTPHandler.swift */; };
+		FCBD64752CA56857006D6947 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = FCBD64742CA56857006D6947 /* NIO */; };
+		FCBD64772CA56879006D6947 /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = FCBD64762CA56879006D6947 /* NIOHTTP1 */; };
+		FCC286BC282BAFFF00F1A60C /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC286BB282BAFFF00F1A60C /* StreamReader.swift */; };
+		FCC5757324FF3D3D00AF19D0 /* CustomWordTypePopupMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC5757224FF3D3D00AF19D0 /* CustomWordTypePopupMenu.xib */; };
+		FCD5C34624429C2A00DCF0FC /* WallpaperInfoAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C34524429C2A00DCF0FC /* WallpaperInfoAppDelegate.swift */; };
+		FCD5C34824429C2A00DCF0FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD5C34724429C2A00DCF0FC /* Assets.xcassets */; };
+		FCD5C34B24429C2A00DCF0FC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD5C34924429C2A00DCF0FC /* MainMenu.xib */; };
+		FCD5C3702442A51600DCF0FC /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C36F2442A51600DCF0FC /* RepeatingTimer.swift */; };
+		FCD5C3722442AE3B00DCF0FC /* WallpaperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3712442AE3B00DCF0FC /* WallpaperService.swift */; };
+		FCD5C3742442B2B600DCF0FC /* PlatformTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3732442B2B600DCF0FC /* PlatformTimer.swift */; };
+		FCD5C3762442B40200DCF0FC /* PlatformWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3752442B40200DCF0FC /* PlatformWallpaper.swift */; };
+		FCD5C3782442B8B400DCF0FC /* WallpaperNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3772442B8B400DCF0FC /* WallpaperNotification.swift */; };
+		FCD5C37A2442B95100DCF0FC /* WallpaperServiceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3792442B95100DCF0FC /* WallpaperServiceInfo.swift */; };
+		FCD5C3BD2442E94600DCF0FC /* WallpaperInfoUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3BC2442E94600DCF0FC /* WallpaperInfoUI.swift */; };
+		FCD5C3BF2442F2CF00DCF0FC /* PlatformFileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3BE2442F2CF00DCF0FC /* PlatformFileObserver.swift */; };
+		FCD5C3C12442F46F00DCF0FC /* LinkedHashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3C02442F46F00DCF0FC /* LinkedHashMap.swift */; };
+		FCD5C3D2244302B700DCF0FC /* FileWatcher+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3CE244302B600DCF0FC /* FileWatcher+Action.swift */; };
+		FCD5C3D3244302B700DCF0FC /* FileWatcher+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3CF244302B600DCF0FC /* FileWatcher+Type.swift */; };
+		FCD5C3D4244302B700DCF0FC /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3D0244302B600DCF0FC /* FileWatcher.swift */; };
+		FCD5C3D5244302B700DCF0FC /* FileWatcherEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3D1244302B600DCF0FC /* FileWatcherEvent.swift */; };
+		FCD5C3DB244304E100DCF0FC /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3DA244304E100DCF0FC /* ImageFileManager.swift */; };
+		FCD5C3DF2443093700DCF0FC /* BPUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3DE2443093700DCF0FC /* BPUtil.swift */; };
+		FCD5C3E324430E5B00DCF0FC /* ExifInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3E224430E5B00DCF0FC /* ExifInterface.swift */; };
+		FCD5C3E524431E1F00DCF0FC /* PlatformInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3E424431E1F00DCF0FC /* PlatformInfo.swift */; };
+		FCD5C3E724434FCC00DCF0FC /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5C3E624434FCC00DCF0FC /* Stack.swift */; };
+		FCD6282D24E94AE300D35C3E /* ThemeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6282C24E94AE300D35C3E /* ThemeInfo.swift */; };
+		FCE55E0F24FDA8E600BF23C5 /* gray_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE55E0B24FDA8E500BF23C5 /* gray_light.png */; };
+		FCE55E1024FDA8E600BF23C5 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE55E0C24FDA8E500BF23C5 /* trash.png */; };
+		FCE55E1124FDA8E600BF23C5 /* red_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE55E0D24FDA8E500BF23C5 /* red_light.png */; };
+		FCE55E1224FDA8E600BF23C5 /* green_light.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE55E0E24FDA8E500BF23C5 /* green_light.png */; };
+		FCF6407C244626CC00D9482B /* WallpaperInfoUI.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF6407B244626CC00D9482B /* WallpaperInfoUI.xib */; };
+		FCFB3EC72523C49000E2ABAB /* WPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB3EC62523C49000E2ABAB /* WPath.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC00199E2BF8B75200E78E3D /* QuickShareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickShareManager.swift; sourceTree = "<group>"; };
+		FC08ED422CD64D4100C3F9FD /* BPFileReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPFileReceiver.swift; sourceTree = "<group>"; };
+		FC0B76CB244650C400A9630F /* DirectoryChooserDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryChooserDialog.swift; sourceTree = "<group>"; };
+		FC0B76CD244654E700A9630F /* thirdwave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thirdwave.png; sourceTree = "<group>"; };
+		FC0B76CE244654E700A9630F /* wallpaperinfo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = wallpaperinfo.icns; sourceTree = "<group>"; };
+		FC0D656F245BF95300CABD28 /* PlatformHotKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformHotKey.swift; sourceTree = "<group>"; };
+		FC2389D424FC082F0015DCE2 /* themelib.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = themelib.txt; sourceTree = "<group>"; };
+		FC2389D624FC9D150015DCE2 /* CustomConfigDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomConfigDialog.swift; sourceTree = "<group>"; };
+		FC2389D824FCC5620015DCE2 /* CustomConfigDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomConfigDialog.xib; sourceTree = "<group>"; };
+		FC2B467D2447A6A6006C47C8 /* WallpaperServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperServiceHandler.swift; sourceTree = "<group>"; };
+		FC2B467F2447BA90006C47C8 /* WallpaperServiceConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperServiceConnection.swift; sourceTree = "<group>"; };
+		FC2B46812448C224006C47C8 /* StatusBarMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusBarMenu.xib; sourceTree = "<group>"; };
+		FC2B46832448C758006C47C8 /* toolicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolicon.png; sourceTree = "<group>"; };
+		FC2B46852449FC7B006C47C8 /* PlatformPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformPreference.swift; sourceTree = "<group>"; };
+		FC2E409A24648109005510F3 /* folder_mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder_mac.png; sourceTree = "<group>"; };
+		FC35DD8524445F80001E734F /* NSImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageExtension.swift; sourceTree = "<group>"; };
+		FC35DD8724447789001E734F /* WallpaperWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperWidgetProvider.swift; sourceTree = "<group>"; };
+		FC35DD8924449EF6001E734F /* AppUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
+		FC3807A7251066E400F55EE8 /* reservedword.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reservedword.txt; sourceTree = "<group>"; };
+		FCAB9567250C3B29007E4A79 /* ThemeLibraryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLibraryInterface.swift; sourceTree = "<group>"; };
+		FCB1FBE32522C9930033A4C0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		FCB5E610245915BE00241084 /* media_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_stop.png; sourceTree = "<group>"; };
+		FCB5E611245915BE00241084 /* power_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power_on.png; sourceTree = "<group>"; };
+		FCB5E612245915BE00241084 /* media_previous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_previous.png; sourceTree = "<group>"; };
+		FCB5E613245915BE00241084 /* power_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power_stop.png; sourceTree = "<group>"; };
+		FCB5E614245915BE00241084 /* media_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_play.png; sourceTree = "<group>"; };
+		FCB5E615245915BE00241084 /* media_eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_eject.png; sourceTree = "<group>"; };
+		FCB5E616245915BE00241084 /* media_next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_next.png; sourceTree = "<group>"; };
+		FCB5E617245915BE00241084 /* media_play_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_play_pause.png; sourceTree = "<group>"; };
+		FCB5E618245915BE00241084 /* media_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = media_pause.png; sourceTree = "<group>"; };
+		FCB5E6222459182200241084 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		FCB5E6232459182200241084 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		FCBD64532CA46AED006D6947 /* BPBonjourService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPBonjourService.swift; sourceTree = "<group>"; };
+		FCBD64552CA46BE4006D6947 /* BPHTTPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPHTTPHandler.swift; sourceTree = "<group>"; };
+		FCC286BB282BAFFF00F1A60C /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
+		FCC5757224FF3D3D00AF19D0 /* CustomWordTypePopupMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomWordTypePopupMenu.xib; sourceTree = "<group>"; };
+		FCD5C34224429C2A00DCF0FC /* WallpaperInfoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallpaperInfoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCD5C34524429C2A00DCF0FC /* WallpaperInfoAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperInfoAppDelegate.swift; sourceTree = "<group>"; };
+		FCD5C34724429C2A00DCF0FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCD5C34A24429C2A00DCF0FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FCD5C34C24429C2A00DCF0FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCD5C34D24429C2A00DCF0FC /* WallpaperInfoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WallpaperInfoApp.entitlements; sourceTree = "<group>"; };
+		FCD5C35624429C2A00DCF0FC /* WallpaperInfoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperInfoAppTests.swift; sourceTree = "<group>"; };
+		FCD5C35824429C2A00DCF0FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCD5C36124429C2B00DCF0FC /* WallpaperInfoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperInfoAppUITests.swift; sourceTree = "<group>"; };
+		FCD5C36324429C2B00DCF0FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCD5C36F2442A51600DCF0FC /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
+		FCD5C3712442AE3B00DCF0FC /* WallpaperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperService.swift; sourceTree = "<group>"; };
+		FCD5C3732442B2B600DCF0FC /* PlatformTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformTimer.swift; sourceTree = "<group>"; };
+		FCD5C3752442B40200DCF0FC /* PlatformWallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformWallpaper.swift; sourceTree = "<group>"; };
+		FCD5C3772442B8B400DCF0FC /* WallpaperNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperNotification.swift; sourceTree = "<group>"; };
+		FCD5C3792442B95100DCF0FC /* WallpaperServiceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperServiceInfo.swift; sourceTree = "<group>"; };
+		FCD5C3BC2442E94600DCF0FC /* WallpaperInfoUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperInfoUI.swift; sourceTree = "<group>"; };
+		FCD5C3BE2442F2CF00DCF0FC /* PlatformFileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformFileObserver.swift; sourceTree = "<group>"; };
+		FCD5C3C02442F46F00DCF0FC /* LinkedHashMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedHashMap.swift; sourceTree = "<group>"; };
+		FCD5C3CE244302B600DCF0FC /* FileWatcher+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Action.swift"; sourceTree = "<group>"; };
+		FCD5C3CF244302B600DCF0FC /* FileWatcher+Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Type.swift"; sourceTree = "<group>"; };
+		FCD5C3D0244302B600DCF0FC /* FileWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
+		FCD5C3D1244302B600DCF0FC /* FileWatcherEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWatcherEvent.swift; sourceTree = "<group>"; };
+		FCD5C3DA244304E100DCF0FC /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
+		FCD5C3DE2443093700DCF0FC /* BPUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPUtil.swift; sourceTree = "<group>"; };
+		FCD5C3E224430E5B00DCF0FC /* ExifInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExifInterface.swift; sourceTree = "<group>"; };
+		FCD5C3E424431E1F00DCF0FC /* PlatformInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInfo.swift; sourceTree = "<group>"; };
+		FCD5C3E624434FCC00DCF0FC /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		FCD6282C24E94AE300D35C3E /* ThemeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeInfo.swift; sourceTree = "<group>"; };
+		FCE55E0B24FDA8E500BF23C5 /* gray_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_light.png; sourceTree = "<group>"; };
+		FCE55E0C24FDA8E500BF23C5 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		FCE55E0D24FDA8E500BF23C5 /* red_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_light.png; sourceTree = "<group>"; };
+		FCE55E0E24FDA8E500BF23C5 /* green_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_light.png; sourceTree = "<group>"; };
+		FCF6407B244626CC00D9482B /* WallpaperInfoUI.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WallpaperInfoUI.xib; sourceTree = "<group>"; };
+		FCFB3EC62523C49000E2ABAB /* WPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPath.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCD5C33F24429C2900DCF0FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCBD64752CA56857006D6947 /* NIO in Frameworks */,
+				FCBD64772CA56879006D6947 /* NIOHTTP1 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCBD64732CA56857006D6947 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCD5C33924429C2900DCF0FC = {
+			isa = PBXGroup;
+			children = (
+				FCD5C34424429C2A00DCF0FC /* WallpaperInfoApp */,
+				FCD5C3D92443048800DCF0FC /* Resource */,
+				FCD5C35524429C2A00DCF0FC /* WallpaperInfoAppTests */,
+				FCD5C36024429C2B00DCF0FC /* WallpaperInfoAppUITests */,
+				FCBD64732CA56857006D6947 /* Frameworks */,
+				FCD5C34324429C2A00DCF0FC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCD5C34324429C2A00DCF0FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCD5C34224429C2A00DCF0FC /* WallpaperInfoApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCD5C34424429C2A00DCF0FC /* WallpaperInfoApp */ = {
+			isa = PBXGroup;
+			children = (
+				FC35DD8924449EF6001E734F /* AppUtil.swift */,
+				FCD5C3DE2443093700DCF0FC /* BPUtil.swift */,
+				FCBD64532CA46AED006D6947 /* BPBonjourService.swift */,
+				FC08ED422CD64D4100C3F9FD /* BPFileReceiver.swift */,
+				FCBD64552CA46BE4006D6947 /* BPHTTPHandler.swift */,
+				FC2389D624FC9D150015DCE2 /* CustomConfigDialog.swift */,
+				FC0B76CB244650C400A9630F /* DirectoryChooserDialog.swift */,
+				FCD5C3DA244304E100DCF0FC /* ImageFileManager.swift */,
+				FCD5C3BE2442F2CF00DCF0FC /* PlatformFileObserver.swift */,
+				FC0D656F245BF95300CABD28 /* PlatformHotKey.swift */,
+				FCD5C3E424431E1F00DCF0FC /* PlatformInfo.swift */,
+				FC2B46852449FC7B006C47C8 /* PlatformPreference.swift */,
+				FCD5C3732442B2B600DCF0FC /* PlatformTimer.swift */,
+				FCD5C3752442B40200DCF0FC /* PlatformWallpaper.swift */,
+				FC00199E2BF8B75200E78E3D /* QuickShareManager.swift */,
+				FCD6282C24E94AE300D35C3E /* ThemeInfo.swift */,
+				FCAB9567250C3B29007E4A79 /* ThemeLibraryInterface.swift */,
+				FCD5C34524429C2A00DCF0FC /* WallpaperInfoAppDelegate.swift */,
+				FCD5C3BC2442E94600DCF0FC /* WallpaperInfoUI.swift */,
+				FCD5C3772442B8B400DCF0FC /* WallpaperNotification.swift */,
+				FC2B467F2447BA90006C47C8 /* WallpaperServiceConnection.swift */,
+				FC2B467D2447A6A6006C47C8 /* WallpaperServiceHandler.swift */,
+				FCD5C3792442B95100DCF0FC /* WallpaperServiceInfo.swift */,
+				FCD5C3712442AE3B00DCF0FC /* WallpaperService.swift */,
+				FC35DD8724447789001E734F /* WallpaperWidgetProvider.swift */,
+				FCFB3EC62523C49000E2ABAB /* WPath.swift */,
+				FCD5C3D82443045C00DCF0FC /* ExternSrc */,
+				FCD5C34D24429C2A00DCF0FC /* WallpaperInfoApp.entitlements */,
+				FCD5C34C24429C2A00DCF0FC /* Info.plist */,
+				FC0B76CE244654E700A9630F /* wallpaperinfo.icns */,
+				FC0B76CD244654E700A9630F /* thirdwave.png */,
+			);
+			path = WallpaperInfoApp;
+			sourceTree = "<group>";
+		};
+		FCD5C35524429C2A00DCF0FC /* WallpaperInfoAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCD5C35624429C2A00DCF0FC /* WallpaperInfoAppTests.swift */,
+				FCD5C35824429C2A00DCF0FC /* Info.plist */,
+			);
+			path = WallpaperInfoAppTests;
+			sourceTree = "<group>";
+		};
+		FCD5C36024429C2B00DCF0FC /* WallpaperInfoAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FCD5C36124429C2B00DCF0FC /* WallpaperInfoAppUITests.swift */,
+				FCD5C36324429C2B00DCF0FC /* Info.plist */,
+			);
+			path = WallpaperInfoAppUITests;
+			sourceTree = "<group>";
+		};
+		FCD5C3D82443045C00DCF0FC /* ExternSrc */ = {
+			isa = PBXGroup;
+			children = (
+				FCC286BB282BAFFF00F1A60C /* StreamReader.swift */,
+				FCD5C3E224430E5B00DCF0FC /* ExifInterface.swift */,
+				FCD5C3C02442F46F00DCF0FC /* LinkedHashMap.swift */,
+				FCB1FBE32522C9930033A4C0 /* StringExtension.swift */,
+				FCD5C36F2442A51600DCF0FC /* RepeatingTimer.swift */,
+				FCD5C3D0244302B600DCF0FC /* FileWatcher.swift */,
+				FCD5C3CE244302B600DCF0FC /* FileWatcher+Action.swift */,
+				FCD5C3CF244302B600DCF0FC /* FileWatcher+Type.swift */,
+				FCD5C3D1244302B600DCF0FC /* FileWatcherEvent.swift */,
+				FC35DD8524445F80001E734F /* NSImageExtension.swift */,
+				FCD5C3E624434FCC00DCF0FC /* Stack.swift */,
+			);
+			path = ExternSrc;
+			sourceTree = "<group>";
+		};
+		FCD5C3D92443048800DCF0FC /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FCE55E0B24FDA8E500BF23C5 /* gray_light.png */,
+				FCE55E0E24FDA8E500BF23C5 /* green_light.png */,
+				FCE55E0D24FDA8E500BF23C5 /* red_light.png */,
+				FCE55E0C24FDA8E500BF23C5 /* trash.png */,
+				FCB5E615245915BE00241084 /* media_eject.png */,
+				FC2E409A24648109005510F3 /* folder_mac.png */,
+				FCB5E6232459182200241084 /* folder.png */,
+				FCB5E6222459182200241084 /* gear.png */,
+				FCB5E616245915BE00241084 /* media_next.png */,
+				FCB5E618245915BE00241084 /* media_pause.png */,
+				FCB5E617245915BE00241084 /* media_play_pause.png */,
+				FCB5E614245915BE00241084 /* media_play.png */,
+				FCB5E612245915BE00241084 /* media_previous.png */,
+				FCB5E610245915BE00241084 /* media_stop.png */,
+				FCB5E611245915BE00241084 /* power_on.png */,
+				FCB5E613245915BE00241084 /* power_stop.png */,
+				FCD5C34724429C2A00DCF0FC /* Assets.xcassets */,
+				FC3807A7251066E400F55EE8 /* reservedword.txt */,
+				FC2389D424FC082F0015DCE2 /* themelib.txt */,
+				FCD5C34924429C2A00DCF0FC /* MainMenu.xib */,
+				FC2389D824FCC5620015DCE2 /* CustomConfigDialog.xib */,
+				FCC5757224FF3D3D00AF19D0 /* CustomWordTypePopupMenu.xib */,
+				FCF6407B244626CC00D9482B /* WallpaperInfoUI.xib */,
+				FC2B46812448C224006C47C8 /* StatusBarMenu.xib */,
+				FC2B46832448C758006C47C8 /* toolicon.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FCD5C34124429C2900DCF0FC /* WallpaperInfoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCD5C36624429C2B00DCF0FC /* Build configuration list for PBXNativeTarget "WallpaperInfoApp" */;
+			buildPhases = (
+				FCD5C33E24429C2900DCF0FC /* Sources */,
+				FCD5C33F24429C2900DCF0FC /* Frameworks */,
+				FCD5C34024429C2900DCF0FC /* Resources */,
+				FCD7C3CD2451EC8500EF5C6F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WallpaperInfoApp;
+			productName = WallpaperInfoApp;
+			productReference = FCD5C34224429C2A00DCF0FC /* WallpaperInfoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCD5C33A24429C2900DCF0FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1600;
+				ORGANIZATIONNAME = "Brad Park";
+				TargetAttributes = {
+					FCD5C34124429C2900DCF0FC = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = FCD5C33D24429C2900DCF0FC /* Build configuration list for PBXProject "WallpaperInfoApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FCD5C33924429C2900DCF0FC;
+			packageReferences = (
+				FCBD64722CA56849006D6947 /* XCRemoteSwiftPackageReference "swift-nio" */,
+			);
+			productRefGroup = FCD5C34324429C2A00DCF0FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCD5C34124429C2900DCF0FC /* WallpaperInfoApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCD5C34024429C2900DCF0FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCE55E1024FDA8E600BF23C5 /* trash.png in Resources */,
+				FCB5E61D245915BE00241084 /* media_play.png in Resources */,
+				FCD5C34824429C2A00DCF0FC /* Assets.xcassets in Resources */,
+				FCE55E1224FDA8E600BF23C5 /* green_light.png in Resources */,
+				FCC5757324FF3D3D00AF19D0 /* CustomWordTypePopupMenu.xib in Resources */,
+				FCD5C34B24429C2A00DCF0FC /* MainMenu.xib in Resources */,
+				FCB5E61F245915BE00241084 /* media_next.png in Resources */,
+				FCB5E6242459182200241084 /* gear.png in Resources */,
+				FC2B46822448C224006C47C8 /* StatusBarMenu.xib in Resources */,
+				FCB5E61C245915BE00241084 /* power_stop.png in Resources */,
+				FCE55E0F24FDA8E600BF23C5 /* gray_light.png in Resources */,
+				FCB5E620245915BE00241084 /* media_play_pause.png in Resources */,
+				FC2E409B24648109005510F3 /* folder_mac.png in Resources */,
+				FC2B46842448C758006C47C8 /* toolicon.png in Resources */,
+				FC2389D924FCC5620015DCE2 /* CustomConfigDialog.xib in Resources */,
+				FCB5E619245915BE00241084 /* media_stop.png in Resources */,
+				FCB5E61A245915BE00241084 /* power_on.png in Resources */,
+				FCB5E6252459182200241084 /* folder.png in Resources */,
+				FC0B76D0244654E700A9630F /* wallpaperinfo.icns in Resources */,
+				FC0B76CF244654E700A9630F /* thirdwave.png in Resources */,
+				FCE55E1124FDA8E600BF23C5 /* red_light.png in Resources */,
+				FCF6407C244626CC00D9482B /* WallpaperInfoUI.xib in Resources */,
+				FC2389D524FC082F0015DCE2 /* themelib.txt in Resources */,
+				FCB5E621245915BE00241084 /* media_pause.png in Resources */,
+				FCB5E61B245915BE00241084 /* media_previous.png in Resources */,
+				FCB5E61E245915BE00241084 /* media_eject.png in Resources */,
+				FC3807A8251066E400F55EE8 /* reservedword.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FCD7C3CD2451EC8500EF5C6F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    echo \"Copy WallpaperInfoApp to Cloudstation\"\n    echo -E ${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\n    cd ${BUILT_PRODUCTS_DIR}; zip -r ~/WallpaperInfoApp.app.zip \"${FULL_PRODUCT_NAME}\"\n    mv -f ~/WallpaperInfoApp.app.zip ~/Documents/CloudStation/Install/Mac\\ OS\\ X\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCD5C33E24429C2900DCF0FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCD5C3DF2443093700DCF0FC /* BPUtil.swift in Sources */,
+				FCD5C3D5244302B700DCF0FC /* FileWatcherEvent.swift in Sources */,
+				FCD5C3762442B40200DCF0FC /* PlatformWallpaper.swift in Sources */,
+				FCD5C3D4244302B700DCF0FC /* FileWatcher.swift in Sources */,
+				FC00199F2BF8B75200E78E3D /* QuickShareManager.swift in Sources */,
+				FCBD64542CA46AF9006D6947 /* BPBonjourService.swift in Sources */,
+				FC35DD8824447789001E734F /* WallpaperWidgetProvider.swift in Sources */,
+				FCD5C3DB244304E100DCF0FC /* ImageFileManager.swift in Sources */,
+				FCD6282D24E94AE300D35C3E /* ThemeInfo.swift in Sources */,
+				FC08ED432CD64D4100C3F9FD /* BPFileReceiver.swift in Sources */,
+				FCD5C3D3244302B700DCF0FC /* FileWatcher+Type.swift in Sources */,
+				FCD5C34624429C2A00DCF0FC /* WallpaperInfoAppDelegate.swift in Sources */,
+				FC2389D724FC9D150015DCE2 /* CustomConfigDialog.swift in Sources */,
+				FCFB3EC72523C49000E2ABAB /* WPath.swift in Sources */,
+				FC35DD8A24449EF6001E734F /* AppUtil.swift in Sources */,
+				FCB1FBE42522C9930033A4C0 /* StringExtension.swift in Sources */,
+				FCD5C3722442AE3B00DCF0FC /* WallpaperService.swift in Sources */,
+				FCD5C3782442B8B400DCF0FC /* WallpaperNotification.swift in Sources */,
+				FCC286BC282BAFFF00F1A60C /* StreamReader.swift in Sources */,
+				FCD5C3742442B2B600DCF0FC /* PlatformTimer.swift in Sources */,
+				FC2B46802447BA90006C47C8 /* WallpaperServiceConnection.swift in Sources */,
+				FCD5C3BD2442E94600DCF0FC /* WallpaperInfoUI.swift in Sources */,
+				FCAB9568250C3B29007E4A79 /* ThemeLibraryInterface.swift in Sources */,
+				FCD5C3E524431E1F00DCF0FC /* PlatformInfo.swift in Sources */,
+				FCD5C3D2244302B700DCF0FC /* FileWatcher+Action.swift in Sources */,
+				FC35DD8624445F80001E734F /* NSImageExtension.swift in Sources */,
+				FCD5C3E724434FCC00DCF0FC /* Stack.swift in Sources */,
+				FCBD64562CA46BEA006D6947 /* BPHTTPHandler.swift in Sources */,
+				FC2B467E2447A6A6006C47C8 /* WallpaperServiceHandler.swift in Sources */,
+				FC2B46862449FC7B006C47C8 /* PlatformPreference.swift in Sources */,
+				FCD5C37A2442B95100DCF0FC /* WallpaperServiceInfo.swift in Sources */,
+				FCD5C3C12442F46F00DCF0FC /* LinkedHashMap.swift in Sources */,
+				FCD5C3BF2442F2CF00DCF0FC /* PlatformFileObserver.swift in Sources */,
+				FC0D6570245BF95300CABD28 /* PlatformHotKey.swift in Sources */,
+				FC0B76CC244650C400A9630F /* DirectoryChooserDialog.swift in Sources */,
+				FCD5C3E324430E5B00DCF0FC /* ExifInterface.swift in Sources */,
+				FCD5C3702442A51600DCF0FC /* RepeatingTimer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FCD5C34924429C2A00DCF0FC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCD5C34A24429C2A00DCF0FC /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FCD5C36424429C2B00DCF0FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FCD5C36524429C2B00DCF0FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		FCD5C36724429C2B00DCF0FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WallpaperInfoApp/WallpaperInfoApp.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WallpaperInfoApp",
+				);
+				INFOPLIST_FILE = WallpaperInfoApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdwavesoft.WallpaperInfoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FCD5C36824429C2B00DCF0FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WallpaperInfoApp/WallpaperInfoApp.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WallpaperInfoApp",
+				);
+				INFOPLIST_FILE = WallpaperInfoApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thirdwavesoft.WallpaperInfoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCD5C33D24429C2900DCF0FC /* Build configuration list for PBXProject "WallpaperInfoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD5C36424429C2B00DCF0FC /* Debug */,
+				FCD5C36524429C2B00DCF0FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCD5C36624429C2B00DCF0FC /* Build configuration list for PBXNativeTarget "WallpaperInfoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD5C36724429C2B00DCF0FC /* Debug */,
+				FCD5C36824429C2B00DCF0FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FCBD64722CA56849006D6947 /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.73.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FCBD64742CA56857006D6947 /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCBD64722CA56849006D6947 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		FCBD64762CA56879006D6947 /* NIOHTTP1 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCBD64722CA56849006D6947 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOHTTP1;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = FCD5C33A24429C2900DCF0FC /* Project object */;
+}

@@ -1,0 +1,16 @@
+.git
+.gitignore
+README.md
+*.md
+.env
+.env.*
+tmp/
+log/
+spec/
+.rspec
+.rubocop.yml
+coverage/
+.bundle
+vendor/bundle
+node_modules
+.DS_Store

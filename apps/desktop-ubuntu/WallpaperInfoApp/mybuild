@@ -1,0 +1,142 @@
+#!/bin/bash
+
+##########################################################
+# initialize os variables
+##########################################################
+# msys : Windows MinGW
+# cygwin : Windows Cygwin
+# darwin10.0 : Mac OS X (Snow leopard)
+# darwin14 : Mac OS X (Yosemite)
+# darwin15 : Mac OS X (El capitan)
+# darwin16 : Mac OS X (Sierra)
+# darwin17 : Mac OS X (High Sierra)
+# darwin18 : Mac OS X (Mojave)
+# darwin19 : Mac OS X (Catalina)
+# darwin20 : Mac OS X (Big Sur)
+# linux-gnu : Ubuntu
+function init_os() {
+    os="${OSTYPE}"
+    os_linefeed=$'\n'
+    if [ "${os}" = "linux-gnu" ]; then
+        os="linux"
+    elif [ "${os/[1|2]*/}" = "darwin" ]; then
+        os="osx"
+    elif [[ "${os}" = "msys" || "${os}" = "cygwin" ]]; then
+        os="windows"
+        os_linefeed=$'\r\n'
+    fi
+}
+init_os
+
+# to solve VS Code's environment variable GTK_PATH
+unset GTK_PATH
+export GTK_PATH=/usr/lib/x86_64-linux-gnu/gtk-3.0
+export XDG_CURRENT_DESKTOP=Unity
+export ORIGINAL_XDG_CURRENT_DESKTOP=ubuntu:GNOME
+
+# to avoid the following error
+# /snap/core20/current/lib/x86_64-linux-gnu/libstdc++.so.6:
+# version `GLIBCXX_3.4.29' not found (required by /usr/lib/x86_64-linux-gnu/libproxy.so.1)
+# sudo snap remove code
+# sudo snap install code --classic
+# find / -name libpython3.10.so 2>/dev/null
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+
+# handling antialias error - one time build set up
+result=$(gsettings list-keys org.gnome.settings-daemon.plugins.xsettings | grep antialiasing )
+if [[ $result != "antialiasing" ]]; then
+    cat <<EOF
+# error with no antialiasing in org.gnome.settings-daemon.plugins.xsettings schema
+# add following key in schema (note that do not put it in deprecated schema section)
+sudo vi /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.xsettings.gschema.xml
+    <key name="antialiasing" enum="org.gnome.settings-daemon.GsdFontAntialiasingMode">
+     <default>'grayscale'</default>
+     <summary>Antialiasing</summary>
+     <description>The type of antialiasing to use when rendering fonts. Possible values are: “none” for no antialiasing, “grayscale” for standard grayscale antialiasing, and “rgba” for subpixel antialiasing (LCD screens only).</description>
+    </key>
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+EOF
+    exit 1
+fi
+
+# ubuntu 22.04: 5.15.0-58-generic (5.15.)
+# ubuntu 18.04: 5.4.0-128-generic (5.4. or 6.2.)
+linux_ver=$(uname -r | sed -E "s/([0-9]+\.[0-9]+\.).*/\1/g")
+if [[ "${linux_ver}" == "5.4." ]]; then
+    target_bin="WallpaperInfoApp.u1804.bin"
+else
+    target_bin="WallpaperInfoApp.u2204.bin"
+fi
+
+deploy_path=~/bin/WallpaperInfoApp
+
+if [ ! -f ~/.local/bin/pyinstaller ]; then
+    echo "[0] Install pyinstaller"
+    pip3 install pyinstaller
+fi
+
+if [[ $# -eq 1 && $1 == "-b" ]]; then
+    pyinstaller WallpaperInfoApp.py --onefile -n WallpaperInfoApp.bin
+    exit
+fi
+
+# for one time import library: TODO change checking directory
+if [ ! -f /usr/bin/glade ]; then
+    echo "[0] Install pynput, piexif, watchdog, glade, libcanberra-gtk-module"
+    sudo apt update && sudo apt upgrade
+    pip3 install pynput
+    pip3 install piexif
+    pip3 install watchdog
+
+    sudo apt-get install glade
+    sudo apt install libcanberra-gtk-module libcanberra-gtk3-module
+    sudo apt-get install gir1.2-appindicator3-0.1
+    sudo ln -s /usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libcanberra-gtk-module.so /usr/lib/libcanberra-gtk-module.so
+fi
+
+# clean previous build
+if [[ $# -eq 1 && $1 == "-f" ]]; then
+    echo "[0] clean previous build for -f option"
+    if [ -d build ]; then
+        rm -Rf build
+    fi
+    if [ -d dist ]; then
+        rm -Rf dist
+    fi
+fi
+
+echo "[1] killing WallpaperInfoApp process, if any"
+output=$(ps -ef | grep WallpaperInfoApp | grep -v grep )
+if [ "${output}" != "" ]; then
+    echo -e "${output}\n$ killall WallpaperInfoApp WallpaperInfoApp.bin"
+    killall WallpaperInfoApp WallpaperInfoApp.bin
+fi
+
+echo "[2] build and install WallpaperInfoApp ..."
+source="dist/WallpaperInfoApp.bin WallpaperInfoApp.glade thirdwave.xpm"
+source_bin="WallpaperInfoApp.sh " # remove WallpaperInfoApp.desktop
+# --add-binary to fix "Failed to load Python shared library" error --add-binary=/usr/lib/x86_64-linux-gnu/libpython3.10.so:.
+pyinstaller --onefile -n WallpaperInfoApp.bin WallpaperInfoApp.py
+mkdir -p "${deploy_path}"
+cp $source "${deploy_path}"
+cp $source_bin ~/bin
+
+echo "[3] configure WallpaperInfoApp ..."
+# chmod +x ~/bin/WallpaperInfoApp.desktop
+chmod +x ~/bin/WallpaperInfoApp.sh
+# gio set ~/bin/WallpaperInfoApp.desktop "metadata::trusted" yes
+
+if [[ $# -eq 1 && $1 == "-f" ]]; then
+    echo -e "Deploy for all devices"
+    install_sync_path=~/Documents/CloudStation/Install/Linux/WallpaperInfoApp
+    install_sync_path_bin=~/Documents/CloudStation/Install/Linux/bin
+    mkdir -p ${install_sync_path}
+    cp $source ${install_sync_path}
+    cp $source_bin ${install_sync_path_bin}
+    mv "${install_sync_path}/WallpaperInfoApp.bin" "${install_sync_path}/${target_bin}"
+fi
+
+cd ~/bin/WallpaperInfoApp
+echo "[4] execute WallpaperInfoApp ..."
+echo -e "$  ~/bin/WallpaperInfoApp.sh"
+~/bin/WallpaperInfoApp.sh

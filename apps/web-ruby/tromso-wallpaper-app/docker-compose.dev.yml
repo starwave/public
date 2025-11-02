@@ -1,0 +1,22 @@
+# Docker Compose for LOCAL DEVELOPMENT
+# Use this to build and test the Docker image locally
+# Usage: docker compose -f docker-compose.dev.yml up --build
+
+services:
+  tromso-wallpaper-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tromso-wallpaper-app-ruby-dev
+    ports:
+      - "3001:3001"
+    environment:
+      - RACK_ENV=production
+      - PORT=3001
+    restart: unless-stopped
+    networks:
+      - tromso-network
+
+networks:
+  tromso-network:
+    driver: bridge

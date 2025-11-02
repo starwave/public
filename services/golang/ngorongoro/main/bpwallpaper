@@ -1,0 +1,613 @@
+#!/bin/bash
+
+##########################################################
+# set path environment variable
+##########################################################
+source_root_path=~/CloudStation
+service_cache_path=~/Documents/CloudStation/BPCache
+service_coden_path=~/Documents/Coden
+if [ -d "${BPWALLPAPERROOT}" ]; then
+    source_root_path="${BPWALLPAPERROOT}"
+fi
+if [ -d "${BPWALLPAPERCACHE}" ]; then
+    service_cache_path="${BPWALLPAPERCACHE}"
+fi
+if [ -d "${BPWALLPAPERCODEN}" ]; then
+    service_coden_path="${BPWALLPAPERCODEN}"
+fi
+# default service root (can be updated by cache path)
+service_root_path="${source_root_path}"
+
+##########################################################
+# set global variable
+##########################################################
+o_screen_dim=""
+o_resize_mode="exact"
+o_dim_postfix=""
+o_interval=8
+o_root_path="/"
+
+default_filterstring="#sn#|#nd#"
+o_allow_string="none"
+allow_string=""
+o_filter_string="none"
+filter_string="${default_filterstring}"
+
+o_debug=false
+o_padding_mode=true
+o_padding_color=black
+o_mode="normal"
+o_theme="default1"
+o_input_files=false
+o_use_cache=true
+o_use_coden=false
+
+font_size=20
+default_left_margin=55
+default_min_margin=5
+
+bpwallpaperpath=~/.bpwallpaper.jpg
+font_name=Malgun-Gothic
+
+os=$(bp_os)
+
+##########################################################
+# get recent years
+##########################################################
+function get_recent_years() {
+    year1=$(date +"%Y" )
+    year2=$(expr $year1 - 1 )
+    year3=$(expr $year2 - 1 )
+    year4=$(expr $year3 - 1 )
+    year5=$(expr $year4 - 1 )
+    echo -e "/BP Photo/${year5}/|/BP Photo/${year4}/|/BP Photo/${year3}/|/BP Photo/${year2}/|/BP Photo/${year1}/"
+}
+
+##########################################################
+# return media information from exif info
+##########################################################
+function draw_text_on_wallpaper() {
+    # change decomposition label to normal for mac os x
+    if [[ "${os}" == "linux" || "${os}" == "windows" ]]; then
+        label="${1}"
+    else
+        label=$(echo ${1} | uconv -x Any-NFC )
+    fi
+    # mark realtime label symbol *
+    if ! $o_input_files ; then
+        label="${label} *"
+    fi
+    mogrify -font "${font_name}"  \
+        -pointsize ${font_size} \
+    -strokewidth 2 -stroke 'rgb(80,80,80))' -fill 'rgb(80,80,80))' -draw "text $(( label_x + 2 )),$(( label_y + 2 )) '$label'" \
+    -strokewidth 1 -stroke black -fill black -draw "text $(( label_x + 1 )),$(( label_y + 1 )) '$label'" \
+    -strokewidth 0 -stroke white -fill white -draw "text ${label_x},${label_y} '$label'" \
+    "${bpwallpaperpath}"
+}
+
+##########################################################
+# return media modified time
+##########################################################
+function get_modified_time() {
+    if [ "${os}" = "linux" ]; then
+        modified_time=$(stat -c "%Y" "${1}")
+    elif [ "${os}" = "osx" ]; then
+        modified_time=$(stat -f "%m" "${1}")
+    else
+        modified_time=$(stat -c "%Y" "${1}")
+    fi
+    echo "${modified_time}"
+}
+
+##########################################################
+# calculate image ratio (should use as procedure)
+##########################################################
+function calc_image_ratio() {
+    # -auto-orient option fixes all following exif rotation
+    # "Rotate 180", "Rotate 270 CW", "Rotate 90 CW"
+    if [[ $f_orientation == "Rotate 270 CW" || $f_orientation == "Rotate 90 CW" ]]; then
+        temp=$f_imagewidth
+        f_imagewidth=$f_imageheight
+        f_imageheight=$temp
+    fi
+    image_ratio=$(( $f_imagewidth * 100 / $f_imageheight ))
+}
+
+##########################################################
+# create_wallpaper
+##########################################################
+function create_wallpaper() {
+    # shouldn't happen but just in case - it could happen if given source file doesn't exsit
+    if [ ! -f "$wall_path" ]; then
+        echo "file ${wall_path} doesn't exist"
+        exit 1
+    fi
+    # read exif information (awalys get the description the last)
+    raw_media_info=$(exiftool -f -s -S -imagesize -orientation -imagedescription "$wall_path")
+	SAVEIFS=$IFS   					# Save current IFS
+	IFS=$'\n'						# Change IFS to new line
+	media_info=($raw_media_info) 	# split to array $names
+	IFS=$SAVEIFS   					# Restore IFS
+
+	f_imagewidth=$(echo -e "${media_info[0]}" | sed -E "s/x.*$//g" )
+    f_imageheight=$(echo -e "${media_info[0]}" | sed -E "s/^.*x//g" )
+    f_orientation=$(echo -e "${media_info[1]}" | sed -E "s/^.*x//g" )
+    f_description=$(echo -e "${media_info[2]}" |  sed -E "s/ *$//g" )   # rtrim
+
+    # makes the image label extension="${filename##*.}"
+    parentdir=$(basename -- "$(dirname "${wall_path}")")
+    parentdir="${parentdir/'#nd#'/'!'}" # convert special tag to ! in original label
+    parentdir="${parentdir/'#sn#'/'~'}" # convert special tag to ~ in original label
+    # remove prefix for avoiding name collision to contain more meaningful label text
+    filename=$(basename -- "${wall_path}" | sed -E "s/^[0-9]{8}_[0-9]{6}@//g" )
+    if [[ "${f_description}" != "-" && "${f_description}" != "" ]]; then
+        label="${parentdir} / #${f_description} | ${filename%.*}"
+    else
+        label="${parentdir} / ${filename%.*}"
+    fi
+    label="${label/'#nd#'/'!'}" # convert special tag to ! in original label
+    label="${label/'#sn#'/'~'}" # convert special tag to ~ in original label
+    label=$(echo -e "${label}" | sed -E "s/ #[a-z]*# / /g" ) # remove all tags in original label
+    label=$(echo -e "${label}" | sed -E "s/^(.{30})(.*)(.{30}$)/\\1...\\3/g" ) # abbreviate long label (maxlen=63)
+    label=$(echo -e "${label}" | sed -E "s/'/\\\'/g" ) # if label has single quote, escape it to \'
+
+    # resize image with or without padding
+    if [[ $o_padding_mode == false ]]; then
+        calc_image_ratio
+        actual_imageheight=$f_imageheight
+        if [[ $image_ratio -gt $screen_ratio && $f_imagewidth -gt $screen_width ]]; then
+            actual_imageheight=$(( $f_imageheight * $screen_width / $f_imagewidth ))
+        elif [[ "${f_imageheight}" -gt "${screen_height}" ]]; then
+            actual_imageheight="${screen_height}"
+        fi
+        actual_imagewidth=$(( $image_ratio * $actual_imageheight / 100 ))
+        if [[ "${f_imageheight}" -gt "${f_imagewidth}" ]]; then
+            label_x=$default_min_margin
+        else
+            label_x=$default_left_margin
+        fi
+        let label_y=$(( $actual_imageheight - $font_size + $default_min_margin ))
+        magick "${wall_path}" -auto-orient -resize "4000x"${screen_height}">"  \
+            "${bpwallpaperpath}"
+    elif [ $o_resize_mode = "exact" ]; then
+        # FYI, how ImageMagick scales in order { extent the first (padding) -> draw text -> resize }
+        magick "${wall_path}" -auto-orient -resize "${screen_width}x${screen_height}" \
+            -extent "${screen_width}x${screen_height}" -background "${o_padding_color}" -gravity center \
+            "${bpwallpaperpath}"
+    elif [ $o_resize_mode = "ratio" ]; then
+        calc_image_ratio
+        if [[ $image_ratio -gt $screen_ratio  ]]; then
+            (( $f_imagewidth > $screen_width )) && actual_imagewidth=$screen_width || actual_imagewidth=$f_imagewidth
+            (( $f_imagewidth < 1920 )) && actual_imagewidth=1920
+            actual_imageheight=$(( $screen_height * $actual_imagewidth / $screen_width ))
+        else
+            (( $f_imageheight > $screen_height )) && actual_imageheight=$screen_height || actual_imageheight=$f_imageheight
+            (( $f_imageheight < 1200 )) && actual_imageheight=1200
+            actual_imagewidth=$(( $screen_width * $actual_imageheight / $screen_height ))
+        fi
+        let font_size=$(( 20 * actual_imageheight / 1200 ))
+        let label_x=$(( $default_left_margin * actual_imagewidth / 1920 ))
+        let label_y=$(( $actual_imageheight - $font_size + $default_min_margin ))
+        magick -auto-orient -resize "${actual_imagewidth}x${actual_imageheight}" \
+            -extent "${actual_imagewidth}x${actual_imageheight}" -background "${o_padding_color}" -gravity center \
+            "${wall_path}" "${bpwallpaperpath}"
+    else
+        echo "unknown resize mode"
+        exit 1
+    fi
+    # draw text on label
+    draw_text_on_wallpaper "${label}"
+}
+
+##########################################################
+# initialize with parameter option
+##########################################################
+while getopts "c:d:D:i:r:f:a:p:mt:uU:bnqh" option
+do
+	case "${option}"
+	in
+        c) custom_string="${OPTARG}"
+           o_theme="custom"
+           SAVEIFS=$IFS   					# Save current IFS
+	       IFS=$';'						# Change IFS to new line
+	       custom_configs=($custom_string) 	# split to array $names
+	       IFS=$SAVEIFS
+           o_root_path="${custom_configs[0]}"
+           o_allow_string="${custom_configs[1]}"
+           o_filter_string="${custom_configs[2]}"
+            ;;
+        d) o_screen_dim="${OPTARG}";;
+        D) o_screen_dim="${OPTARG}"; o_resize_mode="ratio";;
+		i) o_interval="${OPTARG}";;
+		r) o_theme="custom"; o_root_path="${OPTARG}";;
+        a) o_theme="custom"; o_allow_string="${OPTARG}";;
+        f) o_theme="custom"; o_filter_string="${OPTARG}";;
+        p) o_padding_mode=true
+           o_padding_color="${OPTARG}";;
+        m) ;; # just for the legacy
+        t) o_theme="${OPTARG}";;
+        u) o_mode="uri";;
+        U) bpwallpaperpath="${OPTARG}"; o_mode="file";;
+        b) o_debug=true; bpwallpaperpath=~/bpwallpaper.jpg ;;
+        n) o_use_cache=false; o_cache_path="";;
+        q) touch -h "${bpwallpaperpath}"; exit 1;;
+        h|?) echo -e "usage: bpwallpaper [-c custom_string] [-d|D widthxheight] [-i interval] [-r root_folder] [-a allow_string] [-f filter_string] [-p] [-t theme] [-u|U filename] [-b] [-n] [-q] [input_files...]"
+             echo -e "-d|D widthxheight : exact|ratio dimension. (default:screen, hd:1920x1080, uhd:3840x2160, ipadpro:2732x2048, iphonemax:2688x1242)";
+             echo -e "-i interval : slide interval in seconds.";
+             echo -e "-r root_folder : root folder for images.";
+             echo -e "-a allow_string : set allow  string. [default ].";
+             echo -e "-f filter_string : set filter string. [default #sn#|#nd#].";
+             echo -e "-p color : set image padding mode. [black or 'rgb(0.0.0)' or off]";
+             echo -e "-t theme : set wallpaper theme.";
+             echo -e "-u|U filename : uri|file fetch mode"
+             echo -e "-b : debug mode"
+             echo -e "-n : no cache"
+             echo -e "-q : quit wallpaper. this is to stop the previous execution.";
+             exit 1;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+
+##########################################################
+# kill previous running and get the screen dimension
+##########################################################
+if [ $o_mode = "normal" ]; then
+    # this will kill the previous script
+    touch -h "${bpwallpaperpath}"
+# remove the previous result file for file mode request
+elif [[ $o_mode == "file" && -e "${bpwallpaperpath}" ]]; then
+    rm -f "${bpwallpaperpath}"
+fi
+
+# another way for mac to get the real resolution with retina scales
+# $ system_profiler SPDisplaysDataType | grep Resolution
+if [[ $o_screen_dim == "" ]]; then
+    if [[ $os != "unknown" ]]; then
+        raw_dim_info=$(bpscreen )
+        SAVEIFS=$IFS   					# Save current IFS
+        IFS=$'\n'						# Change IFS to new line
+        dim_info=($raw_dim_info) 	    # split to array $names
+        IFS=$SAVEIFS   					# Restore IFS
+        screen_count="${dim_info[0]}"
+        o_screen_dim="${dim_info[$screen_count]}" # select 2nd or last monitor
+        # o_screen_dim=$(xdpyinfo  | grep 'dimensions:' | sed -E "s/(^ *dimensions: *)([0-9]*x[0-9]*)( pixels.*)/\2/g" )
+    else
+        o_screen_dim="1920x1080"
+    fi
+else
+    case "${o_screen_dim}"
+    in
+        hd|itouch|zanzibar)
+            o_screen_dim="1920x1080";; # 1.778
+        uhd)
+            o_screen_dim="3840x2160";; # 1.778
+        ipadpro|ipad|galaxytab)
+            o_screen_dim="2732x2048";; # 1.334
+        iphonemax|iphonex)
+            o_screen_dim="2688x1242";; # 2.164
+        galaxys|galaxynote)
+            o_screen_dim="1080x2280";; # 0.474
+        *)
+            ;;
+    esac
+fi
+if [[ $o_padding_color == "" ]]; then
+    o_padding_color=black
+elif [[ $o_padding_color == "off" ]]; then
+    o_padding_mode=false
+fi
+if [[ "${o_screen_dim}" != "origin" ]]; then
+    screen_width=$(echo -e "${o_screen_dim}" | sed -E "s/(^[0-9]*)(x)([0-9]*$)/\1/g" )
+    screen_height=$(echo -e "${o_screen_dim}" | sed -E "s/(^[0-9]*)(x)([0-9]*$)/\3/g" )
+    if [ "$screen_width" = "$o_screen_dim" ] || [ ! $screen_width -gt 639 ]; then
+        screen_width=1920
+    fi
+    if [ "$screen_height" = "$o_screen_dim" ] || [ ! $screen_height -gt 479 ]; then
+        screen_height=1080
+    fi
+    screen_ratio=$(( $screen_width * 100 / $screen_height ))
+
+    # following will be used only for padding mode & exact resize mode
+    # other mode will overwrite these values
+    actual_imagewidth=$screen_width
+    actual_imageheight=$screen_height
+    let label_x=$default_left_margin
+    let label_y=$(( ${screen_height} - $font_size + $default_min_margin ))
+fi
+
+# initialize wallpaper mode
+if [[ $o_mode = "normal" && $os = "linux" ]]; then
+    gsettings set org.gnome.desktop.background picture-options 'scaled'
+fi
+
+##########################################################
+# adjust parameters and post process
+##########################################################
+if [ $# -gt 0 ]; then
+	all_input_files=( "$@" )
+    o_input_files=true
+    o_theme="custom"
+    if [ $o_mode = "uri" ]; then
+        echo "Error. URI fetch mode can't be used with input files."
+        exit 1
+    fi
+else
+    # default values
+    # o_root_path="/"
+    # allow_string=""
+    # filter_string="${default_filterstring}"
+    case "$o_theme" in
+        default1)
+            filter_string="${default_filterstring}|/People/"
+            ;;
+        default2)
+            ;;
+        custom)
+            ;;
+        photo)
+            o_root_path="/BP Photo/"
+            ;;
+        recent)
+            o_root_path=$(get_recent_years )
+            allow_string=""
+            ;;
+        wallpaper)
+            o_root_path="/BP Wallpaper/"
+            ;;
+        landscape)
+            o_root_path="/BP Wallpaper/"
+            allow_string="/Landscapes/|/Nature/|/USA/|/Architecture/|/Korea/"
+            ;;
+        movie1)
+            o_root_path="/BP Wallpaper/"
+            allow_string="/Animations/|/Movies/|/TVShow/"
+            ;;
+        movie2)
+            o_root_path="/BP Wallpaper/"
+            allow_string="/Animations/|/Movies/|/TVShow/|/Performance/"
+            filter_string=""
+            ;;
+        special1)
+            o_root_path="/BP Wallpaper/"
+            allow_string="${default_filterstring}"
+            filter_string="/Animations|Anime/"
+            ;;
+        special2)
+            o_root_path="/"
+            allow_string="${default_filterstring}|/People/"
+            filter_string=""
+            ;;
+        all)
+            o_root_path="/"
+            allow_string=""
+            filter_string=""
+            ;;
+        *)
+            o_theme="default1"
+            filter_string="${default_filterstring}|/People/"
+            ;;
+    esac
+
+    # in case other theme is explicitly set when allow or filter is given, it overrides with custom theme
+    if [[ "${o_filter_string}" != "none" || "${o_allow_string}" != "none" ]]; then
+        o_theme="custom"
+    fi
+
+    ##########################################################
+    # Cache and Root preparation if exists
+    ##########################################################
+    o_cache_path="${service_cache_path}/${o_screen_dim}"
+    if [ ! -d "${o_cache_path}" ]; then
+        o_cache_path=""
+        o_use_cache=false
+    fi
+    if $o_use_cache ; then
+        service_root_path="${o_cache_path}"
+    fi
+
+    # service_find_path: service_coden_path > service_cache_path > service_root_path
+    if [ -d "${service_coden_path}" ]; then
+        o_use_coden=true
+        service_find_path="${service_coden_path}"
+    else
+        service_find_path="${service_root_path}"
+    fi
+
+    # make service_find_paths out of o_root_path
+    if [ "${o_root_path}" = "" ]; then
+        echo "Error: Root path is empty."
+        exit 1
+    fi
+    service_find_paths=""
+    SAVEIFS=$IFS   					# Save current IFS
+    IFS=$'|'						# Change IFS to new line
+    root_paths=($o_root_path) 	    # split to array $names
+    IFS=$SAVEIFS   					# Restore IFS
+    for n in "${!root_paths[@]}";
+    do
+	    root_path="${root_paths[n]}"
+        if [[ "${root_path}" == "/" || ! -d "${root_path}" ]]; then
+            root_path="${service_find_path}${root_path}"
+        fi
+
+        if [ ! -d "${root_path}" ]; then
+            echo "Error: There is no root directory, ${root_path}"
+            exit 1
+        fi
+
+        # mac append additional slash at the end with find, so remove it
+        if [[ $os != "linux" ]]; then
+            root_path=$(echo -e "${root_path}" | sed -E "s/\/$//g" )
+        fi
+        service_find_paths+='"'"${root_path}"'" '
+    done
+fi
+#echo "${service_find_paths}"; exit 1
+
+if [ $o_theme = "custom" ]; then
+    if [[ "${o_filter_string}" != "none" ]]; then
+        filter_string="${o_filter_string}"
+    fi
+    if [[ "${o_allow_string}" != "none" ]]; then
+        allow_string="${o_allow_string}"
+    fi
+fi
+
+##########################################################
+# Prepare allow pattern
+##########################################################
+# Linux : -iregex '.*\(#sn#\|#nd#\).*jpg
+# OS X : \( -ipath '*#sn#*.jpg' -o -ipath '*#nd#*.jpg' \)
+# allow string conversion
+allow_pattern=""
+if [ "${allow_string}" != "" ]; then
+    if [ $os = "osx" ]; then
+        # TODO -> {blank} => \{blank}
+        # {pattern} => -ipath '*{pattern}*.jpg'
+        # | => -o
+        allow_pattern=$(echo -e "${allow_string}" | sed -E "s/([^\|]*)/-ipath \*\"\\1\"\*.jpg/g" )
+        allow_pattern=$(echo -e "-a ${allow_pattern}" | sed -E "s/\|/ -o /g" )
+    else
+        # / => \/
+        # | => \|
+        allow_pattern=" -iregex \".*\\("$(echo -e "${allow_string}" | sed -E "s/(\/|\|)/\\\\\1/g" )"\\).*.jpg\""
+    fi
+    # to find Korean files name
+    if [ $os = "osx" ]; then
+        allow_pattern=$(echo "${allow_pattern}" | uconv -x Any-NFD )
+    fi
+fi
+# echo "${allow_pattern}"; exit 1
+
+# filter string conversion
+if [ "${filter_string}" != "" ]; then
+    filter_pattern="s/"$(echo -e "${filter_string}" | sed -E "s/\//\\\\\//g" )"/match/g"
+    # to filter Korean files name
+    if [ $os = "osx" ]; then
+        filter_pattern=$(echo "${filter_pattern}" | uconv -x Any-NFD )
+    fi
+    # echo "${filter_pattern}"
+fi
+
+##########################################################
+# infinite loop to switch wallpapers
+##########################################################
+while true
+do
+    # enforce to enter the loop
+    ret_path="starts"
+    try=0
+    while [ "${wall_path}" != "${ret_path}" ]       # filter will be checked
+    do
+        # fetch a random path from root folder
+        if ! $o_input_files; then
+            # (-type l -o -type f) or ( -type l,f) is removed since it's not needed
+            cmd="find ${service_find_paths} -ipath \*.jpg $allow_pattern | shuf -n 1"
+            wall_path=$(bash -c "${cmd}")
+        else
+            if [ ${#all_input_files[@]} -eq 1 ]; then
+                wall_path="${all_input_files[0]}"
+            else
+                rand=$[$RANDOM % ${#all_input_files[@]}]
+                wall_path="${all_input_files[$rand]}"
+            fi
+        fi
+        # no match must exit with error
+        if [[ "${wall_path}" = "" ]]; then
+            echo "find ${service_find_paths} $allow_pattern | shuf -n 1"
+            echo "No matched image error"
+            exit 1
+        elif [[ try -gt 9 ]]; then
+            echo "filter pattern: ${filter_pattern}"
+            echo "No matched image error after 10 trials."
+            exit 1
+        fi
+        # if no filter, then break out of loop
+        if [ "${filter_string}" = "" ]; then
+            break
+        fi
+        ret_path=$(echo -e "${wall_path}" | sed -E "${filter_pattern}" )
+        let "try+=1"
+    done
+    # change back to real path instead of coden symlink
+    if $o_use_coden; then
+        coden_for_return="${wall_path:${#service_coden_path}}"
+        tromso_original_path=$(realpath "${wall_path}")
+        wall_path=${tromso_original_path/${source_root_path}/${service_root_path}}
+        # try next one if symlink is broken
+        if [ ! -f "$wall_path" ]; then
+            echo "file ${wall_path} doesn't exist with given coden ${wall_path}"
+            continue
+        fi
+    else
+        coden_for_return="${wall_path:${#service_root_path}}"
+    fi
+
+    if [[ $o_mode == "uri" ]]; then
+        echo "${wall_path}"
+        exit
+    fi
+
+    # if not use cache -> create wallpaper with name of ${bpwallpaperpath}
+    # if use cache and it exists -> makes symbolic link to cache with with name of ${bpwallpaperpath}
+    # if use cache but it doesn't exist -> create wallpaper from source with name of ${bpwallpaperpath} (cache is not yet made for that resolution)
+    if [ "${o_screen_dim}" == "origin" ]; then
+        wall_path=${wall_path/${service_root_path}/${source_root_path}}
+        ln -sf "${wall_path}" "${bpwallpaperpath}"
+    elif ! $o_use_cache ; then
+        create_wallpaper
+    elif [ -f "${wall_path}" ]; then
+        echo "${wall_path}\n"
+        ln -sf "${wall_path}" "${bpwallpaperpath}"
+    else
+        wall_path=${wall_path/${service_root_path}/${source_root_path}}
+        create_wallpaper
+    fi
+
+    if [ $o_mode == "file" ]; then
+        # make sure don't add linefeed at the end
+        if ! $o_input_files; then
+            # ngorongoro file mode return
+            echo -n "${coden_for_return}"
+        else
+            # cache create mode, copy timestamp for efficient update, print target
+            touch -r "${wall_path}" "${bpwallpaperpath}"
+            echo -e "${bpwallpaperpath/${service_cache_path}/} from ${wall_path/${service_root_path}/}"
+        fi
+        exit
+    fi
+
+    before=$(get_modified_time "${bpwallpaperpath}")
+
+    # actual wallpaper setting
+    if $o_debug; then
+        echo -e '"'${label}'"' ${actual_imagewidth}x${actual_imageheight}
+    elif [ $os = "linux" ]; then
+        gsettings set org.gnome.desktop.background picture-uri "${bpwallpaperpath}"
+    elif [ $os = "osx" ]; then
+        osxwallpaper "${bpwallpaperpath}"
+    elif [ $os = "windows" ]; then
+        winwallpaper "${bpwallpaperpath}"
+    fi
+
+    # exit for one file input case
+    if [[ $o_input_files && ${#all_input_files[@]} -eq 1  ]]; then
+        exit
+    fi
+
+    # sleep interval and check if quit request is done
+    sleep ${o_interval}
+    after=$(get_modified_time "${bpwallpaperpath}")
+    if [ $before != $after ]; then
+        if [ $os = "linux" ]; then
+            notify-send "bpwallpaper" "background bpwallpaper stopped." -i ~/bin/.thirdwave.png -t 1000
+        elif [ $os = "osx" ]; then
+            osascript -e 'display notification "background bpwallpaper stopped." with title "bpwallpaper" subtitle "" sound name "Frog"'
+        elif [ $os = "windows" ]; then
+            winwallpaper "bpwallpaper" "background bpwallpaper stopped."
+        else
+            echo "bpwallpaper stopped."
+        fi
+        exit
+    fi
+done

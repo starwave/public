@@ -1,0 +1,159 @@
+#!/bin/bash
+
+source_root_path=~/CloudStation
+service_cache_path=~/Documents/CloudStation/BPCache
+service_best_path=~/Documents/CloudStation/Best
+service_coden_path=~/Documents/Coden
+if [ -d "${BPWALLPAPERROOT}" ]; then
+    source_root_path="${BPWALLPAPERROOT}"
+fi
+if [ -d "${BPWALLPAPERCACHE}" ]; then
+    service_cache_path="${BPWALLPAPERCACHE}"
+fi
+if [ -d "${BPPHOTOBEST}" ]; then
+    service_best_path="${BPPHOTOBEST}"
+fi
+if [ -d "${BPWALLPAPERCODEN}" ]; then
+    service_coden_path="${BPWALLPAPERCODEN}"
+fi
+
+o_dimensions=( "photo" "1920x1080" "3840x2160" "2732x2048"  "2688x1242" "1080x2280" "2048x2732" )
+o_print_only=false
+
+##########################################################
+# read command parameters
+##########################################################
+while getopts "ph" option
+do
+	case "${option}"
+	in
+        p) o_print_only=true;;
+        h|?) echo -e "usage: check_image_description [-p]"
+        	 echo -e "-p : command print only";
+             echo -e "-h : this page";
+             exit;;
+    esac
+done
+
+##########################################################
+# initialize os variables
+##########################################################
+# msys : Windows MinGW
+# cygwin : Windows Cygwin
+# darwin10.0 : Mac OS X (Snow leopard)
+# darwin14 : Mac OS X (Yosemite)
+# darwin15 : Mac OS X (El capitan)
+# darwin16 : Mac OS X (Sierra)
+# darwin17 : Mac OS X (High Sierra)
+# darwin18 : Mac OS X (Mojave)
+# darwin19 : Mac OS X (Catalina)
+# darwin20 : Mac OS X (Big Sur)
+# linux-gnu : Ubuntu
+function init_os() {
+    os="${OSTYPE}"
+    os_linefeed=$'\n'
+    if [ "${os}" = "linux-gnu" ]; then
+        os="linux"
+    elif [ "${os/[1|2]*/}" = "darwin" ]; then
+        os="osx"
+    elif [[ "${os}" = "msys" || "${os}" = "cygwin" ]]; then
+        os="windows"
+        os_linefeed=$'\r\n'
+    fi
+}
+init_os
+
+##########################################################
+# function to show count
+##########################################################
+function show_count() {
+    let index++
+    if [ $(( $index % 100 )) = 1 ]; then
+        echo -e ">>>>> check photo description: ${index} of ${total} <<<<<<<<<"
+    fi
+}
+
+##########################################################
+# process file for delete
+##########################################################
+user_home=~
+function process_photo() {
+    f_source="${1}"
+    f_desc=$(exiftool -f -s -S -imagedescription "${f_source}")
+    # escape description for file name
+    f_desc=$(echo "${f_desc}" | sed -E "s/[\\\/:*?\"<>|]/ /g")
+    f_coden_path="${f_source/${service_best_path}/${service_coden_path}}"
+    f_source_path="${f_source/${service_best_path}/${source_root_path}/BP Photo}"
+    raw_candidates=$(find -L "$(dirname "${f_coden_path}")" -samefile "${f_source_path}" 2> /dev/null)
+    SAVEIFS=$IFS   					# Save current IFS
+    IFS=$'\n'						# Change IFS to new line
+    f_candidates=($raw_candidates) 	# split to array $names
+    IFS=$SAVEIFS   					# Restore IFS
+    for f_candidate in "${f_candidates[@]}";
+    do
+        if [ "${f_desc}" = "-" ]; then
+            if [[ "${f_source##*/}" != "${f_candidate##*/}" ]]; then
+                echo "Symlink '${f_candidate}' is deleted because it has old description as coden. (${f_desc})"
+                if ! $o_print_only; then
+                    rm -f "${f_candidate}"
+                fi
+            fi
+        elif [[ ! "${f_candidate}" =~ "${f_desc}" ]]; then
+            echo "Symlink '${f_candidate}' is deleted because it has old description as coden. (${f_desc})"
+            if ! $o_print_only; then
+                rm -f "${f_candidate}"
+            fi
+        fi
+    done
+
+    for o_dimension in "${o_dimensions[@]}";
+    do
+        if [ "$o_dimension" = "photo" ]; then
+            path_dest="${source_root_path}/BP Photo"
+        else
+            path_dest="${service_cache_path}/${o_dimension}/BP Photo"
+        fi
+        f_target="${f_source/${service_best_path}/${path_dest}}"
+        if [ -f "${f_target}" ]; then
+            f_desc_target=$(exiftool -f -s -S -imagedescription "${f_target}")
+            if [[ "${f_desc}" != "${f_desc_target}" ]]; then
+                echo "Remove existing cache due to description difference. ${f_target}"
+                if ! $o_print_only; then
+                    rm -f "${f_target}"
+                fi
+            fi
+        fi
+        if [ ! -f "${f_target}" ]; then
+            if [ "$o_dimension" = "photo" ]; then
+                if ! $o_print_only; then
+                    magick "${f_source}" -auto-orient -resize '8000x2280>' "${f_target}" ;
+                    touch -r "${f_source}" "${f_target}"
+                fi
+                echo -e "Resize: ${f_target/${user_home}/} from ${f_source/${user_home}/}"
+            else
+                echo -e "Cache: \c"
+                if ! $o_print_only; then
+                    bpwallpaper -f "" -D "${o_dimension}" -U "${f_target}" "${f_source}"
+                else
+                    echo -e "${f_target/${user_home}/} from ${f_source/${user_home}/}"
+                fi
+            fi
+        fi
+    done
+}
+
+##########################################################
+# main
+##########################################################
+if [[ "${os}" != "linux" ]]; then
+    o_dimensions=( "photo" "1920x1080" )
+fi
+raw_all_files=$(find "${service_best_path}" -ipath '*.jpg' -type f -not -path '*/.*' )
+index=0
+total=$(wc -l <<< "$raw_all_files" )
+if [ "${raw_all_files}" != "" ]; then
+    echo -e "${raw_all_files}" | while IFS= read -r file ; do show_count; process_photo "${file}" ; done
+else
+    echo -e "Error: There is no source."
+    exit 1
+fi

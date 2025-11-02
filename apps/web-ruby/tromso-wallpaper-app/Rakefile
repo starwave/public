@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :spec
+
+desc 'Run the application server'
+task :server do
+  exec 'bundle exec rackup -p 3001'
+end
+
+desc 'Run with auto-reload (development)'
+task :dev do
+  exec 'bundle exec rerun -- rackup -p 3001'
+end
+
+desc 'Run RuboCop'
+task :rubocop do
+  exec 'bundle exec rubocop'
+end
+
+desc 'Run RuboCop with auto-correct'
+task :rubocop_fix do
+  exec 'bundle exec rubocop -A'
+end

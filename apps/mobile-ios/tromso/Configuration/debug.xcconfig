@@ -1,0 +1,12 @@
+//
+//  debug.xcconfig
+//  tromso
+//
+//  Created by Brad Park on 5/20/20.
+//  Copyright © 2020 Brad Park. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+ConfigEnvironment=Local

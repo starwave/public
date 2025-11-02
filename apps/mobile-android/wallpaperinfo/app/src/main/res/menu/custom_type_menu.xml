@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/custom_root"
+            android:icon="@drawable/folder"
+            android:title="@string/root"
+            android:titleCondensed="@string/root"></item>
+        <item
+            android:id="@+id/custom_allow"
+            android:icon="@drawable/green_light"
+            android:title="@string/allow"
+            android:titleCondensed="@string/allow"></item>
+        <item
+            android:id="@+id/custom_filter"
+            android:icon="@drawable/red_light"
+            android:title="@string/filter"
+            android:titleCondensed="@string/filter"></item>
+        <item
+            android:id="@+id/custom_reserve"
+            android:icon="@drawable/gray_light"
+            android:title="@string/reserved"
+            android:titleCondensed="@string/reserved"></item>
+    </group>
+</menu>

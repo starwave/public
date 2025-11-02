@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function init_os() {
+    os="${OSTYPE}"
+    os_linefeed=$'\n'	
+    if [ "${os}" = "linux-gnu" ]; then
+        os="linux"
+    elif [ "${os/1*/}" = "darwin" ]; then
+        os="osx"
+    elif [[ "${os}" = "msys" || "${os}" = "cygwin" ]]; then
+        os="windows"
+        os_linefeed=$'\r\n'	
+    fi
+}
+init_os
+
+# for one time import
+# go get -u golang.org/x/sys/...; # for fsnotify use
+if [ ! -d ~/go/src/github.com/kbinani/screenshot ]; then
+    echo "$ go get github.com/kbinani/screenshot"
+    go get github.com/kbinani/screenshot
+fi
+
+output=$(go build -o ~/bin/bpscreen 2>&1 )
+if [[ "${output}" != "" ]]; then
+    echo -e "###############\n$ Error in build\n${output}\n###############"
+    exit 1
+fi
+
+echo -e "# Build success, use the following cmd to deploy to install"
+echo -e "cp ~/bin/bpscreen ~/install/bin"
