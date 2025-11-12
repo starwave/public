@@ -18,10 +18,11 @@ The primary objective of this project is to create a robust and cross-platform s
 ### Key Features:
 
 - **📺 Universal Platform Support:** The application is designed to function across all major operating systems:
-  - **Mobile:** iOS and Android
-  - **Desktop:** macOS (OS X), Windows, and Linux
-  - **TV:** tvOS
-  - **Web:** Standard web browsers
+  - **Mobile:** iOS and Android (Swift, Swft UI, Android)
+  - **Desktop:** macOS (OS X), Windows, and Linux (Swift, C#, Python GTK)
+  - **TV:** tvOS (Swift UI)
+  - **Web:** Standard web browsers (Javascript, Typescript, React, Ruby)
+  - **backend:** Go Server (configuration, image change detection, file sync)
 - **💾 Flexible Data Storage:** The project is built to accommodate virtually **any choice of personal data storage** for your images, offering flexibility without limitations.
 
 ---
