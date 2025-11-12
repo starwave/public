@@ -1,0 +1,96 @@
+apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
+apply plugin: "kotlin-android"
+
+react {
+    // Set the node executable path - try multiple common locations
+    def nodePath = System.getenv("NODE_BINARY") ?:
+                   findNodeExecutable()
+    if (nodePath) {
+        nodeExecutableAndArgs = [nodePath]
+    }
+}
+
+def findNodeExecutable() {
+    def nodeLocations = [
+        "/opt/homebrew/bin/node",     // Homebrew on Apple Silicon Mac
+        "/usr/local/bin/node",        // Homebrew on Intel Mac
+        "/usr/bin/node",              // System node on Linux/Mac
+        System.getProperty("user.home") + "/.nvm/versions/node/*/bin/node"
+    ]
+
+    for (location in nodeLocations) {
+        def nodeFile = new File(location)
+        if (nodeFile.exists() && nodeFile.canExecute()) {
+            return location
+        }
+    }
+
+    // Try to find node via command
+    try {
+        def process = ["which", "node"].execute()
+        process.waitFor()
+        if (process.exitValue() == 0) {
+            return process.text.trim()
+        }
+    } catch (Exception e) {
+        // Ignore and continue
+    }
+
+    return null
+}
+
+def enableProguardInReleaseBuilds = false
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    namespace "com.thirdwavesoft.umunhumra"
+
+    // Disable JDK image transform to avoid jlink issues
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    defaultConfig {
+        applicationId "com.thirdwavesoft.umunhumra"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+}
+
+dependencies {
+    implementation("com.facebook.react:react-android")
+
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+}
+
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
