@@ -1,0 +1,317 @@
+<!-- Splash Screen -->
+<div id="splash-screen">
+    <img src="/tromso.png" alt="Tromso" onerror="this.style.display='none'">
+    <h1>Tromso Wallpaper</h1>
+    <p style="color: #888; margin-top: 10px;">Ruby Edition</p>
+</div>
+
+<!-- Controls Panel -->
+<div id="controls">
+    <h2>Settings</h2>
+
+    <label for="theme-select">Theme:</label>
+    <select id="theme-select">
+        <option value="default1">Default 1</option>
+        <option value="default2" selected>Default 2</option>
+        <option value="custom">Custom</option>
+        <option value="photo">Photo</option>
+        <option value="recent">Recent</option>
+        <option value="wallpaper">Wallpaper</option>
+        <option value="landscape">Landscape</option>
+        <option value="movie1">Movie 1</option>
+        <option value="movie2">Movie 2</option>
+        <option value="special1">Special 1</option>
+        <option value="special2">Special 2</option>
+        <option value="all">All</option>
+    </select>
+
+    <label for="custom-config">Custom Config:</label>
+    <input type="text" id="custom-config" value="/;;#sn#|#nd#" placeholder="/path;;#tag1#|#tag2#">
+
+    <label>
+        <input type="checkbox" id="pause-checkbox"> Pause Slideshow
+    </label>
+
+    <button id="prev-btn">← Previous</button>
+    <button id="next-btn">Next →</button>
+    <button id="close-btn">Close</button>
+</div>
+
+<!-- Theme Display -->
+<div id="theme-display"></div>
+
+<!-- Navigation Hints -->
+<div class="nav-hint">
+    Double-click center to open settings<br>
+    Arrow keys: ← → (navigate) ↑ ↓ (theme)
+</div>
+
+<!-- Wallpaper Container -->
+<div id="wallpaper-container">
+    <img id="wallpaper-img" alt="Wallpaper">
+    <div class="loading" id="loading">Loading...</div>
+</div>
+
+<script>
+// Configuration
+const CONFIG = {
+    apiBase: 'http://192.168.1.111:8080',
+    interval: 7000,          // 7 seconds
+    saverTime: 5000,         // 5 seconds
+    maxCache: 20
+};
+
+// State
+const state = {
+    theme: localStorage.getItem('theme') || 'default2',
+    dimension: '1920x1080',
+    customConfig: localStorage.getItem('customConfig') || '/;;#sn#|#nd#',
+    pause: false,
+    cache: [],
+    index: -1,
+    intervalTimer: null,
+    saverTimer: null,
+    touchStart: { x: null, y: null }
+};
+
+// DOM Elements
+const elements = {
+    img: document.getElementById('wallpaper-img'),
+    controls: document.getElementById('controls'),
+    themeDisplay: document.getElementById('theme-display'),
+    splashScreen: document.getElementById('splash-screen'),
+    loading: document.getElementById('loading'),
+    themeSelect: document.getElementById('theme-select'),
+    customConfig: document.getElementById('custom-config'),
+    pauseCheckbox: document.getElementById('pause-checkbox'),
+    prevBtn: document.getElementById('prev-btn'),
+    nextBtn: document.getElementById('next-btn'),
+    closeBtn: document.getElementById('close-btn')
+};
+
+// Initialize
+function init() {
+    // Set initial values
+    elements.themeSelect.value = state.theme;
+    elements.customConfig.value = state.customConfig;
+
+    // Hide splash after 4 seconds
+    setTimeout(() => {
+        elements.splashScreen.classList.add('fade-out');
+    }, 4000);
+
+    // Load first image
+    setTimeout(() => {
+        navigateWallpaper(1);
+    }, 500);
+
+    // Start timer
+    restartTimer();
+
+    // Event listeners
+    elements.themeSelect.addEventListener('change', (e) => {
+        changeTheme(e.target.value);
+    });
+
+    elements.customConfig.addEventListener('change', (e) => {
+        state.customConfig = e.target.value;
+        localStorage.setItem('customConfig', e.target.value);
+        resetCache();
+    });
+
+    elements.pauseCheckbox.addEventListener('change', (e) => {
+        state.pause = e.target.checked;
+        if (state.pause) {
+            clearInterval(state.intervalTimer);
+        } else {
+            restartTimer();
+        }
+    });
+
+    elements.prevBtn.addEventListener('click', () => navigateWallpaper(-1));
+    elements.nextBtn.addEventListener('click', () => navigateWallpaper(1));
+    elements.closeBtn.addEventListener('click', () => {
+        elements.controls.classList.remove('show');
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (elements.controls.classList.contains('show')) return;
+
+        switch(e.key) {
+            case 'ArrowLeft':
+                navigateWallpaper(-1);
+                break;
+            case 'ArrowRight':
+                navigateWallpaper(1);
+                break;
+            case 'ArrowUp':
+                cycleTheme(-1);
+                break;
+            case 'ArrowDown':
+                cycleTheme(1);
+                break;
+        }
+    });
+
+    // Double click to show controls
+    document.addEventListener('dblclick', (e) => {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        if (Math.abs(e.clientX - centerX) < 200 && Math.abs(e.clientY - centerY) < 200) {
+            elements.controls.classList.toggle('show');
+        }
+    });
+
+    // Touch gestures
+    document.addEventListener('touchstart', (e) => {
+        state.touchStart.x = e.touches[0].clientX;
+        state.touchStart.y = e.touches[0].clientY;
+    });
+
+    document.addEventListener('touchend', (e) => {
+        if (!state.touchStart.x || !state.touchStart.y) return;
+
+        const xDiff = state.touchStart.x - e.changedTouches[0].clientX;
+        const yDiff = state.touchStart.y - e.changedTouches[0].clientY;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (Math.abs(xDiff) > 100) {
+                navigateWallpaper(xDiff > 0 ? 1 : -1);
+            }
+        } else {
+            if (Math.abs(yDiff) > 100) {
+                cycleTheme(yDiff > 0 ? -1 : 1);
+            }
+        }
+
+        state.touchStart = { x: null, y: null };
+    });
+}
+
+// Navigate wallpaper (forward/backward)
+function navigateWallpaper(offset) {
+    console.log(`Navigating: ${offset}, cache: ${state.cache.length}, index: ${state.index}`);
+
+    if (offset === 1) {
+        if (state.index === state.cache.length - 1) {
+            // Load new image
+            loadNewImage();
+        } else {
+            // Use cached image
+            state.index++;
+            displayImage(state.cache[state.index]);
+        }
+    } else if (offset === -1 && state.index > 0) {
+        state.index--;
+        displayImage(state.cache[state.index]);
+    }
+
+    restartSaverTimer();
+}
+
+// Load new wallpaper from API
+function loadNewImage() {
+    const optionString = state.theme === 'custom'
+        ? `&o=${encodeURIComponent(` -c '${state.customConfig}'`)}`
+        : '';
+
+    const url = `${CONFIG.apiBase}/ngorongoro?a=tweb&d=${state.dimension}&t=${state.theme}${optionString}&${Date.now()}`;
+
+    console.log('Loading:', url);
+    elements.loading.style.display = 'block';
+
+    const img = new Image();
+    img.onload = () => {
+        console.log('Image loaded');
+        elements.loading.style.display = 'none';
+
+        // Add to cache
+        if (state.cache.length > CONFIG.maxCache) {
+            state.cache.shift();
+        } else {
+            state.index++;
+        }
+        state.cache.push(img.src);
+
+        displayImage(img.src);
+    };
+
+    img.onerror = () => {
+        console.error('Failed to load:', url);
+        elements.loading.style.display = 'none';
+        elements.loading.textContent = 'Failed to load image';
+    };
+
+    img.src = url;
+}
+
+// Display image
+function displayImage(src) {
+    elements.img.classList.remove('loaded');
+    setTimeout(() => {
+        elements.img.src = src;
+        elements.img.classList.add('loaded');
+    }, 100);
+}
+
+// Change theme
+function changeTheme(newTheme) {
+    state.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+    resetCache();
+    showThemeDisplay(newTheme);
+    loadNewImage();
+}
+
+// Cycle through themes
+function cycleTheme(direction) {
+    const themes = ['default1', 'default2', 'custom', 'photo', 'recent', 'wallpaper',
+                    'landscape', 'movie1', 'movie2', 'special1', 'special2', 'all'];
+    const currentIndex = themes.indexOf(state.theme);
+    const newIndex = (currentIndex + direction + themes.length) % themes.length;
+
+    changeTheme(themes[newIndex]);
+    elements.themeSelect.value = themes[newIndex];
+}
+
+// Show theme name briefly
+function showThemeDisplay(theme) {
+    elements.themeDisplay.textContent = `Theme: ${theme}`;
+    elements.themeDisplay.classList.add('show');
+
+    setTimeout(() => {
+        elements.themeDisplay.classList.remove('show');
+    }, 2000);
+}
+
+// Reset cache
+function resetCache() {
+    state.cache = [];
+    state.index = -1;
+}
+
+// Restart slideshow timer
+function restartTimer() {
+    if (state.intervalTimer) clearInterval(state.intervalTimer);
+
+    if (!state.pause) {
+        state.intervalTimer = setInterval(() => {
+            navigateWallpaper(1);
+        }, CONFIG.interval);
+    }
+}
+
+// Restart saver timer (hides controls on inactivity)
+function restartSaverTimer() {
+    if (state.saverTimer) clearTimeout(state.saverTimer);
+
+    state.saverTimer = setTimeout(() => {
+        elements.controls.classList.remove('show');
+    }, CONFIG.saverTime);
+}
+
+// Initialize app
+init();
+</script>

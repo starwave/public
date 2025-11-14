@@ -19,9 +19,10 @@ This is a Ruby/Sinatra port of the Tromso Wallpaper App, providing a simple API 
 
 ## Tech Stack
 
-- **Ruby**: 3.3+ (compatible with 3.0+)
-- **Framework**: Sinatra 4.0
+- **Backend**: Ruby 3.3+ with Sinatra 4.0
+- **Frontend**: ERB templates + Vanilla JavaScript
 - **Web Server**: Puma
+- **Styling**: Pure CSS (no build step needed)
 - **Testing**: RSpec
 - **Code Quality**: RuboCop
 - **Deployment**: Docker + systemd
@@ -37,7 +38,7 @@ This is a Ruby/Sinatra port of the Tromso Wallpaper App, providing a simple API 
 
 ```bash
 # Clone or navigate to project
-cd /path/to/tromso-wallpaper-app
+cd ~/thirdwave_git/shared/ruby/tromso-wallpaper-app
 
 # Install dependencies
 bundle install
@@ -46,7 +47,7 @@ bundle install
 bundle exec rake server
 ```
 
-Access at: **http://localhost:3001**
+Access at: **http://localhost:6001**
 
 For detailed installation instructions, see [INSTALL.md](INSTALL.md)
 
@@ -57,6 +58,7 @@ For detailed installation instructions, see [INSTALL.md](INSTALL.md)
 Health check endpoint.
 
 **Response**:
+
 ```json
 {
   "status": "ok",
@@ -69,14 +71,17 @@ Health check endpoint.
 Get theme library configuration.
 
 **Parameters**:
+
 - `a` - Action (must be `g` for get)
 
 **Example**:
+
 ```bash
-curl http://localhost:3001/maramboi?a=g
+curl http://localhost:6001/maramboi?a=g
 ```
 
 **Response**:
+
 ```json
 [
   {
@@ -95,17 +100,20 @@ curl http://localhost:3001/maramboi?a=g
 Wallpaper request endpoint (proxy).
 
 **Parameters**:
+
 - `a` - Action
 - `d` - Dimension (e.g., `1920x1080`)
 - `t` - Theme (e.g., `default2`)
 - `o` - Options (optional)
 
 **Example**:
+
 ```bash
-curl "http://localhost:3001/ngorongoro?a=tweb&d=1920x1080&t=default2"
+curl "http://localhost:6001/ngorongoro?a=tweb&d=1920x1080&t=default2"
 ```
 
 **Response**:
+
 ```json
 {
   "message": "Wallpaper endpoint",
@@ -126,10 +134,10 @@ curl "http://localhost:3001/ngorongoro?a=tweb&d=1920x1080&t=default2"
 # Development with auto-reload
 bundle exec rake dev
 
-# Or using rerun directly
-bundle exec rerun -- rackup -p 3001
-
 # Production mode
+bundle exec rake server
+
+# Or using Puma directly
 RACK_ENV=production bundle exec puma -C config/puma.rb
 ```
 
@@ -169,23 +177,23 @@ bundle exec rake rubocop_fix
 tromso-wallpaper-app/
 ├── lib/
 │   └── app.rb              # Main Sinatra application
+├── views/                  # ERB templates (Ruby's view layer)
+│   ├── layout.erb          # Main HTML layout
+│   └── index.erb           # Wallpaper app view (HTML + JS)
 ├── config/
 │   └── puma.rb             # Puma web server configuration
 ├── spec/
 │   ├── spec_helper.rb      # RSpec configuration
 │   └── app_spec.rb         # Application tests
-├── public/                 # Static files (React build output)
+├── public/                 # Static assets
+│   └── tromso.png          # App logo
 ├── log/                    # Application logs
 ├── tmp/                    # Temporary files
-├── Gemfile                 # Gem dependencies
+├── Gemfile                 # Ruby gem dependencies
 ├── Gemfile.lock            # Locked gem versions
 ├── config.ru               # Rack configuration
 ├── Rakefile                # Rake tasks
-├── Dockerfile              # Docker image definition
-├── docker-compose.yml      # Docker Compose configuration
-├── .rubocop.yml            # RuboCop configuration
-├── .rspec                  # RSpec configuration
-├── .env.example            # Environment variables template
+├── .gitignore              # Git ignore rules
 └── README.md               # This file
 ```
 
@@ -243,9 +251,11 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment instructions.
 # List all tasks
 bundle exec rake -T
 
-# Common tasks
-bundle exec rake server          # Run the application server
-bundle exec rake dev              # Run with auto-reload
+# Server tasks
+bundle exec rake server           # Run the server
+bundle exec rake dev              # Run with auto-reload (development)
+
+# Testing & Quality
 bundle exec rake spec             # Run tests
 bundle exec rake rubocop          # Check code style
 bundle exec rake rubocop_fix      # Auto-fix code style
@@ -287,16 +297,19 @@ bundle exec rspec spec/app_spec.rb -e "GET /health"
 ### Optimization Tips
 
 1. **Use Multiple Workers**:
+
    ```bash
    WEB_CONCURRENCY=4 bundle exec puma -C config/puma.rb
    ```
 
 2. **Increase Thread Count**:
+
    ```bash
    MAX_THREADS=10 bundle exec puma -C config/puma.rb
    ```
 
 3. **Use jemalloc**:
+
    ```bash
    LD_PRELOAD=/path/to/libjemalloc.so bundle exec puma
    ```
@@ -346,17 +359,17 @@ For more troubleshooting, see [INSTALL.md](INSTALL.md#troubleshooting)
 
 ## Comparison with Node.js Version
 
-| Feature | Ruby/Sinatra | Node.js/Express |
-|---------|--------------|-----------------|
-| **Language** | Ruby 3.3 | Node.js 20 |
-| **Framework** | Sinatra 4.0 | Express 4.x |
-| **Web Server** | Puma | Node built-in |
-| **Startup Time** | < 1s | < 1s |
-| **Memory** | 30-50MB | 40-60MB |
-| **Concurrency** | Multi-thread | Event loop |
-| **Testing** | RSpec | Jest |
-| **Build Step** | No | Yes (TypeScript) |
-| **Hot Reload** | rerun | nodemon |
+| Feature          | Ruby/Sinatra | Node.js/Express  |
+| ---------------- | ------------ | ---------------- |
+| **Language**     | Ruby 3.3     | Node.js 20       |
+| **Framework**    | Sinatra 4.0  | Express 4.x      |
+| **Web Server**   | Puma         | Node built-in    |
+| **Startup Time** | < 1s         | < 1s             |
+| **Memory**       | 30-50MB      | 40-60MB          |
+| **Concurrency**  | Multi-thread | Event loop       |
+| **Testing**      | RSpec        | Jest             |
+| **Build Step**   | No           | Yes (TypeScript) |
+| **Hot Reload**   | rerun        | nodemon          |
 
 ## Contributing
 

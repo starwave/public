@@ -7,9 +7,10 @@ require 'json'
 
 class TromsoWallpaperApp < Sinatra::Base
   configure do
-    set :port, ENV.fetch('PORT', 3001)
+    set :port, ENV.fetch('PORT', 6001)
     set :bind, '0.0.0.0'
     set :public_folder, File.join(root, '..', 'public')
+    set :views, File.join(root, '..', 'views')
     set :static, true
 
     # Enable CORS
@@ -75,14 +76,14 @@ class TromsoWallpaperApp < Sinatra::Base
          }
   end
 
-  # Serve React app for all other routes (SPA)
+  # Serve Ruby ERB frontend
+  get '/' do
+    erb :index, layout: :layout
+  end
+
+  # Catch-all route (fallback to index for SPA-like behavior)
   get '*' do
-    if File.exist?(File.join(settings.public_folder, 'index.html'))
-      send_file File.join(settings.public_folder, 'index.html')
-    else
-      status 404
-      json error: 'Application not found. Please build the frontend first.'
-    end
+    erb :index, layout: :layout
   end
 
   # Error handling

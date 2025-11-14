@@ -11,6 +11,7 @@ Get up and running in under 5 minutes!
 ```
 
 That's it! The script will:
+
 - ✅ Check Ruby version
 - ✅ Install Bundler
 - ✅ Install dependencies
@@ -51,7 +52,7 @@ bundle install
 bundle exec rake server
 ```
 
-Access at: **http://localhost:3001**
+Access at: **http://localhost:6001**
 
 ---
 
@@ -62,7 +63,7 @@ Access at: **http://localhost:3001**
 bundle exec rspec
 
 # Test endpoint
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 ```
 
 ---
@@ -71,13 +72,13 @@ curl http://localhost:3001/health
 
 ### Essential Guides
 
-| Guide | When to Use |
-|-------|-------------|
-| [README.md](README.md) | Overview and API docs |
-| [INSTALL.md](INSTALL.md) | Detailed installation (Mac & Ubuntu) |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Production deployment |
-| [COMPARISON.md](COMPARISON.md) | Compare with Node.js version |
-| [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) | Complete project overview |
+| Guide                                    | When to Use                          |
+| ---------------------------------------- | ------------------------------------ |
+| [README.md](README.md)                   | Overview and API docs                |
+| [INSTALL.md](INSTALL.md)                 | Detailed installation (Mac & Ubuntu) |
+| [DEPLOYMENT.md](DEPLOYMENT.md)           | Production deployment                |
+| [COMPARISON.md](COMPARISON.md)           | Compare with Node.js version         |
+| [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) | Complete project overview            |
 
 ---
 
@@ -143,18 +144,21 @@ threads 10, 10         # Change thread pool
 ## 📊 API Endpoints
 
 ### Health Check
+
 ```bash
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 ```
 
 ### Theme Library
+
 ```bash
-curl http://localhost:3001/maramboi?a=g
+curl http://localhost:6001/maramboi?a=g
 ```
 
 ### Wallpaper Request
+
 ```bash
-curl "http://localhost:3001/ngorongoro?a=tweb&d=1920x1080&t=default2"
+curl "http://localhost:6001/ngorongoro?a=tweb&d=1920x1080&t=default2"
 ```
 
 ---
@@ -162,17 +166,20 @@ curl "http://localhost:3001/ngorongoro?a=tweb&d=1920x1080&t=default2"
 ## 🐛 Troubleshooting
 
 ### Port Already in Use
+
 ```bash
 lsof -i :3001
 kill -9 <PID>
 ```
 
 ### Bundle Install Fails
+
 ```bash
 bundle install --path vendor/bundle
 ```
 
 ### Ruby Version Error
+
 ```bash
 rbenv install 3.3.0
 rbenv global 3.3.0
@@ -249,13 +256,13 @@ ps aux | grep puma | awk '{print $6}'
 
 ## 🆚 Ruby vs Node.js
 
-| Feature | Ruby | Node.js |
-|---------|------|---------|
-| Setup Time | 2 min | 3 min |
-| Lines of Code | Less | More |
-| Build Step | No | Yes |
-| Memory Usage | 30-50MB | 40-60MB |
-| Best For | APIs | Full-stack |
+| Feature       | Ruby    | Node.js    |
+| ------------- | ------- | ---------- |
+| Setup Time    | 2 min   | 3 min      |
+| Lines of Code | Less    | More       |
+| Build Step    | No      | Yes        |
+| Memory Usage  | 30-50MB | 40-60MB    |
+| Best For      | APIs    | Full-stack |
 
 See [COMPARISON.md](COMPARISON.md) for detailed analysis.
 
@@ -288,7 +295,7 @@ bundle exec rspec     # Should pass
 bundle exec rake server
 
 # 5. Health check (in another terminal)
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 # Should return: {"status":"ok",...}
 ```
 
@@ -298,8 +305,8 @@ curl http://localhost:3001/health
 
 Your Tromso Wallpaper App (Ruby) is now running!
 
-**Access**: http://localhost:3001
-**Health**: http://localhost:3001/health
+**Access**: http://localhost:6001
+**Health**: http://localhost:6001/health
 **API Docs**: See [README.md](README.md)
 
 Happy coding! 🚀

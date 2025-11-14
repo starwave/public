@@ -109,7 +109,7 @@ docker ps | grep tromso
 docker logs tromso-wallpaper-app
 
 # Test endpoint
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 ```
 
 ---
@@ -169,7 +169,7 @@ docker compose up -d
 
 # Verify
 docker ps
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 ```
 
 ---
@@ -319,7 +319,7 @@ sudo systemctl reload nginx
 
 ```bash
 # Health endpoint
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 
 # Full status
 systemctl status tromso-wallpaper-app
@@ -430,6 +430,7 @@ sudo certbot renew --dry-run
 ### Application Security
 
 1. **Keep dependencies updated**:
+
    ```bash
    bundle update
    bundle exec bundle-audit check --update
@@ -606,6 +607,7 @@ sudo nano /etc/security/limits.conf
 ```
 
 Add:
+
 ```
 * soft nofile 65536
 * hard nofile 65536
@@ -619,12 +621,14 @@ sudo nano /etc/sysctl.conf
 ```
 
 Add:
+
 ```
 net.core.somaxconn = 1024
 net.ipv4.tcp_max_syn_backlog = 2048
 ```
 
 Apply:
+
 ```bash
 sudo sysctl -p
 ```

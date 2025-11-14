@@ -29,8 +29,9 @@ Complete installation instructions for Mac OSX and Ubuntu 22.04.
 brew install rbenv ruby-build
 
 # Initialize rbenv
-echo 'eval "$(rbenv init - zsh)"' >> ~/.zshrc
-source ~/.zshrc
+echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
+echo 'eval "$(rbenv init - bash)"' >> ~/.bash_profile
+source ~/.bashrc
 
 # Install Ruby 3.3
 rbenv install 3.3.0
@@ -41,6 +42,7 @@ ruby --version  # Should show ruby 3.3.0 or higher
 ```
 
 **Alternative: Using Ruby that comes with macOS**
+
 ```bash
 # macOS includes Ruby, but it's usually outdated
 ruby --version  # Check current version
@@ -59,7 +61,7 @@ bundler --version
 ### Step 3: Clone/Navigate to Project
 
 ```bash
-cd /Users/starwave/thirdwave_git/shared/ruby/tromso-wallpaper-app
+cd ~/thirdwave_git/shared/ruby/tromso-wallpaper-app
 ```
 
 ### Step 4: Install Dependencies
@@ -85,7 +87,7 @@ bundle exec rackup -p 3001
 bundle exec rake dev
 ```
 
-Access the app at: **http://localhost:3001**
+Access the app at: **http://localhost:6001**
 
 ### Step 6: Run Tests
 
@@ -210,7 +212,7 @@ bundle exec rake dev
 bundle exec puma -C config/puma.rb
 ```
 
-Access the app at: **http://localhost:3001**
+Access the app at: **http://localhost:6001**
 
 ### Step 8: Run Tests
 
@@ -337,6 +339,7 @@ RACK_ENV=development
 #### Issue: "command not found: bundle"
 
 **Solution**:
+
 ```bash
 gem install bundler
 # Or specify path
@@ -346,6 +349,7 @@ gem install bundler
 #### Issue: Permission denied installing gems
 
 **Solution**:
+
 ```bash
 # Use rbenv (recommended)
 brew install rbenv
@@ -359,6 +363,7 @@ bundle install --path vendor/bundle
 #### Issue: Native extension build failed
 
 **Solution**:
+
 ```bash
 # Install Xcode Command Line Tools
 xcode-select --install
@@ -370,6 +375,7 @@ brew install openssl
 #### Issue: SSL certificate error
 
 **Solution**:
+
 ```bash
 # Update certificates
 brew install openssl@3
@@ -381,6 +387,7 @@ brew upgrade openssl@3
 #### Issue: "Could not find gem"
 
 **Solution**:
+
 ```bash
 # Update RubyGems
 gem update --system
@@ -395,6 +402,7 @@ bundle install
 #### Issue: Native extension build errors
 
 **Solution**:
+
 ```bash
 # Install build tools
 sudo apt-get install -y build-essential patch ruby-dev zlib1g-dev liblzma-dev
@@ -406,6 +414,7 @@ sudo apt-get install -y libssl-dev libreadline-dev libffi-dev libgdbm-dev
 #### Issue: Permission errors
 
 **Solution**:
+
 ```bash
 # Install to local directory
 bundle install --path vendor/bundle
@@ -417,6 +426,7 @@ sudo chown -R $USER:$USER ~/.gem
 #### Issue: Port already in use
 
 **Solution**:
+
 ```bash
 # Find process using port 3001
 sudo lsof -i :3001
@@ -431,6 +441,7 @@ PORT=3002 bundle exec rake server
 #### Issue: rbenv: version `3.3.0` not installed
 
 **Solution**:
+
 ```bash
 # List available versions
 rbenv install --list
@@ -468,7 +479,7 @@ bundle exec rspec
 bundle exec rake server
 
 # 6. Test endpoint (in another terminal)
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 # Should return: {"status":"ok","timestamp":"..."}
 ```
 

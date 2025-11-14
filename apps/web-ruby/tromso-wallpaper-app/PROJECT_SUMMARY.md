@@ -87,12 +87,15 @@ tromso-wallpaper-app/
 ## API Endpoints
 
 ### 1. Health Check
+
 ```
 GET /health
 ```
+
 Returns server status and timestamp.
 
 **Response**:
+
 ```json
 {
   "status": "ok",
@@ -101,12 +104,15 @@ Returns server status and timestamp.
 ```
 
 ### 2. Theme Library
+
 ```
 GET /maramboi?a=g
 ```
+
 Returns available wallpaper themes.
 
 **Response**:
+
 ```json
 [
   {
@@ -117,12 +123,15 @@ Returns available wallpaper themes.
 ```
 
 ### 3. Wallpaper Request
+
 ```
 GET /ngorongoro?a=tweb&d=1920x1080&t=default2
 ```
+
 Processes wallpaper requests with parameters.
 
 **Response**:
+
 ```json
 {
   "message": "Wallpaper endpoint",
@@ -153,6 +162,7 @@ bundle exec rake server
 ### Detailed Installation
 
 See [INSTALL.md](INSTALL.md) for:
+
 - Mac OSX installation (Homebrew, rbenv)
 - Ubuntu 22.04 installation (rbenv, apt, RVM)
 - Troubleshooting common issues
@@ -242,6 +252,7 @@ docker run -p 3001:3001 tromso-wallpaper-app-ruby:latest
 ### Remote Server Deployment
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for:
+
 - Systemd service setup
 - Nginx reverse proxy
 - SSL/TLS configuration
@@ -254,14 +265,14 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for:
 
 ### Benchmarks
 
-| Metric | Value |
-|--------|-------|
-| Startup Time | < 1s |
-| Memory (idle) | 30-50MB |
-| Memory (loaded) | 100-150MB |
-| Requests/sec (1 worker) | ~1,000 |
-| Requests/sec (4 workers) | ~3,000 |
-| Response Time (avg) | < 10ms |
+| Metric                   | Value     |
+| ------------------------ | --------- |
+| Startup Time             | < 1s      |
+| Memory (idle)            | 30-50MB   |
+| Memory (loaded)          | 100-150MB |
+| Requests/sec (1 worker)  | ~1,000    |
+| Requests/sec (4 workers) | ~3,000    |
+| Response Time (avg)      | < 10ms    |
 
 ### Optimization Tips
 
@@ -308,6 +319,7 @@ MAX_THREADS=5
 ### Puma Configuration
 
 Edit `config/puma.rb`:
+
 ```ruby
 workers ENV.fetch('WEB_CONCURRENCY', 2).to_i
 threads 5, 5
@@ -343,7 +355,7 @@ preload_app!
 
 ```bash
 # Application health
-curl http://localhost:3001/health
+curl http://localhost:6001/health
 
 # System status
 systemctl status tromso-wallpaper-app
@@ -370,12 +382,14 @@ sudo journalctl -u tromso-wallpaper-app -f
 ### Common Issues
 
 1. **Port in use**:
+
    ```bash
    lsof -i :3001
    kill -9 <PID>
    ```
 
 2. **Bundle install fails**:
+
    ```bash
    bundle install --path vendor/bundle
    ```
@@ -395,16 +409,19 @@ See [INSTALL.md](INSTALL.md#troubleshooting) for more solutions.
 ### Regular Tasks
 
 **Weekly**:
+
 - Check application logs
 - Monitor resource usage
 - Review error rates
 
 **Monthly**:
+
 - Update dependencies: `bundle update`
 - Security audit: `bundle audit check`
 - Review performance metrics
 
 **Quarterly**:
+
 - Major version updates
 - Code refactoring
 - Documentation updates
@@ -510,6 +527,7 @@ MIT License - See LICENSE file for details
 ### 1.0.0 (2025-10-30)
 
 **Initial Release**:
+
 - ✅ Sinatra 4.0 backend
 - ✅ Puma web server
 - ✅ Complete API endpoints
@@ -526,6 +544,7 @@ MIT License - See LICENSE file for details
 The **Tromso Wallpaper App (Ruby)** provides a lightweight, production-ready API backend for wallpaper management. With comprehensive documentation, full Docker support, and extensive testing, it's ready for both development and production use.
 
 **Key Highlights**:
+
 - 🚀 Fast setup (< 5 minutes)
 - 📦 Docker ready
 - ✅ 100% test coverage
@@ -534,9 +553,10 @@ The **Tromso Wallpaper App (Ruby)** provides a lightweight, production-ready API
 - 💪 Production ready
 
 **Get Started**:
+
 ```bash
 ./setup.sh
 bundle exec rake server
 ```
 
-Access at: **http://localhost:3001**
+Access at: **http://localhost:6001**

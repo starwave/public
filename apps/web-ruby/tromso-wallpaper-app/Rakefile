@@ -8,12 +8,12 @@ task default: :spec
 
 desc 'Run the application server'
 task :server do
-  exec 'bundle exec rackup -p 3001'
+  exec 'bundle exec rackup -p 6001'
 end
 
 desc 'Run with auto-reload (development)'
 task :dev do
-  exec 'bundle exec rerun -- rackup -p 3001'
+  exec 'bundle exec rerun -- rackup -p 6001'
 end
 
 desc 'Run RuboCop'

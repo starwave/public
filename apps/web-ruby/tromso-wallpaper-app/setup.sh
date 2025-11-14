@@ -152,7 +152,7 @@ main() {
     echo ""
     echo "     bundle exec rake server"
     echo ""
-    echo "  Access at: http://localhost:3001"
+    echo "  Access at: http://localhost:6001"
     echo ""
     echo "Other commands:"
     echo "  bundle exec rake dev       # Start with auto-reload"

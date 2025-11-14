@@ -37,6 +37,4 @@
 .DS_Store
 Thumbs.db
 
-# Build artifacts
-/public/assets/
-/public/index.html
+# Build artifacts (none needed for ERB)

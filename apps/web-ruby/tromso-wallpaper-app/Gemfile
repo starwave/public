@@ -8,6 +8,7 @@ ruby '>= 3.0.0'
 gem 'sinatra', '~> 4.0'
 gem 'sinatra-contrib', '~> 4.0'
 gem 'puma', '~> 6.0'
+gem 'rackup', '~> 2.0'
 
 # JSON handling
 gem 'json', '~> 2.7'
@@ -17,6 +18,9 @@ gem 'rack-cors', '~> 2.0'
 
 # Environment variables
 gem 'dotenv', '~> 3.0'
+
+# Task automation
+gem 'rake', '~> 13.0'
 
 group :development do
   gem 'rerun', '~> 0.14'
