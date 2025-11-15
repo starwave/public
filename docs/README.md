@@ -48,3 +48,16 @@ The primary objective of this project is to search image with similarity or keyw
   - **Mobile:** iOS and Android (react native)
   - **Web:** Standard web browsers (node js, react js)
   - **database:** Qdrant, PostgreSQL, ElasticSearch
+
+---
+
+# 📸 What's up Today Project Snapshot
+
+A Next.js application that aggregates daily news, market data, weather, and sports scores in a newspaper-style layout.
+
+- **Stock Prices**: Real-time prices for FAANG stocks + NVIDIA and Microsoft
+- **Weather**: Current weather for Fremont, California
+- **NBA Scores**: Latest NBA game results
+- **News Headlines**: Top 5 US news headlines
+- **Cryptocurrency**: Bitcoin, Ethereum, and BNB prices
+- **MongoDB Storage**: Data cached with date-based document IDs (format: YYYYMMDD)
