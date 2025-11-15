@@ -53,7 +53,7 @@ The primary objective of this project is to search image with similarity or keyw
 
 # 📸 What's up Today Project Snapshot
 
-A Next.js application that aggregates daily news, market data, weather, and sports scores in a newspaper-style layout.
+A Next.js application that aggregates daily news, market data, weather, and sports scores using GraghQL in a newspaper-style layout.
 
 - **Stock Prices**: Real-time prices for FAANG stocks + NVIDIA and Microsoft
 - **Weather**: Current weather for Fremont, California
