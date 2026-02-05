@@ -6,12 +6,12 @@ A lead management system that allows prospects to submit their information (name
 
 | Component | Tech | URL |
 |-----------|------|-----|
-| API Server | Python FastAPI | `http://192.168.1.221` |
-| Lead Portal (public) | Next.js + TypeScript | `http://192.168.1.221` |
+| API Server | Python FastAPI | `http://alma-api.thirdwavesoft.com` |
+| Lead Portal (public) | Next.js + TypeScript | `http://alma-lead.thirdwavesoft.com` |
 | Internal Portal | Next.js + TypeScript | `http://alma-internal.thirdwavesoft.com` |
 | Database | PostgreSQL 16 | `localhost:5432` |
 | Cache / Rate Limit | Redis 7 | `localhost:6379` |
-| API Docs | Swagger UI | `http://192.168.1.221/docs` |
+| API Docs | Swagger UI | `http://alma-api.thirdwavesoft.com/docs` |
 
 ## Quick Start
 
@@ -23,6 +23,10 @@ cd alma-lead-system
 # Start all services
 docker compose up --build
 ```
+Services that are pre-built at:
+- Lead form: http://alma-lead.thirdwavesoft.com/
+- Internal portal: http://alma-internal.thirdwavesoft.com/
+- API / Swagger: https://alma-api.thirdwavesoft.com/docs
 
 Services will be available at:
 - Lead form: http://localhost:4000

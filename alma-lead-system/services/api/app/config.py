@@ -12,7 +12,8 @@ class Settings(BaseSettings):
     api_key: str = ""
     api_host: str = "0.0.0.0"
     api_port: int = 4002
-    cors_origins: str = "http://localhost:4000,http://localhost:4001"
+    # cors_origins: str = "http://localhost:4000,http://localhost:4001"
+    cors_origins: str = "http://alma-lead.thirdwavesoft.com,http://alma-internal.thirdwavesoft.com"
 
     # Storage
     storage_backend: str = "local"  # "local" or "s3"

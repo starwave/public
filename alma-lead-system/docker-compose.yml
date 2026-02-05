@@ -47,7 +47,7 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-alma_user}:${POSTGRES_PASSWORD:-alma_passwd}@host.docker.internal:5432/${POSTGRES_DB:-alma_db}
       REDIS_URL: redis://redis:6379/0
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://192.168.1.221,http://alma-internal.thirdwavesoft.com,http://localhost:4000,http://localhost:4001}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://alma-lead.thirdwavesoft.com,http://alma-internal.thirdwavesoft.com}
       API_KEY: ${API_KEY:-3kxgnRlA8v4Ql2IodaitnuN1YSwLCEks}
     volumes:
       - ./services/api:/app
@@ -62,7 +62,7 @@ services:
       context: ./apps/lead-portal
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: ${LEAD_API_URL:-http://192.168.1.221}
+        NEXT_PUBLIC_API_URL: ${LEAD_API_URL:-http://alma-api.thirdwavesoft.com}
     ports:
       - "${LEAD_PORTAL_PORT:-4000}:3000"
     depends_on:
@@ -74,7 +74,7 @@ services:
       context: ./apps/internal-portal
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: ${INTERNAL_API_URL:-http://192.168.1.221}
+        NEXT_PUBLIC_API_URL: ${INTERNAL_API_URL:-http://alma-api.thirdwavesoft.com}
     ports:
       - "${INTERNAL_PORTAL_PORT:-4001}:3000"
     depends_on:

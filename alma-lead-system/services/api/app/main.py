@@ -33,8 +33,6 @@ app.add_middleware(
     allow_origins=[
         "http://alma-internal.thirdwavesoft.com",
         "http://alma-lead.thirdwavesoft.com",
-        "http://192.168.1.221:4000",
-        "http://192.168.1.221:4001",
     ],
     allow_credentials=True,
     allow_methods=["*"],

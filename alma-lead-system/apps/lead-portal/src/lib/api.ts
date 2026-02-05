@@ -1,7 +1,7 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002";
 
 export async function submitLead(formData: FormData) {
-  const res = await fetch(`${API_URL}:4002/leads`, {
+  const res = await fetch(`${API_URL}/leads`, {
     method: "POST",
     body: formData,
   });
