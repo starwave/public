@@ -35,7 +35,7 @@ export async function fetchLeads(
   });
   if (status) params.set("status", status);
 
-  const res = await fetch(`${API_URL}/internal/leads?${params}`, {
+  const res = await fetch(`${API_URL}:4002/internal/leads?${params}`, {
     headers: { "X-API-Key": getApiKey() },
   });
 
@@ -54,7 +54,7 @@ export async function updateLeadStatus(
   leadId: string,
   status: "PENDING" | "REACHED_OUT"
 ): Promise<Lead> {
-  const res = await fetch(`${API_URL}/internal/leads/${leadId}`, {
+  const res = await fetch(`${API_URL}:4002/internal/leads/${leadId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

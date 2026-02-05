@@ -16,7 +16,7 @@ export default function LoginPage() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/internal/leads?page=1&page_size=1`,
+        `${process.env.NEXT_PUBLIC_API_URL}:4002/internal/leads?page=1&page_size=1`,
         { headers: { "X-API-Key": apiKey } }
       );
 

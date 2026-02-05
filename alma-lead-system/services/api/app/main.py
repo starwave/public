@@ -33,19 +33,25 @@ app.add_middleware(
     allow_origins=[
         "http://alma-internal.thirdwavesoft.com",
         "http://alma-lead.thirdwavesoft.com",
-        "http://192.168.1.221",
+        "http://192.168.1.221:4000",
+        "http://192.168.1.221:4001",
     ],
-    allow_origins=settings.cors_origin_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Access-Control-Allow-Private-Network"],
 )
 
 # ── Routers ──
 app.include_router(leads.router)
 app.include_router(internal.router)
 
-
 @app.get("/health", tags=["Health"])
 async def health_check():
     return {"status": "ok"}
+
+@app.middleware("http")
+async def add_pna_header(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Private-Network"] = "true"
+    return response
